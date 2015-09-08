@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--
     <const name="main_menu_index">0</const>
     <const name="settings_index">1</const>
     <const name="game_history_index">2</const>
@@ -11,4 +12,5 @@
     <const name="choose_food_index">8</const>
     <const name="stats_index">9</const>
     <const name="walk_index">10</const>
+    -->
 </resources>
