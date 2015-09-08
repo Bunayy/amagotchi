@@ -1,0 +1,61 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView android:text="@string/app_name" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:id="@+id/titleView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/new_game"
+        android:id="@+id/newGameBtn"
+        android:onClick="onNewGame"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/continue_game"
+        android:id="@+id/contGameBtn"
+        android:onClick="onContGame"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/newGameBtn"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/game_settings"
+        android:id="@+id/settingsBtn"
+        android:onClick="onSettings"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/contGameBtn"
+        android:layout_centerHorizontal="true"
+        android:clickable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/game_history"
+        android:id="@+id/gameHistoryBtn"
+        android:onClick="onGameHistory"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/settingsBtn"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onSettings"
+        android:text="test"
+        android:layout_above="@+id/newGameBtn"
+        android:layout_alignLeft="@+id/titleView"
+        android:layout_alignStart="@+id/titleView"
+        android:layout_marginBottom="118dp" />
+
+</RelativeLayout>

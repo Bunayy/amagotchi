@@ -1,17 +1,29 @@
 package projekt.fhflensburg.amagotchi;
 
+import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ViewFlipper flipper;
+    private TextView settView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Log.v("inf", "Test Bir Iki");
+
+        flipper = (ViewFlipper) findViewById(R.id.flipper);
+
     }
 
     @Override
@@ -48,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onSettings(View view)
     {
-
+        Log.v("inf", "onSettings():");
+        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.settingsView)));
     }
 
     public void onGameHistory(View view)
