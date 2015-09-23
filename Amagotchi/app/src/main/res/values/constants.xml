@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="healthPerPeriodStandardValue" format="float" type="dimen">-0.042</item>
+    <item name="repletionPerPeriodStandardValue" format="float" type="dimen">-0.17</item>
+    <item name="sleepPerPeriodStandardValue" format="float" type="dimen">-0.1</item>
+    <item name="motivationPerPeriodStandardValue" format="float" type="dimen">-0.0</item>
+    <item name="happinessPerPeriodStandardValue" format="float" type="dimen">-0.0</item>
+    <item name="fitnessPerPeriodStandardValue" format="float" type="dimen">-0.12</item>
+    <item name="attentionPerPeriodStandardValue" format="float" type="dimen">-0.28</item>
+    <item name="ageStandardValue" format="float" type="dimen">0.0</item>
+    <item name="levelStandardValue" format="float" type="dimen">0.0</item>
+    <item name="weightStandardValue" format="float" type="dimen">0.1</item>
+    <integer name="healthDevelopmentBoundary">70</integer>
+    <integer name="repletionDevelopmentBoundary">60</integer>
+    <integer name="sleepDevelopmentBoundary">40</integer>
+    <integer name="motivationDevelopmentBoundary">70</integer>
+    <integer name="happinessDevelopmentBoundary">70</integer>
+    <integer name="fitnessDevelopmentBoundary">70</integer>
+    <integer name="attentionDevelopmentBoundary">70</integer>
+
+</resources>
