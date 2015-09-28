@@ -11,7 +11,9 @@ import android.util.TypedValue;
 public class Amagotchi
 {
     private static Amagotchi instance;
-    private static Context context;
+    public static Context context;
+
+    private Sickness sickness;
 
     // Eigenschaften initial setzen
     // Eigenschaften observable machen
@@ -32,6 +34,10 @@ public class Amagotchi
     // Feld initial setzen
     // Feld observable machen
     private boolean isSick;
+
+    // Feld initial setzen
+    // Feld observable machen
+    private boolean feces;
 
     private double healthPerPeriod;
     private double repletionPerPeriod;
@@ -133,6 +139,14 @@ public class Amagotchi
             developmentPoints += 1;
 
         //Alterung hinzufügen
+    }
+
+    public Sickness getSickness() {
+        return sickness;
+    }
+
+    public void setSickness(Sickness sickness) {
+        this.sickness = sickness;
     }
 
     public String getName()

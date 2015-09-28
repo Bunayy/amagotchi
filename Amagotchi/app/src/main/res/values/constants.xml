@@ -10,6 +10,7 @@
     <item name="ageStandardValue" format="float" type="dimen">0.0</item>
     <item name="levelStandardValue" format="float" type="dimen">0.0</item>
     <item name="weightStandardValue" format="float" type="dimen">0.1</item>
+
     <integer name="healthDevelopmentBoundary">70</integer>
     <integer name="repletionDevelopmentBoundary">60</integer>
     <integer name="sleepDevelopmentBoundary">40</integer>
@@ -18,4 +19,17 @@
     <integer name="fitnessDevelopmentBoundary">70</integer>
     <integer name="attentionDevelopmentBoundary">70</integer>
 
+    <integer name="infectionInitialHealthLoss">-30</integer>
+    <integer name="infectionInitialMotivationLoss">-15</integer>
+    <integer name="infectionInitialAttentionLoss">-10</integer>
+    <item name="infectionPeriodicHealthLoss" format="float" type="dimen">-0.17</item>
+    <item name="infectionPeriodicMotivationLoss" format="float" type="dimen">-0.125</item>
+    <item name="infectionPeriodicHappinessLoss" format="float" type="dimen">-0.17</item>
+
+    <integer name="overeatingInitialHealthLoss">-25</integer>
+    <integer name="overeatingInitialMotivationLoss">-15</integer>
+    <integer name="overeatingInitialAttentionLoss">0</integer>
+    <item name="overeatingPeriodicHealthLoss" format="float" type="dimen">-0.085</item>
+    <item name="overeatingPeriodicMotivationLoss" format="float" type="dimen">0.0</item>
+    <item name="overeatingPeriodicHappinessLoss" format="float" type="dimen">-0.25</item>
 </resources>
