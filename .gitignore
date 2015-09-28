@@ -1,3 +1,11 @@
 Amagotchi/.idea/gradle.xml
 Amagotchi/.idea/misc.xml
 Amagotchi/app/app.iml
+*.iml
+.idea/compiler.xml
+*.name
+.idea/copyright/profiles_settings.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/workspace.xml
+.idea/vcs.xml
