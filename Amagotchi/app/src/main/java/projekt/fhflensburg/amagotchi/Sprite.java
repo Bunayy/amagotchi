@@ -1,4 +1,4 @@
-package com.example.pschoe.surfaceviewtestapp;
+package projekt.fhflensburg.amagotchi;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

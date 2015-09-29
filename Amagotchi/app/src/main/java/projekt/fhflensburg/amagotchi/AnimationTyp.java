@@ -1,4 +1,4 @@
-package com.example.pschoe.surfaceviewtestapp;
+package projekt.fhflensburg.amagotchi;
 
 /**
  * Created by User on 22.09.2015.

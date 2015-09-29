@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onNewGame(View view)
     {
-        setContentView(R.layout.game_view);
+        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
 
         canvasContainer = (RelativeLayout)findViewById(R.id.canvasContainer);
         gameView = new GameView(this);
@@ -116,12 +116,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void test_1(View v)
     {
-        game.setAmagotchiEvent(AnimationTyp.NORMAL);
+        gameView.setAmagotchiEvent(AnimationTyp.NORMAL);
     }
 
     public void test_2(View v)
     {
-        game.setAmagotchiEvent(AnimationTyp.SLEEPING);
+        gameView.setAmagotchiEvent(AnimationTyp.SLEEPING);
     }
 
 }
