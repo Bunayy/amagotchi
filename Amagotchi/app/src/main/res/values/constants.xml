@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <integer name="startValueHealth">100</integer>
+    <integer name="startValueRepletion">100</integer>
+    <integer name="startValueSleep">100</integer>
+    <integer name="startValueMotivation">100</integer>
+    <integer name="startValueHappiness">100</integer>
+    <integer name="startValueFitness">100</integer>
+    <integer name="startValueAttention">60</integer>
+
     <item name="healthPerPeriodStandardValue" format="float" type="dimen">-0.042</item>
     <item name="repletionPerPeriodStandardValue" format="float" type="dimen">-0.17</item>
     <item name="sleepPerPeriodStandardValue" format="float" type="dimen">-0.1</item>
@@ -32,4 +40,24 @@
     <item name="overeatingPeriodicHealthLoss" format="float" type="dimen">-0.085</item>
     <item name="overeatingPeriodicMotivationLoss" format="float" type="dimen">0.0</item>
     <item name="overeatingPeriodicHappinessLoss" format="float" type="dimen">-0.25</item>
+
+    <integer name="healthyFoodHealth">10</integer>
+    <integer name="healthyFoodRepletion">7</integer>
+    <integer name="healthyFoodSleep">-5</integer>
+    <integer name="healthyFoodHappiness">-7</integer>
+    <integer name="healthyFoodFitness">5</integer>
+    <integer name="healthyFoodAttention">1</integer>
+
+    <integer name="solidFoodRepletion">20</integer>
+    <integer name="solidFoodSleep">-20</integer>
+    <integer name="solidFoodHappiness">6</integer>
+    <integer name="solidFoodFitness">-3</integer>
+    <integer name="solidFoodAttention">3</integer>
+
+    <integer name="candyRepletion">12</integer>
+    <integer name="candySleep">-10</integer>
+    <integer name="candyMotivation">15</integer>
+    <integer name="candyHappiness">8</integer>
+    <integer name="candyFitness">-9</integer>
+    <integer name="candyAttention">3</integer>
 </resources>

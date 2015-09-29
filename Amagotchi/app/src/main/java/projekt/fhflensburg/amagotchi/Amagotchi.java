@@ -5,9 +5,6 @@ import android.util.TypedValue;
 
 // Unterscheidung Eiform und geschlüpfte Form umsetzen
 // ToString() Funktion für die Speicherung
-/**
- * Created by bunay_000 on 09.09.2015.
- */
 public class Amagotchi
 {
     private static Amagotchi instance;
@@ -15,7 +12,6 @@ public class Amagotchi
 
     private Sickness sickness;
 
-    // Eigenschaften initial setzen
     // Eigenschaften observable machen
     private String name;
     private double health;
@@ -31,13 +27,14 @@ public class Amagotchi
     private double weight;
     private int developmentPoints;
 
-    // Feld initial setzen
     // Feld observable machen
     private boolean isSick;
 
-    // Feld initial setzen
     // Feld observable machen
     private boolean feces;
+
+    // Feld observable machen
+    private boolean isdead;
 
     private double healthPerPeriod;
     private double repletionPerPeriod;
@@ -46,6 +43,9 @@ public class Amagotchi
     private double happinessPerPeriod;
     private double fitnessPerPeriod;
     private double attentionPerPeriod;
+
+    private FoodFactory foodFactory;
+    private Food food;
 
     private Amagotchi()
     {
@@ -70,9 +70,17 @@ public class Amagotchi
         Amagotchi.context = context;
     }
 
-    public void init()
+    private void init()
     {
         TypedValue tempValue = new TypedValue();
+
+        health = context.getResources().getInteger(R.integer.startValueHealth);
+        repletion = context.getResources().getInteger(R.integer.startValueRepletion);
+        sleep = context.getResources().getInteger(R.integer.startValueSleep);
+        motivation = context.getResources().getInteger(R.integer.startValueMotivation);
+        happiness = context.getResources().getInteger(R.integer.startValueHappiness);
+        fitness = context.getResources().getInteger(R.integer.startValueFitness);
+        attention = context.getResources().getInteger(R.integer.startValueAttention);
 
         context.getResources().getValue(R.dimen.healthPerPeriodStandardValue, tempValue, true);
         healthPerPeriod = tempValue.getFloat();
@@ -103,6 +111,12 @@ public class Amagotchi
 
         context.getResources().getValue(R.dimen.weightStandardValue, tempValue, true);
         weight = tempValue.getFloat();
+
+        isSick = false;
+        feces = false;
+        isdead = false;
+
+        foodFactory = new FoodFactory();
     }
 
     public void updateValues()
@@ -141,13 +155,27 @@ public class Amagotchi
         //Alterung hinzufügen
     }
 
-    public Sickness getSickness() {
-        return sickness;
+    public void feedAmagotchi(String foodType)
+    {
+        food = foodFactory.getFood(foodType);
+        food.feed(this);
     }
 
-    public void setSickness(Sickness sickness) {
-        this.sickness = sickness;
+    // Muss noch umgesetzt werden
+    public void developAmagotchi()
+    {
+
     }
+
+    //Muss noch umgesetzt werden
+    public void ripAmagotchi()
+    {
+        isdead = true;
+    }
+
+    public Sickness getSickness() { return sickness; }
+
+    public void setSickness(Sickness sickness) { this.sickness = sickness; }
 
     public String getName()
     {
@@ -259,5 +287,9 @@ public class Amagotchi
         this.weight = weight;
     }
 
+    //Muss noch umgesetzt werden
+    public void saveGame()
+    {
 
+    }
 }
