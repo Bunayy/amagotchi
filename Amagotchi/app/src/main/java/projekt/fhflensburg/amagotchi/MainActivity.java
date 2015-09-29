@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -15,12 +16,13 @@ public class MainActivity extends AppCompatActivity {
     private ViewFlipper flipper;
     private TextView settView;
 
+    private GameView gameView;
+    private RelativeLayout canvasContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Log.v("inf", "Test Bir Iki");
 
         flipper = (ViewFlipper) findViewById(R.id.flipper);
 
@@ -50,7 +52,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onNewGame(View view)
     {
+        setContentView(R.layout.game_view);
 
+        canvasContainer = (RelativeLayout)findViewById(R.id.canvasContainer);
+        gameView = new GameView(this);
+        canvasContainer.addView(gameView);
     }
 
     public void onContGame(View view)
@@ -68,4 +74,54 @@ public class MainActivity extends AppCompatActivity {
     {
 
     }
+    public void onFeedingPressed(View v)
+    {
+        Log.v("test", "Gib Gib GIb !");
+    }
+
+    public void onLightPressed(View v)
+    {
+        Log.v("test", "Licht An/Aus");
+    }
+
+    public void onCleaningPressed(View v)
+    {
+        Log.v("test", "Reinigen");
+    }
+
+    public void onStatsPressed(View v)
+    {
+        Log.v("test", "Hier sind deine Stats");
+    }
+
+    public void onMedicinePressed(View v)
+    {
+        Log.v("test", "Ih bah Medizin !");
+    }
+
+    public void onDisciplinePressed(View v)
+    {
+        Log.v("test", "Böses amagee");
+    }
+
+    public void onMinigamesPressed(View v)
+    {
+        Log.v("test", "Juhu Spiele!");
+    }
+
+    public void onWalkingPressed(View v)
+    {
+        Log.v("test", "Wenns denn sein muss !");
+    }
+
+    public void test_1(View v)
+    {
+        game.setAmagotchiEvent(AnimationTyp.NORMAL);
+    }
+
+    public void test_2(View v)
+    {
+        game.setAmagotchiEvent(AnimationTyp.SLEEPING);
+    }
+
 }
