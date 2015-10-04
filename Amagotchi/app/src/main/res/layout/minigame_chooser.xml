@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_marginTop="60dp"
+        android:id="@+id/holBtn"
+        android:src="@drawable/higher_or_lower_btn"
+        android:onClick="startMinigame"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/holBtn"
+        android:layout_marginTop="70dp"
+        android:background="#ddd"
+        android:text="@string/higher_or_lower_description"
+        />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/holBtn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_marginTop="60dp"
+        android:id="@+id/lorBtn"
+        android:src="@drawable/left_or_right_btn"
+        android:onClick="startMinigame"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/lorBtn"
+        android:layout_below="@id/holBtn"
+        android:layout_marginTop="70dp"
+        android:background="#ddd"
+        android:text="@string/left_or_right_description"
+        />
+</RelativeLayout>

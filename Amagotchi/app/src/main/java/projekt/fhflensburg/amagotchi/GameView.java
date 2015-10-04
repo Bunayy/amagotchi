@@ -15,6 +15,8 @@ import android.view.SurfaceView;
  */
 public class GameView extends SurfaceView implements Runnable
 {
+    private Amagotchi amaGee = Amagotchi.getInstance();
+
     //Hier müssen die Werte des Amagotchi rein! MAYBE Observer ?
     String state = "egg";
     String amagotchiType = "_3";
