@@ -1,12 +1,15 @@
 package projekt.fhflensburg.amagotchi;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.TypedValue;
 
 // Unterscheidung Eiform und geschlüpfte Form umsetzen
 // ToString() Funktion für die Speicherung
 public class Amagotchi
 {
+    private static final String LOG_TAG = "Amagotchi";
+
     private static Amagotchi instance;
     public static Context context;
 
@@ -287,9 +290,14 @@ public class Amagotchi
         this.weight = weight;
     }
 
-    //Muss noch umgesetzt werden
-    public void saveGame()
+    public String getSaveString()
     {
-        //bla
+        Log.d(LOG_TAG, "getSaveString() " + name);
+        return name;
+    }
+
+    public void loadSaveString(String input)
+    {
+        name = input;
     }
 }
