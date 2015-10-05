@@ -26,8 +26,8 @@
         android:text="@string/continue_game_btn"
         android:id="@+id/contGameBtn"
         android:onClick="onContGame"
-        android:layout_marginTop="35dp"
-        android:layout_below="@+id/newGameBtn"
+        android:layout_marginTop="25dp"
+        android:layout_below="@id/newGameBtn"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -37,8 +37,8 @@
         android:text="@string/settings_btn"
         android:id="@+id/settingsBtn"
         android:onClick="onSettings"
-        android:layout_marginTop="35dp"
-        android:layout_below="@+id/contGameBtn"
+        android:layout_marginTop="25dp"
+        android:layout_below="@id/contGameBtn"
         android:layout_centerHorizontal="true"
         android:clickable="true" />
 
@@ -49,8 +49,18 @@
         android:text="@string/game_history_bn"
         android:id="@+id/gameHistoryBtn"
         android:onClick="onGameHistory"
-        android:layout_marginTop="35dp"
-        android:layout_below="@+id/settingsBtn"
+        android:layout_marginTop="25dp"
+        android:layout_below="@id/settingsBtn"
+        android:layout_centerHorizontal="true" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/borderlessButtonStyle"
+        android:text="SoundCheck"
+        android:id="@+id/soundTestBtn"
+        android:onClick="onSoundCheck"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/gameHistoryBtn"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

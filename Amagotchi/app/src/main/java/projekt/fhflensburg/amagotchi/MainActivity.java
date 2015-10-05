@@ -1,8 +1,13 @@
 package projekt.fhflensburg.amagotchi;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.media.MediaPlayer;
 import android.os.Debug;
 import android.os.Environment;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +27,14 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewFlipper flipper;
     Amagotchi ama;
+
+    SoundService mSoundService;
+    boolean mSoundServiceBounded = false;
+
+    MediaPlayer mPlayer;
+
+
+
 
     //Bei Start der App
     @Override
@@ -194,5 +207,35 @@ public class MainActivity extends AppCompatActivity {
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.sumUpGameView)));
 
     }
+
+    public void onSoundCheck(View v)
+    {
+        Log.d(LOG_TAG, "onSoundCheck()");
+        Intent intent = new Intent(MainActivity.this,SoundService.class);
+
+        Log.v(LOG_TAG, "startServiceBtn onClick()");
+        bindService(intent, mSoundServiceConnection, Context.BIND_AUTO_CREATE);
+
+        if (mSoundService != null) mSoundService.makeNoise();
+
+    }
+
+    private ServiceConnection mSoundServiceConnection = new ServiceConnection()
+    {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.v(LOG_TAG, "onServiceConnected");
+            SoundService.SoundBinder soundBinder = (SoundService.SoundBinder)service;
+            mSoundService = soundBinder.getService();
+            mSoundServiceBounded = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            Log.v(LOG_TAG, "onServiceDisconnected");
+            mSoundServiceBounded = false;
+            mSoundService = null;
+        }
+    };
 
 }

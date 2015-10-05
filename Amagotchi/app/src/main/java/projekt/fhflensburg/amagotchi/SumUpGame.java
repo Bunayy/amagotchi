@@ -165,7 +165,7 @@ public class SumUpGame
             tempTV.setBackgroundColor(Color.parseColor("#32CD32"));
 
             amagotchi.setMotivation(amagotchi.getMotivation() + 1);
-            
+
             equationSolvedValid = false;
         }
         else
