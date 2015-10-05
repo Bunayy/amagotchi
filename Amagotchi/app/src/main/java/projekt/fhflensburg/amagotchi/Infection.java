@@ -7,10 +7,20 @@ import android.util.TypedValue;
  */
 public class Infection extends Sickness
 {
-    public Infection()
+    private static Infection instance;
+
+    private Infection()
     {
         super();
         init();
+    }
+
+    public static Sickness getInstance()
+    {
+        if(Infection.instance == null)
+            Infection.instance = new Infection();
+
+        return Infection.instance;
     }
 
     private void init()
@@ -29,5 +39,12 @@ public class Infection extends Sickness
 
         Amagotchi.context.getResources().getValue(R.dimen.infectionPeriodicHappinessLoss, tempValue, true);
         periodicHappinessLoss = tempValue.getFloat();
+    }
+
+    public void breakOut(Amagotchi obj)
+    {
+        obj.setHealth(obj.getHealth() + initialHealthLoss);
+        obj.setMotivation(obj.getMotivation() + initialMotivationLoss);
+        obj.setAttention(obj.getAttention() + initialAttentionLoss);
     }
 }

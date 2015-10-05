@@ -9,11 +9,10 @@ import android.util.TypedValue;
 public class Amagotchi
 {
     private static final String LOG_TAG = "Amagotchi";
+    private static final String DEST_SAVE_VERSION = "1"; //Savegame version in der gespeichert wird
 
     private static Amagotchi instance;
     public static Context context;
-
-    private Sickness sickness;
 
     // Eigenschaften observable machen
     private String name;
@@ -30,11 +29,15 @@ public class Amagotchi
     private double weight;
     private int developmentPoints;
 
+    private int timeToHatch;
+
     // Feld observable machen
-    private boolean isSick;
+    private boolean isSickInfection;
+    private boolean isSickOvereating;
 
     // Feld observable machen
     private boolean feces;
+    private Long fecesTimestamp;
 
     // Feld observable machen
     private boolean isdead;
@@ -61,6 +64,16 @@ public class Amagotchi
             Amagotchi.instance = new Amagotchi();
 
         return Amagotchi.instance;
+    }
+
+    //Check if instance exists
+    public static Amagotchi getState() {
+
+        if(Amagotchi.instance == null)
+            return null;
+        else
+            return Amagotchi.instance;
+
     }
 
     public static void resetAmagotchi()
@@ -115,7 +128,10 @@ public class Amagotchi
         context.getResources().getValue(R.dimen.weightStandardValue, tempValue, true);
         weight = tempValue.getFloat();
 
-        isSick = false;
+        timeToHatch = context.getResources().getInteger(R.integer.startValuetimeToHatch);
+
+        isSickInfection = false;
+        isSickOvereating = false;
         feces = false;
         isdead = false;
 
@@ -176,9 +192,13 @@ public class Amagotchi
         isdead = true;
     }
 
-    public Sickness getSickness() { return sickness; }
+    public Boolean getIsSickInfection() { return isSickInfection; }
 
-    public void setSickness(Sickness sickness) { this.sickness = sickness; }
+    public void setIsSickInfection(Boolean val) { this.isSickInfection = val; }
+
+    public Boolean getisSickOveraeting() { return isSickOvereating; }
+
+    public void setIsSickOveraeting(Boolean val) { this.isSickOvereating = val; }
 
     public String getName()
     {
@@ -289,6 +309,8 @@ public class Amagotchi
     {
         this.weight = weight;
     }
+
+
 
     public String getSaveString()
     {

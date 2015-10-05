@@ -17,4 +17,6 @@ public abstract class Sickness
     public Sickness(){}
 
     private void init(){}
+
+    public void breakOut(Amagotchi obj){}
 }

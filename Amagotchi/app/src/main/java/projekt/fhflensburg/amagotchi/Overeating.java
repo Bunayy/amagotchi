@@ -7,10 +7,20 @@ import android.util.TypedValue;
  */
 public class Overeating extends Sickness
 {
-    public Overeating()
+    private static Overeating instance;
+
+    private Overeating()
     {
         super();
         init();
+    }
+
+    public static Sickness getInstance()
+    {
+        if(Overeating.instance == null)
+            Overeating.instance = new Overeating();
+
+        return Overeating.instance;
     }
 
     private void init()
@@ -29,5 +39,12 @@ public class Overeating extends Sickness
 
         Amagotchi.context.getResources().getValue(R.dimen.overeatingPeriodicHappinessLoss, tempValue, true);
         periodicHappinessLoss = tempValue.getFloat();
+    }
+
+    public void breakOut(Amagotchi obj)
+    {
+        obj.setHealth(obj.getHealth() + initialHealthLoss);
+        obj.setMotivation(obj.getMotivation() + initialMotivationLoss);
+        obj.setAttention(obj.getAttention() + initialAttentionLoss);
     }
 }
