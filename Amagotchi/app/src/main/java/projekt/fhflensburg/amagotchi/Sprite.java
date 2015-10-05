@@ -62,7 +62,6 @@ public class Sprite
         Rect srcRect = new Rect(startX +5,startY +5,startX+width-5, startY+height-5);
 
         // Mit diesem Rect wird der ausgewhlte Bildausschnitt(das Sprite) skaliert, meiner meinung nach schnell verpixelt!
-        //Rect destRect = new Rect(canvas.getWidth()/4,canvas.getHeight()/8,canvas.getWidth() - canvas.getWidth()/4,canvas.getHeight()-canvas.getHeight()/3);
 
         int smallestSide = Math.min(canvas.getWidth(), canvas.getHeight());
         int destWidth = (int)(smallestSide*.60);
@@ -71,11 +70,9 @@ public class Sprite
         int destStartX = canvas.getWidth()/2 - destWidth/2;
         int destStartY = canvas.getHeight()/2 - destHeight/2;
 
-        Rect destRect = new Rect(destStartX, destStartY - destHeight/2, destStartX + destWidth, destStartY + destHeight);
+        Rect destRect = new Rect(destStartX, destStartY, destStartX + destWidth, destStartY + destHeight);
 
         canvas.drawBitmap(spriteSheet, srcRect, destRect, null);
 
-        Log.d(LOG_TAG, "canvas width: " +canvas.getWidth()+" canvas height"+ canvas.getHeight() + " breite des Sprite: " +width +  " höhe des Sprite: " + height
-                + " die SpriteSheet breite: " + spriteSheet.getWidth() + " spriteSheetHöhe: " + spriteSheet.getHeight()+ " destRect: " + destRect);
-    }
+      }
 }
