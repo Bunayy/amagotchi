@@ -17,9 +17,7 @@ public class Sys {
     {
         String saveString = ama.getSaveString();
 
-        if(save)
-
-        return true;
+        return saveGameString(saveString, ctx);
     }
 
 
