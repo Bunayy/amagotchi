@@ -46,14 +46,14 @@
         style="?android:attr/borderlessButtonStyle"
         />
 
-    <RelativeLayout
+    <projekt.fhflensburg.amagotchi.GameView
         android:id="@+id/canvasContainer"
         android:layout_width="fill_parent"
-        android:layout_height="500dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/feedBtn"
         android:layout_centerVertical="true"
-        >
-    </RelativeLayout>
+        />
+
 
     <ImageButton
         android:id="@+id/medicineBtn"

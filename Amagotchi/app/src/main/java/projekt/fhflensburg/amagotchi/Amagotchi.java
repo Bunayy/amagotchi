@@ -12,8 +12,9 @@ public class Amagotchi
 
     private Sickness sickness;
 
-    // Eigenschaften observable machen
     private String name;
+
+    // Eigenschaften observable machen
     private double health;
     private double repletion;
     private double sleep;
