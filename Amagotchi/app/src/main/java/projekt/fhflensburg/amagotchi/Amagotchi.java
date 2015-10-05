@@ -16,6 +16,8 @@ public class Amagotchi
 
     // Eigenschaften observable machen
     private String name;
+    private String type;
+    private String mutation;
     private double health;
     private double repletion;
     private double sleep;
@@ -25,7 +27,7 @@ public class Amagotchi
     private double attention;
 
     private int level;
-    private double age;
+    private int age; //in Tage, alle 30 Mins
     private double weight;
     private int developmentPoints;
 
@@ -37,7 +39,7 @@ public class Amagotchi
 
     // Feld observable machen
     private boolean feces;
-    private Integer fecesCountdown;
+    private int fecesCountdown;
 
     // Feld observable machen
     private boolean isdead;
@@ -99,6 +101,7 @@ public class Amagotchi
         happiness = context.getResources().getInteger(R.integer.startValueHappiness);
         fitness = context.getResources().getInteger(R.integer.startValueFitness);
         attention = context.getResources().getInteger(R.integer.startValueAttention);
+        age = context.getResources().getInteger(R.integer.ageStandardValue);
 
         context.getResources().getValue(R.dimen.healthPerPeriodStandardValue, tempValue, true);
         healthPerPeriod = tempValue.getFloat();
@@ -123,9 +126,6 @@ public class Amagotchi
 
         context.getResources().getValue(R.dimen.levelStandardValue, tempValue, true);
         level = (int) tempValue.getFloat();
-
-        context.getResources().getValue(R.dimen.ageStandardValue, tempValue, true);
-        age = tempValue.getFloat();
 
         context.getResources().getValue(R.dimen.weightStandardValue, tempValue, true);
         weight = tempValue.getFloat();
@@ -298,7 +298,7 @@ public class Amagotchi
         return age;
     }
 
-    public void setAge(double age)
+    public void setAge(int age)
     {
         this.age = age;
     }
