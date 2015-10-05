@@ -61,7 +61,8 @@ public class SumUpGame
 
         nextTaskBtn = (Button)activity.findViewById(R.id.nextTaskBtn);
 
-        nextTaskBtn.setOnClickListener(new View.OnClickListener() {
+        nextTaskBtn.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v)
             {
@@ -83,7 +84,7 @@ public class SumUpGame
 
     public void provideTask()
     {
-        Log.v(LOG_TAG, "provideTask()");
+        Log.d(LOG_TAG, "provideTask()");
 
         wResultOne = new Random().nextInt(28);
         wResultTwo = new Random().nextInt(28);
