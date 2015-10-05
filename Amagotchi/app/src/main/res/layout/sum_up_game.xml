@@ -17,8 +17,8 @@
         />
     <TextView
         android:id="@+id/result_1"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="80dp"
+        android:layout_height="70dp"
         android:gravity="center_vertical|center_horizontal"
         android:layout_below="@id/calculation"
         android:layout_marginTop="20dp"
@@ -29,12 +29,12 @@
         />
     <TextView
         android:id="@+id/result_2"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="80dp"
+        android:layout_height="70dp"
         android:gravity="center_vertical|center_horizontal"
         android:layout_below="@id/calculation"
         android:layout_toRightOf="@id/result_1"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginTop="20dp"
         android:padding="3dp"
         android:text=""
@@ -43,12 +43,12 @@
         />
     <TextView
         android:id="@+id/result_3"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="80dp"
+        android:layout_height="70dp"
         android:gravity="center_vertical|center_horizontal"
         android:layout_below="@id/calculation"
         android:layout_toRightOf="@id/result_2"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginTop="20dp"
         android:padding="3dp"
         android:text=""
@@ -59,6 +59,7 @@
         android:id="@id/canvasContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_below="@id/result_1"
         android:layout_centerVertical="true"
         >

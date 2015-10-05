@@ -169,6 +169,7 @@ public class GameView extends SurfaceView implements Runnable
             }
 
             Canvas canvas = holder.lockCanvas();
+            Log.d(LOG_TAG, "canvas width: " +canvas.getWidth()+" canvas height"+ canvas.getHeight());
             doDrawings(canvas);
             amagotchi.drawAmagotchi(canvas, amagotchiCounter);
             holder.unlockCanvasAndPost(canvas);

@@ -11,6 +11,8 @@ import android.util.Log;
  */
 public class Sprite
 {
+
+    private static final String LOG_TAG = "Sprite";
     Bitmap spriteSheet;
     AnimationTyp event;
 
@@ -25,8 +27,8 @@ public class Sprite
         x = y = 0;
 
         //hier müssen wir mal gucken ob das ganze so elegant ist
-        width = spriteSheet.getWidth()/8;
-        height = spriteSheet.getHeight()/8;
+        width = spriteSheet.getWidth()/16;
+        height = spriteSheet.getHeight()/16;
 
     }
 
@@ -60,9 +62,12 @@ public class Sprite
         Rect srcRect = new Rect(startX +5,startY +5,startX+width-5, startY+height-5);
 
         // Mit diesem Rect wird der ausgewhlte Bildausschnitt(das Sprite) skaliert, meiner meinung nach schnell verpixelt!
-        Rect destRect = new Rect(canvas.getWidth()/4,canvas.getHeight()/8,canvas.getWidth() - canvas.getWidth()/4,canvas.getHeight()-canvas.getHeight()/3);
-        //Rect destRect = new Rect(canvas.getWidth()/2-width/2,canvas.getHeight()-height/2, width,height);
-        //Rect destRect = new Rect(canvas.getWidth()/2- width/2,0, canvas.getWidth(),canvas.getHeight()-canvas.getHeight()/3);
+        //Rect destRect = new Rect(canvas.getWidth()/4,canvas.getHeight()/8,canvas.getWidth() - canvas.getWidth()/4,canvas.getHeight()-canvas.getHeight()/3);
+        Rect destRect = new Rect(canvas.getWidth()/2 - width/2, canvas.getHeight()/2 - height/2, width, height);
+
         canvas.drawBitmap(spriteSheet, srcRect, destRect, null);
+
+        Log.d(LOG_TAG, "canvas width: " +canvas.getWidth()+" canvas height"+ canvas.getHeight() + " breite des Sprite: " +width +  " höhe des Sprite: " + height
+                + " die SpriteSheet breite: " + spriteSheet.getWidth() + " spriteSheetHöhe: " + spriteSheet.getHeight()+ " destRect: " + destRect);
     }
 }
