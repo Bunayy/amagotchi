@@ -290,6 +290,6 @@ public class Amagotchi
     //Muss noch umgesetzt werden
     public void saveGame()
     {
-
+        //bla
     }
 }
