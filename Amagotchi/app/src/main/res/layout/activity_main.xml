@@ -13,6 +13,7 @@
         <include android:id="@+id/foodChooserView" layout="@layout/food_chooser" />
         <include android:id="@+id/minigamesChooserView" layout="@layout/minigame_chooser" />
         <include android:id="@+id/sumUpGameView" layout="@layout/sum_up_game" />
+        <include android:id="@+id/leftOrRightGameView" layout="@layout/left_or_right_game" />
     </ViewFlipper>
 
 </RelativeLayout>
