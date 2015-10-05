@@ -125,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
     public void onSumUpGameStarted(View v)
     {
         Log.d(LOG_TAG, "onSumUpGameStarted()");
+        SumUpGame sum = new SumUpGame(this);
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.sumUpGameView)));
+
     }
 }
