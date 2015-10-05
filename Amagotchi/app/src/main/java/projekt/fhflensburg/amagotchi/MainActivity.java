@@ -24,6 +24,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         flipper = (ViewFlipper) findViewById(R.id.flipper);
+
+        Log.v(LOG_TAG, "---BEFORE---");
+        Amagotchi ama = new Amagotchi(this);
+        Log.v(LOG_TAG, "---START---");
+        Log.v(LOG_TAG, ama.getSaveString());
+        Log.v(LOG_TAG, "---END---");
     }
 
     //Beim Verlust des Focus
