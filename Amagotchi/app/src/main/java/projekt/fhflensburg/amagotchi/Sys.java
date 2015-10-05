@@ -24,6 +24,7 @@ public class Sys {
     public static Amagotchi loadGame(Context ctx)
     {
         Amagotchi ama = new Amagotchi("-", "1", ctx);
+        Amagotchi.setInstance(ama);
 
         ama.loadSaveString(loadGameString(ctx));
 
