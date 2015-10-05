@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "MainActivity";
 
     private ViewFlipper flipper;
+    Amagotchi ama;
 
     //Bei Start der App
     @Override
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Log.v(LOG_TAG, "---BEFORE------------------");
-        Amagotchi ama = new Amagotchi("Hugo1337", "1", this.getBaseContext());
+        ama = new Amagotchi("Hugo1337", "1", this.getBaseContext());
         /*Log.v(LOG_TAG, "---START---");
         Log.v(LOG_TAG, ama.getSaveString());
         Log.v(LOG_TAG, "---END---");
@@ -155,7 +156,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onMedicinePressed(View v)
     {
-        Log.d(LOG_TAG, "Ih bah Medizin !");
+        //Log.d(LOG_TAG, "Ih bah Medizin !");
+        if (ama.getIsSickInfection() == true)
+        {
+            if (ama.get)
+        }
     }
 
     public void onDisciplinePressed(View v)
