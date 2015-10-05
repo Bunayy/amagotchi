@@ -111,16 +111,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "Wenns denn sein muss !");
     }
 
-    public void test_1(View v)
-    {
-        GameView.getInstance().setAmagotchiEvent(AnimationTyp.NORMAL);
-        GameView.getInstance().hasPooped = true;
-    }
-
-    public void test_2(View v)
-    {
-        GameView.getInstance().setAmagotchiEvent(AnimationTyp.SLEEPING);
-    }
 
     public void onHigherOrLowerStarted(View v)
     {

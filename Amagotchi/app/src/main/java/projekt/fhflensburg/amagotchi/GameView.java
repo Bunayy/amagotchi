@@ -21,7 +21,6 @@ public class GameView extends SurfaceView implements Runnable
 
     private static final String LOG_TAG = "GameView";
     //Zugriff-Methode via Singleton
-    private static GameView instance;
 
     //Hier müssen die Werte des Amagotchi rein! MAYBE Observer ?
     String state = "egg";
@@ -35,7 +34,7 @@ public class GameView extends SurfaceView implements Runnable
 
     boolean isSick = false;
     //Hier muss noch einmal geschaut werden wie man mehrfache häufchen abfängt
-    boolean hasPooped = false;
+    boolean hasPooped = true;
 
     boolean isMainView = true;
 
@@ -76,8 +75,6 @@ public class GameView extends SurfaceView implements Runnable
         ctx = context;
 
         poopBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.poop_2);
-
-        instance = this;
 
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -212,11 +209,6 @@ public class GameView extends SurfaceView implements Runnable
         catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    public static GameView getInstance()
-    {
-        return GameView.instance;
     }
 
 }

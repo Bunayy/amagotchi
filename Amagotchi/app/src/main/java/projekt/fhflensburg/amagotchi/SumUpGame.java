@@ -126,8 +126,6 @@ public class SumUpGame
 
         if(amagochtiChoise == 1) equationSolvedValid = true;
 
-        if(equationSolvedValid)GameView.getInstance().isMainView = false;
-
     }
 
 }
