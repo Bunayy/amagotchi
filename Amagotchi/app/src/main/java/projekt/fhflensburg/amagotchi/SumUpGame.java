@@ -32,12 +32,19 @@ public class SumUpGame
     private Activity activity;
     private int solvedCalculations;
 
+    TextView tempTV;
+
+    ViewFlipper flipper;
+
+    private Amagotchi amagotchi;
+
     /*
         Hier muss auch noch der Bonus auf die Stats bei Erfolg geladen werden
      */
 
     public SumUpGame(Activity _activity)
     {
+        amagotchi = Amagotchi.getState();
         Log.d(LOG_TAG, "Konstruktor");
         activity = _activity;
         init();
@@ -69,9 +76,10 @@ public class SumUpGame
             @Override
             public void onClick(View v)
             {
+
+                solveEquation();
                 if (solvedCalculations < 2)
                 {
-                    solveEquation();
                     solvedCalculations++;
                     provideTask();
                 }
@@ -79,9 +87,19 @@ public class SumUpGame
                 {
                     Log.v(LOG_TAG, "onClick nextTask - setContentView");
                     //hier soll eig die Rückleitung auf die Main-Ansicht des Amagotchi geschehen das klappt aber leider nicht ...
-                    ViewFlipper flipper = (ViewFlipper)activity.findViewById(R.id.flipper);
+                    flipper = (ViewFlipper)activity.findViewById(R.id.flipper);
 
-                    flipper.setDisplayedChild(flipper.indexOfChild(activity.findViewById(R.id.gameView)));
+                    Handler reDo = new Handler();
+
+                    reDo.postDelayed(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            flipper.setDisplayedChild(flipper.indexOfChild(activity.findViewById(R.id.gameView)));
+                        }
+                    }, 1000); // 1 second delay (takes millis)
+
                 }
             }
         });
@@ -98,18 +116,12 @@ public class SumUpGame
         switch (solvedCalculations)
         {
             case 0:
-                //calc = calculationOne.getCalculation();
-                //rResult = calculationOne.getResult();
                 equationNow = calculationOne;
                 break;
             case 1:
-                //calc = calculationTwo.getCalculation();
-                //rResult = calculationTwo.getResult();
                 equationNow = calculationTwo;
                 break;
             case 2:
-                //calc = calculationThree.getCalculation();
-                //rResult = calculationThree.getResult();
                 equationNow = calculationThree;
                 break;
             default:
@@ -132,8 +144,6 @@ public class SumUpGame
 
         if(amagochtiChoise == 1) equationSolvedValid = true;
 
-        final TextView tempTV ;
-
 
         switch (amagochtiChoise)
         {
@@ -152,7 +162,19 @@ public class SumUpGame
 
         if(equationSolvedValid)
         {
+            tempTV.setBackgroundColor(Color.parseColor("#32CD32"));
 
+            amagotchi.setMotivation(amagotchi.getMotivation() + 1);
+            
+            equationSolvedValid = false;
+        }
+        else
+        {
+            tempTV.setBackgroundColor(Color.parseColor("#cc0000"));
+
+            //Konstanten !
+            amagotchi.setMotivation(amagotchi.getMotivation() - 1);
+            amagotchi.setAttention(amagotchi.getAttention() + 2);
         }
 
         //Zurücksetzen der "Farbe"
@@ -164,19 +186,12 @@ public class SumUpGame
             @Override
             public void run()
             {
-                try
-                {
-                    tempTV.setBackgroundColor("#ccc");
-                }
-                catch (Exception e)
-                {
-
-                }
-
+                tempTV.setBackgroundColor(Color.parseColor("#cccccc"));
             }
         }, 1000); // 1 second delay (takes millis)
 
-
+        //hier vllt. noch Konstante anlegen zuf 8 aufmerksamkeit +7  verloren 5
+        amagotchi.setSleep(amagotchi.getSleep() - 2);
     }
 
 }
