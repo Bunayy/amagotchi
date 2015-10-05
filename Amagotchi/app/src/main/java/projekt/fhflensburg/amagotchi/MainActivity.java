@@ -13,11 +13,9 @@ import android.widget.ViewFlipper;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ViewFlipper flipper;
-    private TextView settView;
+    private static final String LOG_TAG = "MainActivity";
 
-    private GameView gameView;
-    private RelativeLayout canvasContainer;
+    private ViewFlipper flipper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,17 +50,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void onNewGame(View view)
     {
+        Log.d(LOG_TAG, "onNewGame()");
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
     }
 
     public void onContGame(View view)
     {
-
+        Log.d(LOG_TAG, "onContGame()");
     }
 
     public void onSettings(View view)
     {
-        Log.v("inf", "onSettings():");
+        Log.d(LOG_TAG, "onSettings():");
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.settingsView)));
     }
 
@@ -72,12 +71,13 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onFeedingPressed(View v)
     {
-        Log.v("test", "Gib Gib GIb !");
+        Log.d(LOG_TAG, "Gib Gib GIb !");
     }
 
     public void onLightPressed(View v)
     {
-        Log.v("test", "Licht An/Aus");
+        Log.d(LOG_TAG, "Licht An/Aus");
+
     }
 
     public void onCleaningPressed(View v)
@@ -87,37 +87,54 @@ public class MainActivity extends AppCompatActivity {
 
     public void onStatsPressed(View v)
     {
-        Log.v("test", "Hier sind deine Stats");
+        Log.d(LOG_TAG, "Hier sind deine Stats");
     }
 
     public void onMedicinePressed(View v)
     {
-        Log.v("test", "Ih bah Medizin !");
+        Log.d(LOG_TAG, "Ih bah Medizin !");
     }
 
     public void onDisciplinePressed(View v)
     {
-        Log.v("test", "Böses amagee");
+        Log.d(LOG_TAG, "Böses amagee");
     }
 
     public void onMinigamesPressed(View v)
     {
-        Log.v("test", "Juhu Spiele!");
+        Log.d(LOG_TAG, "Juhu Spiele!");
+        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.minigamesChooserView)));
     }
 
     public void onWalkingPressed(View v)
     {
-        Log.v("test", "Wenns denn sein muss !");
+        Log.d(LOG_TAG, "Wenns denn sein muss !");
     }
 
     public void test_1(View v)
     {
-        gameView.setAmagotchiEvent(AnimationTyp.NORMAL);
+        GameView.getInstance().setAmagotchiEvent(AnimationTyp.NORMAL);
+        GameView.getInstance().hasPooped = true;
     }
 
     public void test_2(View v)
     {
-        gameView.setAmagotchiEvent(AnimationTyp.SLEEPING);
+        GameView.getInstance().setAmagotchiEvent(AnimationTyp.SLEEPING);
     }
 
+    public void onHigherOrLowerStarted(View v)
+    {
+        Log.d(LOG_TAG, "onHigherOrLowerStarted()");
+    }
+
+    public void onLeftOrRightStarted(View v)
+    {
+        Log.d(LOG_TAG, "onLeftOrRightStarted()");
+    }
+
+    public void onSumUpGameStarted(View v)
+    {
+        Log.d(LOG_TAG, "onSumUpGameStarted()");
+        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.sumUpGameView)));
+    }
 }

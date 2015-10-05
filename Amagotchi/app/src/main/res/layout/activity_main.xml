@@ -13,6 +13,9 @@
         <include android:id="@+id/mainMenuView"  layout="@layout/main_menu" />
         <include android:id="@+id/gameView" layout="@layout/game_view" />
         <include android:id="@+id/settingsView"  layout="@layout/settings" />
+        <include android:id="@+id/foodChooserView" layout="@layout/food_chooser" />
+        <include android:id="@+id/minigamesChooserView" layout="@layout/minigame_chooser" />
+        <include android:id="@+id/sumUpGameView" layout="@layout/sum_up_game" />
     </ViewFlipper>
 
 </RelativeLayout>

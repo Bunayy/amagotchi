@@ -55,6 +55,7 @@
         android:textSize="40dp"
         android:background="#ccc"
         />
+    <!--
     <com.example.pschoe.surfaceviewtestapp.GameView
         android:id="@id/canvasContainer"
         android:layout_width="wrap_content"
@@ -63,7 +64,7 @@
         android:layout_centerVertical="true"
         >
     </com.example.pschoe.surfaceviewtestapp.GameView>
-
+-->
     <Button
         android:id="@+id/nextTaskBtn"
         android:layout_width="wrap_content"

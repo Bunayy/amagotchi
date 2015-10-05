@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp">
+    android:padding="15dp"
+    >
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -11,7 +12,7 @@
         android:layout_marginTop="60dp"
         android:id="@+id/holBtn"
         android:src="@drawable/higher_or_lower_btn"
-        android:onClick="startMinigame"
+        android:onClick="onHigherOrLowerStarted"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -29,8 +30,9 @@
         android:layout_marginTop="60dp"
         android:id="@+id/lorBtn"
         android:src="@drawable/left_or_right_btn"
-        android:onClick="startMinigame"
+        android:onClick="onLeftOrRightStarted"
         />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,5 +41,24 @@
         android:layout_marginTop="70dp"
         android:background="#ddd"
         android:text="@string/left_or_right_description"
+        />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lorBtn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_marginTop="60dp"
+        android:id="@+id/sugBtn"
+        android:src="@drawable/sum_up_game_btn"
+        android:onClick="onSumUpGameStarted"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/sugBtn"
+        android:layout_below="@id/lorBtn"
+        android:layout_marginTop="70dp"
+        android:background="#ddd"
+        android:text="@string/sum_up_game_description"
         />
 </RelativeLayout>
