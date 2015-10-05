@@ -157,10 +157,7 @@ public class MainActivity extends AppCompatActivity {
     public void onMedicinePressed(View v)
     {
         //Log.d(LOG_TAG, "Ih bah Medizin !");
-        if (ama.getIsSickInfection() == true)
-        {
-            if (ama.get)
-        }
+        ama.healAmagotchi();
     }
 
     public void onDisciplinePressed(View v)

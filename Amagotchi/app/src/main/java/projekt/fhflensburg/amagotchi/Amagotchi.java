@@ -188,6 +188,36 @@ public class Amagotchi
         food.feed(this);
     }
 
+    public void healAmagotchi()
+    {
+        if (isSickInfection == true)
+        {
+            if (feces == false)
+                isSickInfection = false;
+        }
+
+        else if (isSickOvereating == true)
+        {
+            if (repletion <= 100)
+                isSickOvereating = false;
+        }
+
+        if(health > 100)
+            health = 100;
+        else
+            health += 40;
+
+        if(happiness < 35)
+            happiness = 0;
+        else
+            happiness += -35;
+
+        if(attention > 97)
+            attention = 100;
+        else
+            attention += 3;
+    }
+
     // Muss noch umgesetzt werden
     public void developAmagotchi()
     {
@@ -199,6 +229,10 @@ public class Amagotchi
     {
         isdead = true;
     }
+
+    public boolean getFeces() { return feces; }
+
+    public void setFeces(boolean feces) { this.feces = feces; }
 
     public Boolean getIsSickInfection() { return isSickInfection; }
 
