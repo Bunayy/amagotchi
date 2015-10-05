@@ -6,31 +6,35 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
+        android:textSize="50dp"
         android:id="@+id/titleView" />
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/new_game"
+        style="?android:attr/borderlessButtonStyle"
+        android:text="@string/new_game_btn"
         android:id="@+id/newGameBtn"
         android:onClick="onNewGame"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/continue_game"
+        style="?android:attr/borderlessButtonStyle"
+        android:text="@string/continue_game_btn"
         android:id="@+id/contGameBtn"
         android:onClick="onContGame"
         android:layout_marginTop="35dp"
         android:layout_below="@+id/newGameBtn"
         android:layout_centerHorizontal="true" />
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/game_settings"
+        style="?android:attr/borderlessButtonStyle"
+        android:text="@string/settings_btn"
         android:id="@+id/settingsBtn"
         android:onClick="onSettings"
         android:layout_marginTop="35dp"
@@ -38,24 +42,15 @@
         android:layout_centerHorizontal="true"
         android:clickable="true" />
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/game_history"
+        style="?android:attr/borderlessButtonStyle"
+        android:text="@string/game_history_bn"
         android:id="@+id/gameHistoryBtn"
         android:onClick="onGameHistory"
         android:layout_marginTop="35dp"
         android:layout_below="@+id/settingsBtn"
         android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onSettings"
-        android:text="test"
-        android:layout_above="@+id/newGameBtn"
-        android:layout_alignLeft="@+id/titleView"
-        android:layout_alignStart="@+id/titleView"
-        android:layout_marginBottom="118dp" />
 
 </RelativeLayout>

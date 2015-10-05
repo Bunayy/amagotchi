@@ -11,6 +11,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.ImageButton;
 
 /**
  * Created by User on 21.09.2015.
@@ -18,6 +19,7 @@ import android.view.SurfaceView;
 public class GameView extends SurfaceView implements Runnable
 {
 
+    private static final String LOG_TAG = "GameView";
     //Zugriff-Methode via Singleton
     private static GameView instance;
 
@@ -48,6 +50,15 @@ public class GameView extends SurfaceView implements Runnable
     Context ctx;
 
 
+    int displayWidth;
+    int displayHeight;
+
+    public void calcCanvasSize(String orign)
+    {
+        // hier wird geschaut das Amagotchi gerade dargestellt wird und entsprechend die Canvas-Größe gewählt
+
+    }
+
 
     public GameView(Context context, AttributeSet attrs)
     {
@@ -58,7 +69,6 @@ public class GameView extends SurfaceView implements Runnable
         spriteSheet = BitmapFactory.decodeResource(getResources(), res.getIdentifier(spriteSheetName, "drawable", context.getPackageName()));
 
         holder = getHolder();
-        holder.setFixedSize(500,500);
 
         drawingThread = new Thread(this);
         drawingThread.start();
@@ -68,6 +78,31 @@ public class GameView extends SurfaceView implements Runnable
         poopBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.poop_2);
 
         instance = this;
+
+        holder.addCallback(new SurfaceHolder.Callback() {
+            @Override
+            public void surfaceCreated(SurfaceHolder holder) {
+                Rect displayDimensions = holder.getSurfaceFrame();
+                displayWidth = displayDimensions.width();
+                displayHeight = displayDimensions.height();
+                //ImageButton btn = (ImageButton)findViewById(R.id.feedBtn);
+                //int btnHeight = btn.getHeight();
+                holder.setFixedSize(displayWidth,displayHeight- 60);// hier  müssen wir nochmal gucken bekomme  die referen auf den Btn nicht hin denke das es ihn zu diesem Zeitpunkt noch nicht gibt
+
+                Log.d(LOG_TAG, " displayW: " + displayWidth + " displayH: " + displayHeight  +  " rect: " + displayDimensions);
+            }
+
+            @Override
+            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+            }
+
+            @Override
+            public void surfaceDestroyed(SurfaceHolder holder) {
+
+            }
+        });
+
     }
     public void doDrawings(Canvas canvas)
     {
@@ -94,7 +129,6 @@ public class GameView extends SurfaceView implements Runnable
 
     public void run()
     {
-
         amagotchi = new Sprite(spriteSheet,amagotchiEvent);
 
         int amountSprites = 0;
@@ -138,7 +172,6 @@ public class GameView extends SurfaceView implements Runnable
             }
 
             Canvas canvas = holder.lockCanvas();
-
             doDrawings(canvas);
             amagotchi.drawAmagotchi(canvas, amagotchiCounter);
             holder.unlockCanvasAndPost(canvas);
