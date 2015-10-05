@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.ImageButton;
@@ -84,7 +85,7 @@ public class GameView extends SurfaceView implements Runnable
                 displayHeight = displayDimensions.height();
                 //ImageButton btn = (ImageButton)findViewById(R.id.feedBtn);
                 //int btnHeight = btn.getHeight();
-                holder.setFixedSize(displayWidth,displayHeight- 60);// hier  müssen wir nochmal gucken bekomme  die referen auf den Btn nicht hin denke das es ihn zu diesem Zeitpunkt noch nicht gibt
+                holder.setFixedSize(displayWidth,displayHeight- (int)(ctx.getResources().getDimension(R.dimen.game_view_btn)));// hier  müssen wir nochmal gucken bekomme  die referen auf den Btn nicht hin denke das es ihn zu diesem Zeitpunkt noch nicht gibt
 
                 Log.d(LOG_TAG, " displayW: " + displayWidth + " displayH: " + displayHeight  +  " rect: " + displayDimensions);
             }

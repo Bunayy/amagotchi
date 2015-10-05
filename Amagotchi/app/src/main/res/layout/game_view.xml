@@ -58,8 +58,8 @@
 
     <ImageButton
         android:id="@+id/medicineBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/game_view_btn"
+        android:layout_height="@dimen/game_view_btn"
         android:layout_below="@id/canvasContainer"
         android:src="@drawable/medicine_btn"
         style="?android:attr/borderlessButtonStyle"
