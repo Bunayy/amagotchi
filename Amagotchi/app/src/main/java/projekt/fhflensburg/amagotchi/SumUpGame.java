@@ -1,4 +1,4 @@
-package com.example.pschoe.surfaceviewtestapp;
+package projekt.fhflensburg.amagotchi;
 
 import android.app.Activity;
 import android.util.Log;

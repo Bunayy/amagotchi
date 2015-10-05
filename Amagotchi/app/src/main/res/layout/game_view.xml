@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/gameviewOutput">
+    android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/gameView">
 
     <ImageButton
         android:id="@+id/feedBtn"
@@ -48,7 +48,7 @@
 
     <projekt.fhflensburg.amagotchi.GameView
         android:id="@+id/canvasContainer"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/feedBtn"
         android:layout_centerVertical="true"
