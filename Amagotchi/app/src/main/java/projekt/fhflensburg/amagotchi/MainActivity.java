@@ -28,13 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private ViewFlipper flipper;
     Amagotchi ama;
 
-    SoundService mSoundService;
+    public static SoundService mSoundService;
     boolean mSoundServiceBounded = false;
-
-    MediaPlayer mPlayer;
-
-
-
 
     //Bei Start der App
     @Override
@@ -68,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
         Log.v(LOG_TAG, amaLoad.getName());
         /*Log.v(LOG_TAG, "---END---");
         Log.v(LOG_TAG, " ");*/
+
+        Intent intent = new Intent(MainActivity.this,SoundService.class);
+
+        Log.v(LOG_TAG, "startServiceBtn onClick()");
+        bindService(intent, mSoundServiceConnection, Context.BIND_AUTO_CREATE);
+
     }
 
     //Beim Verlust des Focus
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onNewGame(View view)
     {
+        mSoundService.playSounds("selection");
         Log.d(LOG_TAG, "onNewGame()");
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
     }
@@ -211,12 +213,7 @@ public class MainActivity extends AppCompatActivity {
     public void onSoundCheck(View v)
     {
         Log.d(LOG_TAG, "onSoundCheck()");
-        Intent intent = new Intent(MainActivity.this,SoundService.class);
-
-        Log.v(LOG_TAG, "startServiceBtn onClick()");
-        bindService(intent, mSoundServiceConnection, Context.BIND_AUTO_CREATE);
-
-        if (mSoundService != null) mSoundService.makeNoise();
+        if (mSoundService != null) mSoundService.playSounds("happy");
 
     }
 

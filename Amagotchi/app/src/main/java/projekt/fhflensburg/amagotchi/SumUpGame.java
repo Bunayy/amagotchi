@@ -166,10 +166,14 @@ public class SumUpGame
 
             amagotchi.setMotivation(amagotchi.getMotivation() + 1);
 
+            MainActivity.mSoundService.playSounds("happy");
+
             equationSolvedValid = false;
         }
         else
         {
+            MainActivity.mSoundService.playSounds("unhappy");
+
             tempTV.setBackgroundColor(Color.parseColor("#cc0000"));
 
             //Konstanten !

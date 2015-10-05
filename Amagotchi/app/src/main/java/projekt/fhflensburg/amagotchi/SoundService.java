@@ -3,6 +3,7 @@ package projekt.fhflensburg.amagotchi;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -58,19 +59,57 @@ public class SoundService extends Service
     }
     public void makeNoise()
     {
+
+
+    }
+
+    public void playSounds(String action)
+    {
+        String fileName = "";
+
+        switch (action)
+        {
+            case "happy":
+                Log.d(LOG_TAG, "unhappy");
+                fileName= "happy";
+                break;
+            case "attention":
+                fileName= "attention";
+                break;
+            case "refuse":
+                fileName= "refuse";
+                break;
+            case "selection":
+                fileName= "select_something_2";
+                break;
+            case "unhappy":
+                fileName= "unhappy";
+                Log.d(LOG_TAG, "unhappy");
+                break;
+            default:
+                Log.e(LOG_TAG, "playSound(String action) - action konnte nicht zu einem filenamen aufgelöst werden");
+        }
+
+
+
+        Resources res = getApplicationContext().getResources();
+
         if(mediaPlayer == null) mediaPlayer= new MediaPlayer();
 
-        Uri mediaUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.happy);
+        Uri mediaUri = Uri.parse("android.resource://" + getPackageName() + "/" + res.getIdentifier(fileName, "raw", getApplicationContext().getPackageName()));
 
-        try {
+
+        try
+        {
             mediaPlayer.setDataSource(getApplicationContext(), mediaUri);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             Log.e(LOG_TAG, e.getMessage(),e);
         }
+
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.prepareAsync();
-
-        mediaPlayer.setLooping(true);
 
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -79,7 +118,6 @@ public class SoundService extends Service
                 mp.start();
             }
         });
-
     }
 
 }
