@@ -53,10 +53,6 @@ public class MainActivity extends AppCompatActivity {
     public void onNewGame(View view)
     {
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
-
-        canvasContainer = (RelativeLayout)findViewById(R.id.canvasContainer);
-        gameView = new GameView(this);
-        canvasContainer.addView(gameView);
     }
 
     public void onContGame(View view)
