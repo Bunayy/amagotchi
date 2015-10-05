@@ -17,13 +17,44 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewFlipper flipper;
 
+    //Bei Start der App
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         flipper = (ViewFlipper) findViewById(R.id.flipper);
+    }
 
+    //Beim Verlust des Focus
+    public void onStop() {
+        Log.v(LOG_TAG, "onStop");
+
+        //saveOnExit(count);
+
+        if(Amagotchi.getState() != null)//Spiel gestartet
+        {
+            Sys.saveGame(Amagotchi.getState(), this);
+        }
+
+        super.onStop();
+
+        finish();
+        System.exit(0); //App beenden
+    }
+
+    //Beim Stopp der App
+    public void onDestroy() {
+        Log.v(LOG_TAG, "onDestroy");
+
+        //saveOnExit(count);
+
+        if(Amagotchi.getState() != null)//Spiel gestartet
+        {
+            Sys.saveGame(Amagotchi.getState(), this);
+        }
+
+        super.onDestroy();
     }
 
     @Override
