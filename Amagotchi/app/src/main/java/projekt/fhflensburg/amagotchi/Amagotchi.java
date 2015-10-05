@@ -216,6 +216,169 @@ public class Amagotchi
             attention += 3;
     }
 
+    public void checkBeforeUpdate(String id, double valueToAdd)
+    {
+        int[] borders;
+        double oldValue;
+        double newValue;
+        boolean bordersAvailable;
+
+        switch (id)
+        {
+            case "Repletion":
+                borders = context.getResources().getIntArray(R.array.repletionBorders);
+                oldValue = getRepletion();
+                bordersAvailable = true;
+                break;
+            case "Sleep":
+                borders = context.getResources().getIntArray(R.array.sleepBorders);
+                oldValue = getSleep();
+                bordersAvailable = true;
+                break;
+            case "Fitness":
+                borders = context.getResources().getIntArray(R.array.fitnessBorders);
+                oldValue = getFitness();
+                bordersAvailable = true;
+                break;
+            case "Attention":
+                borders = context.getResources().getIntArray(R.array.attentionBorders);
+                oldValue = getAttention();
+                bordersAvailable = true;
+                break;
+            case "Health":
+                borders = null;
+                oldValue =getHealth();
+                bordersAvailable = false;
+                break;
+            case "Motivation":
+                borders = null;
+                oldValue =getMotivation();
+                bordersAvailable = false;
+                break;
+            case "Happiness":
+                borders = null;
+                oldValue =getHappiness();
+                bordersAvailable = false;
+                break;
+            default:
+                borders = null;
+                oldValue = -1;
+                bordersAvailable = false;
+        }
+
+        if (bordersAvailable)
+        {
+            int borderCounterOld = 0;
+            int borderCounterNew = 0;
+            int multiplier = 1;
+
+            for (int i = 0; i < borders.length; i++)
+            {
+                if (oldValue < borders[i])
+                    borderCounterOld ++;
+                if (oldValue + valueToAdd < borders[i])
+                    borderCounterNew ++;
+
+                if (borderCounterNew != borderCounterOld)
+                {
+                    if (borderCounterNew == 1)
+                        multiplier = -1;
+
+                    switch (id)
+                    {
+                        case "Repletion":
+                            if (i == 0)
+                            {
+                                motivationPerPeriod += multiplier * 0.125;
+                            }
+                            else if (i == 1)
+                            {
+                                healthPerPeriod += multiplier * 0.17;
+                                happinessPerPeriod += multiplier * 0.17;
+                            }
+                            else if (i == 2)
+                            {
+                                healthPerPeriod += multiplier * 0.34;
+                                checkBeforeUpdate("Attention",  multiplier * 25);
+                            }
+                            break;
+                        case "Sleep":
+                            if (i == 0)
+                            {
+                                happinessPerPeriod += multiplier * 0.17;
+                                checkBeforeUpdate("Attention",  multiplier * 25);
+                            }
+                            else if (i == 1)
+                            {
+                                healthPerPeriod += multiplier * 0.17;
+                            }
+                            else if (i == 2)
+                            {
+                                healthPerPeriod += multiplier * 0.34;
+                            }
+                            break;
+                        case "Fitness":
+                            if (i == 0)
+                            {
+                                healthPerPeriod += multiplier * 0.042;
+                            }
+                            else if (i == 1)
+                            {
+                                healthPerPeriod += multiplier * 0.021;
+                            }
+                            break;
+                        case "Attention":
+                            if (i == 0)
+                            {
+                                checkBeforeUpdate("Happiness",  multiplier * 5);
+                            }
+                            else if (i == 1)
+                            {
+                                checkBeforeUpdate("Happiness",  multiplier * 10);
+                            }
+                            else if (i == 2)
+                            {
+                                checkBeforeUpdate("Happiness",  multiplier * 20);
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+
+        newValue = oldValue + valueToAdd;
+        if (newValue < 0)
+            newValue = 0;
+        else if (newValue > 100 && id != "Repletion")
+            newValue = 100;
+
+        switch (id)
+        {
+            case "Repletion":
+                repletion = newValue;
+                break;
+            case "Sleep":
+                sleep = newValue;
+                break;
+            case "Fitness":
+                fitness = newValue;
+                break;
+            case "Attention":
+                attention = newValue;
+                break;
+            case "Health":
+                health = newValue;
+                break;
+            case "Motivation":
+                motivation = newValue;
+                break;
+            case "Happiness":
+                happiness = newValue;
+                break;
+            default:
+        }
+    }
+
     // Muss noch umgesetzt werden
     public void developAmagotchi()
     {

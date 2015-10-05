@@ -61,4 +61,27 @@
     <integer name="candyHappiness">8</integer>
     <integer name="candyFitness">-9</integer>
     <integer name="candyAttention">3</integer>
+    
+    <integer-array name="repletionBorders">
+        <item>40</item>
+        <item>20</item>
+        <item>0</item>
+    </integer-array>
+
+    <integer-array name="sleepBorders">
+        <item>20</item>
+        <item>10</item>
+        <item>0</item>
+    </integer-array>
+
+    <integer-array name="fitnessBorders">
+        <item>80</item>
+        <item>20</item>
+    </integer-array>
+
+    <integer-array name="attentionBorders">
+        <item>75</item>
+        <item>50</item>
+        <item>25</item>
+    </integer-array>
 </resources>
