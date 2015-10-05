@@ -53,6 +53,8 @@ public class GameView extends SurfaceView implements Runnable
     int displayWidth;
     int displayHeight;
 
+    boolean firstTime;
+
     public void calcCanvasSize(String orign)
     {
         // hier wird geschaut das Amagotchi gerade dargestellt wird und entsprechend die Canvas-Größe gewählt
@@ -77,17 +79,25 @@ public class GameView extends SurfaceView implements Runnable
 
         poopBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.poop_2);
 
+
+        firstTime = true;
+
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
-            public void surfaceCreated(SurfaceHolder holder) {
-                Rect displayDimensions = holder.getSurfaceFrame();
-                displayWidth = displayDimensions.width();
-                displayHeight = displayDimensions.height();
+            public void surfaceCreated(SurfaceHolder holder)
+            {
                 //ImageButton btn = (ImageButton)findViewById(R.id.feedBtn);
                 //int btnHeight = btn.getHeight();
-                holder.setFixedSize(displayWidth,displayHeight- (int)(ctx.getResources().getDimension(R.dimen.game_view_btn)));// hier  müssen wir nochmal gucken bekomme  die referen auf den Btn nicht hin denke das es ihn zu diesem Zeitpunkt noch nicht gibt
 
-                Log.d(LOG_TAG, " displayW: " + displayWidth + " displayH: " + displayHeight  +  " rect: " + displayDimensions);
+                if(firstTime) {
+
+
+                    Rect displayDimensions = holder.getSurfaceFrame();
+                    displayWidth = displayDimensions.width();
+                    displayHeight = displayDimensions.height();
+                    holder.setFixedSize(displayWidth, displayHeight - ((int) (ctx.getResources().getDimension(R.dimen.game_view_btn))) * 2);// hier  müssen wir nochmal gucken bekomme  die referen auf den Btn nicht hin denke das es ihn zu diesem Zeitpunkt noch nicht gibt
+                    firstTime = false;
+                }
             }
 
             @Override
