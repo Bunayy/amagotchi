@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.media.MediaPlayer;
 import android.os.Debug;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,8 +19,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import projekt.fhflensburg.amagotchi.MainService.MyBinder;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
     private ViewFlipper flipper;
     Amagotchi ama;
 
+    //Main Service
+    MainService mainService;
+    boolean mainServiceBound = false;
+
+    //Sound Service
     public static SoundService mSoundService;
     boolean mSoundServiceBounded = false;
 
@@ -39,15 +45,15 @@ public class MainActivity extends AppCompatActivity {
 
         flipper = (ViewFlipper) findViewById(R.id.flipper);
 
-
+/*
         //Log.v(LOG_TAG, "---BEFORE------------------");
         ama = new Amagotchi("Hugo1337", "1", this.getBaseContext());
-        /*Log.v(LOG_TAG, "---START---");
+        Log.v(LOG_TAG, "---START---");
         Log.v(LOG_TAG, ama.getSaveString());
         Log.v(LOG_TAG, "---END---");
         Log.v(LOG_TAG, " ");
 
-        Log.v(LOG_TAG, "---SAVING---");*/
+        Log.v(LOG_TAG, "---SAVING---");
         if(Amagotchi.getState() != null)//Spiel gestartet
         {
             Sys.saveGame(Amagotchi.getState(), this);
@@ -61,13 +67,40 @@ public class MainActivity extends AppCompatActivity {
 
         //Log.v(LOG_TAG, "---LOADING---");
         Log.v(LOG_TAG, amaLoad.getName());
-        /*Log.v(LOG_TAG, "---END---");
+        Log.v(LOG_TAG, "---END---");
         Log.v(LOG_TAG, " ");*/
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        //Main Service
+        Intent intentMain = new Intent(this, MainService.class);
+        startService(intentMain);
+        bindService(intentMain, mainServiceConnection, Context.BIND_AUTO_CREATE);
+
+        //Sound Service
         Intent intent = new Intent(MainActivity.this,SoundService.class);
-
         Log.v(LOG_TAG, "startServiceBtn onClick()");
         bindService(intent, mSoundServiceConnection, Context.BIND_AUTO_CREATE);
+
+
+        //Service Test
+        /*Log.v(LOG_TAG, "---DONE---");
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
+                Log.v(LOG_TAG, "---2s---");
+                if (mainServiceBound)
+                {
+                    Log.v(LOG_TAG, "---BOUND---" + mainService.getTest());
+                }
+            }
+        }, 2000);*/
+
 
     }
 
@@ -186,8 +219,7 @@ public class MainActivity extends AppCompatActivity {
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.minigamesChooserView)));
     }
 
-    public void onWalkingPressed(View v)
-    {
+    public void onWalkingPressed(View v) {
         Log.d(LOG_TAG, "Wenns denn sein muss !");
     }
 
@@ -217,11 +249,28 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private ServiceConnection mainServiceConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            Log.v(LOG_TAG, "onServiceDisconnected Main");
+            mainServiceBound = false;
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.v(LOG_TAG, "onServiceConnected Main");
+            MyBinder myBinder = (MyBinder) service;
+            mainService = myBinder.getService();
+            mainServiceBound = true;
+        }
+    };
+
     private ServiceConnection mSoundServiceConnection = new ServiceConnection()
     {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            Log.v(LOG_TAG, "onServiceConnected");
+            Log.v(LOG_TAG, "onServiceConnected Sound");
             SoundService.SoundBinder soundBinder = (SoundService.SoundBinder)service;
             mSoundService = soundBinder.getService();
             mSoundServiceBounded = true;
@@ -229,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            Log.v(LOG_TAG, "onServiceDisconnected");
+            Log.v(LOG_TAG, "onServiceDisconnected Sound");
             mSoundServiceBounded = false;
             mSoundService = null;
         }
