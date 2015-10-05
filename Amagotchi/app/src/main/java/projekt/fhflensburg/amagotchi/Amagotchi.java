@@ -9,7 +9,7 @@ import android.util.TypedValue;
 public class Amagotchi
 {
     private static final String LOG_TAG = "Amagotchi";
-    private static final Integer DEST_SAVE_VERSION = 1; //Savegame version
+    private static final String DEST_SAVE_VERSION = "1"; //Savegame version in der gespeichert wird
 
     private static Amagotchi instance;
     public static Context context;
@@ -309,6 +309,8 @@ public class Amagotchi
     {
         this.weight = weight;
     }
+
+
 
     public String getSaveString()
     {

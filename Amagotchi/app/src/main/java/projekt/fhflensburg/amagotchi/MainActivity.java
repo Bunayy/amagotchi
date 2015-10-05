@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         //saveOnExit(count);
 
-        if(Amagotchi.getState() != null)//Spiel gestartet
+        /*if(Amagotchi.getState() != null)//Spiel gestartet
         {
             Sys.saveGame(Amagotchi.getState(), this);
         }
@@ -40,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
 
         finish();
-        System.exit(0); //App beenden
+        System.exit(0); //App beenden*/
+
+        super.onStop();
     }
 
     //Beim Stopp der App

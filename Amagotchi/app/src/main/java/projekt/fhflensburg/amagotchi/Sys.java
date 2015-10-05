@@ -15,12 +15,15 @@ public class Sys {
 
     public static Boolean saveGame(Amagotchi ama, Context ctx)
     {
+        String saveString = ama.getSaveString();
+
+        if(save)
 
         return true;
     }
 
 
-    private static void saveGameString(String save, Context ctx) {
+    private static Boolean saveGameString(String save, Context ctx) {
         Log.v(LOG_TAG, "saveGameString(String save, Context ctx) " + save);
 
         try {
@@ -28,10 +31,11 @@ public class Sys {
             FileOutputStream fOut = ctx.openFileOutput("ama.sav", Context.MODE_PRIVATE);
             fOut.write(save.getBytes());
             fOut.close();
-
+            return true;
         } catch (java.io.IOException e) {
             e.printStackTrace();
             Log.v(LOG_TAG, "saveGameString Fail: " + e.getMessage());
+            return false;
         }
 
     }
