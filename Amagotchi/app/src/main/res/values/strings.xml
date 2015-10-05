@@ -8,6 +8,8 @@
     <string name="settings_btn">Einstellungen</string>
     <string name="game_history_bn">Spielhistorie</string>
 
+    <string name="name_textedit">Name</string>
+
     <string name="solid_food_description">Dieses Nahrungsmittel sättigt schenll ist jedoch nicht so gut für die Fitness sollte daher mit Vorsicht verwendet werden.</string>
     <string name="candy_food_description">Dieses Nahrungsmittel hebt die Motivation und das Wohlbefinden des Amagotchi ist  dennoch nicht so gesund!</string>
     <string name="healthy_food_description">Diese Nahrungsmittel stellt die nachhaltigste Nahrungsquelle dar.</string>
