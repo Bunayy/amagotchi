@@ -21,13 +21,12 @@ import android.widget.ViewFlipper;
 
 import projekt.fhflensburg.amagotchi.MainService.MyBinder;
 
-
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "MainActivity";
+    public static MainActivity instance;
 
     private ViewFlipper flipper;
-    Amagotchi ama;
 
     //Main Service
     MainService mainService;
@@ -42,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.instance = this;
 
         flipper = (ViewFlipper) findViewById(R.id.flipper);
 
@@ -161,6 +161,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void onNewGame(View view)
     {
+        String name = "Hans";
+        Integer type = 1;
+
         mSoundService.playSounds("selection");
         Log.d(LOG_TAG, "onNewGame()");
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
@@ -205,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
     public void onMedicinePressed(View v)
     {
         //Log.d(LOG_TAG, "Ih bah Medizin !");
-        ama.healAmagotchi();
+        //ama.healAmagotchi();
     }
 
     public void onDisciplinePressed(View v)
@@ -232,6 +235,7 @@ public class MainActivity extends AppCompatActivity {
     public void onLeftOrRightStarted(View v)
     {
         Log.d(LOG_TAG, "onLeftOrRightStarted()");
+        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.leftOrRightGameView)));
     }
 
     public void onSumUpGameStarted(View v)
