@@ -63,15 +63,13 @@ public class Amagotchi
         Amagotchi.instance = this;
     }
 
-    public static Amagotchi getInstance(Context ctx)
+    //Setzt die Instanz
+    public static void setInstance(Amagotchi pInstance)
     {
-        if(Amagotchi.instance == null)
-            Amagotchi.instance = new Amagotchi("", "1", ctx);
-
-        return Amagotchi.instance;
+        Amagotchi.instance = pInstance;
     }
 
-    //Check if instance exists
+    //Gibt die Instanz oder null zurück
     public static Amagotchi getState() {
 
         if(Amagotchi.instance == null)
