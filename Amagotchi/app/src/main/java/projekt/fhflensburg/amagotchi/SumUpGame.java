@@ -1,6 +1,8 @@
 package projekt.fhflensburg.amagotchi;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -129,6 +131,51 @@ public class SumUpGame
         boolean equationSolvedValid = false;
 
         if(amagochtiChoise == 1) equationSolvedValid = true;
+
+        final TextView tempTV ;
+
+
+        switch (amagochtiChoise)
+        {
+            case 1:
+                tempTV =(TextView)activity.findViewById(R.id.result_1);
+                break;
+            case 2:
+                tempTV =(TextView)activity.findViewById(R.id.result_2);
+                break;
+            case 3:
+                tempTV =(TextView)activity.findViewById(R.id.result_3);
+                break;
+            default:
+                Log.e(LOG_TAG, "solveEquation() - Es kam beim Lösen der Gleichung zu einem Fehler");
+        }
+
+        if(equationSolvedValid)
+        {
+
+        }
+
+        //Zurücksetzen der "Farbe"
+        Handler reDo = new Handler();
+
+        reDo.postDelayed(new Runnable() {
+            private long time = 0;
+
+            @Override
+            public void run()
+            {
+                try
+                {
+                    tempTV.setBackgroundColor("#ccc");
+                }
+                catch (Exception e)
+                {
+
+                }
+
+            }
+        }, 1000); // 1 second delay (takes millis)
+
 
     }
 
