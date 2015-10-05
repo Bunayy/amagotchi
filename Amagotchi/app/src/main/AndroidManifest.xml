@@ -17,13 +17,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service android:name="projekt.fhflensburg.amagotchi.SoundService">
+        <service
+            android:name="projekt.fhflensburg.amagotchi.SoundService"
+            >
         </service>
-
-        <service android:name="projekt.fhflensburg.amagotchi.MainService" >
-        </service>
-
     </application>
 
 </manifest>
