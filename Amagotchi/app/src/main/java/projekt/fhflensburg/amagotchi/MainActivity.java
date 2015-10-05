@@ -118,11 +118,17 @@ public class MainActivity extends AppCompatActivity {
     public void test_1(View v)
     {
         gameView.setAmagotchiEvent(AnimationTyp.NORMAL);
+        gameView.hasPooped = true;
     }
 
     public void test_2(View v)
     {
         gameView.setAmagotchiEvent(AnimationTyp.SLEEPING);
+    }
+
+    public void foodSelection(View v)
+    {
+        Log.v("test", "Es wurde " + v.getId() + " ausgewählt");
     }
 
 }
