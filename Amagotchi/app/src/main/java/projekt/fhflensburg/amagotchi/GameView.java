@@ -1,4 +1,4 @@
-package projekt.fhflensburg.amagotchi;
+package com.example.pschoe.surfaceviewtestapp;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Rect;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -15,7 +17,9 @@ import android.view.SurfaceView;
  */
 public class GameView extends SurfaceView implements Runnable
 {
-    private Amagotchi amaGee = Amagotchi.getInstance();
+
+    //Zugriff-Methode via Singleton
+    private static GameView instance;
 
     //Hier müssen die Werte des Amagotchi rein! MAYBE Observer ?
     String state = "egg";
@@ -27,6 +31,15 @@ public class GameView extends SurfaceView implements Runnable
 
     SurfaceHolder holder;
 
+    boolean isSick = false;
+    //Hier muss noch einmal geschaut werden wie man mehrfache häufchen abfängt
+    boolean hasPooped = false;
+
+    boolean isMainView = true;
+
+    Bitmap poopBitmap;
+
+
     Thread drawingThread = null;
     boolean isRunning = true;
 
@@ -36,9 +49,9 @@ public class GameView extends SurfaceView implements Runnable
 
 
 
-    public GameView(Context context)
+    public GameView(Context context, AttributeSet attrs)
     {
-        super(context);
+        super(context, attrs);
 
         Resources res = context.getResources();
         String spriteSheetName = state + amagotchiType;
@@ -51,10 +64,31 @@ public class GameView extends SurfaceView implements Runnable
         drawingThread.start();
 
         ctx = context;
+
+        poopBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.poop_2);
+
+        instance = this;
     }
     public void doDrawings(Canvas canvas)
     {
-        canvas.drawColor(Color.rgb(120, 153, 66));
+        if(isMainView)
+        {
+            canvas.drawColor(Color.rgb(120, 153, 66));
+        }
+        else
+        {
+            canvas.drawColor(Color.rgb(250, 50, 0));
+        }
+
+        if(hasPooped)
+        {
+            // hier muss dann eventuell abgefragt werden ob  und wie häufig bisher gekackert wurde, dem entsprechend wird die Bitmap dann plaziert
+            Rect srcRect = new Rect(0, 0, poopBitmap.getWidth(), poopBitmap.getHeight());
+
+            // responsive shit !
+            Rect destRect = new Rect(50,50,poopBitmap.getWidth(), poopBitmap.getHeight());
+            canvas.drawBitmap(poopBitmap, srcRect,destRect, null);
+        }
     }
 
 
@@ -145,6 +179,11 @@ public class GameView extends SurfaceView implements Runnable
         catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static GameView getInstance()
+    {
+        return GameView.instance;
     }
 
 }
