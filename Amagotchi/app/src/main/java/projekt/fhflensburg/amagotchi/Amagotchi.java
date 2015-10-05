@@ -16,6 +16,7 @@ public class Amagotchi
 
     // Eigenschaften observable machen
     private String name;
+    private Long saveTimestamp; //Vergleiche mit System.currentTimeMillis()/60000 zur berechnung der Offline Zeit
     private String type;
     private String mutation;
     private double health;
@@ -55,16 +56,17 @@ public class Amagotchi
     private FoodFactory foodFactory;
     private Food food;
 
-    public Amagotchi(Context ctx)
+    public Amagotchi(String pName, String pType, Context ctx)
     {
         context = ctx;
-        init();
+        init(pName, pType);
+        Amagotchi.instance = this;
     }
 
     public static Amagotchi getInstance(Context ctx)
     {
         if(Amagotchi.instance == null)
-            Amagotchi.instance = new Amagotchi(ctx);
+            Amagotchi.instance = new Amagotchi("", "1", ctx);
 
         return Amagotchi.instance;
     }
@@ -79,9 +81,9 @@ public class Amagotchi
 
     }
 
-    public static void resetAmagotchi()
+    public static void resetAmagotchi(String pName, String pType)
     {
-        Amagotchi.instance = new Amagotchi(context);
+        Amagotchi.instance = new Amagotchi(pName, pType, context);
     }
 
     public static void setContext(Context context)
@@ -89,11 +91,14 @@ public class Amagotchi
         Amagotchi.context = context;
     }
 
-    private void init()
+    private void init(String pName, String pType)
     {
         TypedValue tempValue = new TypedValue();
+        saveTimestamp = 0L;
 
-        name = "";
+        name = pName;
+        type = pType;
+        mutation = "0";
         health = context.getResources().getInteger(R.integer.startValueHealth);
         repletion = context.getResources().getInteger(R.integer.startValueRepletion);
         sleep = context.getResources().getInteger(R.integer.startValueSleep);
@@ -325,6 +330,8 @@ public class Amagotchi
             saveString = DEST_SAVE_VERSION + "," + System.currentTimeMillis()/60000;
 
             saveString += "," + name;
+            saveString += "," + type;
+            saveString += "," + mutation;
 
             saveString += "," + level;
             saveString += "," + developmentPoints;
@@ -351,17 +358,68 @@ public class Amagotchi
             saveString += "|" + hc;
         }
 
-
-
-
-
-
-
         return saveString;
     }
 
-    public void loadSaveString(String input)
+    public void loadSaveString(String load)
     {
-        name = input;
+        String[] hashSplit;
+        Boolean hashCorrect;
+
+        try
+        {
+            hashSplit = load.split("\\|");
+            hashCorrect = String.valueOf(hashSplit[0].hashCode()).equals(hashSplit[1]);
+
+        }
+        catch(Exception e)
+        {
+            Log.v(LOG_TAG, "Loading Game failed while checking hash. Corrupt Gamefile ?");
+            return;
+        }
+
+        if(hashCorrect)
+        { //hashSplit[0] contains correct SaveString
+            String[] valSplit = hashSplit[0].split(",");
+
+            Log.v(LOG_TAG, "count: " + valSplit.length);
+
+            if(valSplit[0].equals("1"))//Save version 1
+            {
+                saveTimestamp = Long.getLong(valSplit[1]);
+
+                name = valSplit[2];
+                type = valSplit[3];
+                mutation = valSplit[4];
+
+                level = Integer.parseInt(valSplit[5]);
+                developmentPoints = Integer.parseInt(valSplit[6]);
+                timeToHatch = Integer.parseInt(valSplit[7]);
+
+                isSickInfection = Boolean.parseBoolean(valSplit[8]);
+                isSickOvereating = Boolean.parseBoolean(valSplit[9]);
+                feces = Boolean.parseBoolean(valSplit[10]);
+                isdead = Boolean.parseBoolean(valSplit[11]);
+
+                health = Double.parseDouble(valSplit[12]);
+                health = Double.parseDouble(valSplit[13]);
+                health = Double.parseDouble(valSplit[14]);
+                health = Double.parseDouble(valSplit[15]);
+                health = Double.parseDouble(valSplit[16]);
+                health = Double.parseDouble(valSplit[17]);
+                health = Double.parseDouble(valSplit[18]);
+                health = Double.parseDouble(valSplit[19]);
+                health = Double.parseDouble(valSplit[20]);
+
+                fecesCountdown = Integer.parseInt(valSplit[21]);
+            }
+
+        }
+        else
+        {
+            Log.v(LOG_TAG, "Checking hash failed. Corrupt Gamefile ?");
+            return;
+        }
+
     }
 }

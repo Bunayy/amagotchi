@@ -1,6 +1,8 @@
 package projekt.fhflensburg.amagotchi;
 
+import android.content.Context;
 import android.os.Debug;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,9 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,11 +30,30 @@ public class MainActivity extends AppCompatActivity {
 
         flipper = (ViewFlipper) findViewById(R.id.flipper);
 
-        Log.v(LOG_TAG, "---BEFORE---");
-        Amagotchi ama = new Amagotchi(this);
-        Log.v(LOG_TAG, "---START---");
+
+        //Log.v(LOG_TAG, "---BEFORE------------------");
+        Amagotchi ama = new Amagotchi("Hugo1337", "1", this.getBaseContext());
+        /*Log.v(LOG_TAG, "---START---");
         Log.v(LOG_TAG, ama.getSaveString());
         Log.v(LOG_TAG, "---END---");
+        Log.v(LOG_TAG, " ");
+
+        Log.v(LOG_TAG, "---SAVING---");*/
+        if(Amagotchi.getState() != null)//Spiel gestartet
+        {
+            Sys.saveGame(Amagotchi.getState(), this);
+        }
+        //Log.v(LOG_TAG, "---END---");
+        //Log.v(LOG_TAG, " ");
+
+
+
+        Amagotchi amaLoad = Sys.loadGame(this);
+
+        //Log.v(LOG_TAG, "---LOADING---");
+        Log.v(LOG_TAG, amaLoad.getName());
+        /*Log.v(LOG_TAG, "---END---");
+        Log.v(LOG_TAG, " ");*/
     }
 
     //Beim Verlust des Focus
@@ -168,4 +192,5 @@ public class MainActivity extends AppCompatActivity {
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.sumUpGameView)));
 
     }
+
 }

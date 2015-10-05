@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 
 /**
  * Created by Howie on 05.10.2015.
@@ -20,15 +21,26 @@ public class Sys {
         return saveGameString(saveString, ctx);
     }
 
+    public static Amagotchi loadGame(Context ctx)
+    {
+        Amagotchi ama = new Amagotchi("-", "1", ctx);
+
+        ama.loadSaveString(loadGameString(ctx));
+
+        return ama;
+    }
 
     private static Boolean saveGameString(String save, Context ctx) {
         Log.v(LOG_TAG, "saveGameString(String save, Context ctx) " + save);
 
         try {
 
-            FileOutputStream fOut = ctx.openFileOutput("ama.sav", Context.MODE_PRIVATE);
-            fOut.write(save.getBytes());
-            fOut.close();
+            //FileOutputStream fOut = ctx.openFileOutput("ama", Context.MODE_PRIVATE);
+
+            FileOutputStream fos = ctx.openFileOutput("ama", Context.MODE_PRIVATE);
+
+            fos.write(save.getBytes());
+            fos.close();
             return true;
         } catch (java.io.IOException e) {
             e.printStackTrace();
@@ -44,7 +56,7 @@ public class Sys {
         String ret = "";
 
         try {
-            FileInputStream fin = ctx.openFileInput("ama.sav");
+            FileInputStream fin = ctx.openFileInput("ama");
 
             //Read all Data
             int c;
