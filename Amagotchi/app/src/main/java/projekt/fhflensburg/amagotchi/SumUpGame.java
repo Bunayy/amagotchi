@@ -76,6 +76,7 @@ public class SumUpGame
                 {
                     Log.v(LOG_TAG, "onClick nextTask - setContentView");
                     //hier soll eig die Rückleitung auf die Main-Ansicht des Amagotchi geschehen das klappt aber leider nicht ...
+
                 }
 
             }

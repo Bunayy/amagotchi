@@ -58,8 +58,8 @@
 
     <ImageButton
         android:id="@+id/medicineBtn"
-        android:layout_width="@dimen/game_view_btn"
-        android:layout_height="@dimen/game_view_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/canvasContainer"
         android:src="@drawable/medicine_btn"
         style="?android:attr/borderlessButtonStyle"
@@ -94,5 +94,22 @@
         android:src="@drawable/walk_btn_2"
         style="?android:attr/borderlessButtonStyle"
         android:onClick="onWalkingPressed"
+        />
+    <Button
+        android:id="@+id/testBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:layout_below="@id/canvasContainer"
+        android:layout_toRightOf="@id/walkBtn"
+        android:onClick="test_1"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2"
+        android:layout_below="@id/canvasContainer"
+        android:layout_toRightOf="@id/testBtn"
+        android:onClick="test_2"
         />
 </RelativeLayout>
