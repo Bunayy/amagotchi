@@ -37,7 +37,7 @@ public class Amagotchi
 
     // Feld observable machen
     private boolean feces;
-    private Long fecesTimestamp;
+    private Long fecesCountdown;
 
     // Feld observable machen
     private boolean isdead;
@@ -311,10 +311,24 @@ public class Amagotchi
     }
 
 
-
     public String getSaveString()
     {
         Log.d(LOG_TAG, "getSaveString() " + name);
+
+        if(DEST_SAVE_VERSION.equals("1"))
+        {
+            String saveString = DEST_SAVE_VERSION + "," + System.currentTimeMillis()/60000;
+
+
+
+        }
+
+
+
+
+
+
+
         return name;
     }
 
