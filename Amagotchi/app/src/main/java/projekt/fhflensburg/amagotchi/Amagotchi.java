@@ -16,6 +16,8 @@ public class Amagotchi
 
     // Eigenschaften observable machen
     private String name;
+    private String type;
+    private String mutation;
     private double health;
     private double repletion;
     private double sleep;
@@ -25,7 +27,7 @@ public class Amagotchi
     private double attention;
 
     private int level;
-    private double age;
+    private int age; //in Tage, alle 30 Mins
     private double weight;
     private int developmentPoints;
 
@@ -37,7 +39,7 @@ public class Amagotchi
 
     // Feld observable machen
     private boolean feces;
-    private Long fecesCountdown;
+    private int fecesCountdown;
 
     // Feld observable machen
     private boolean isdead;
@@ -53,15 +55,16 @@ public class Amagotchi
     private FoodFactory foodFactory;
     private Food food;
 
-    private Amagotchi()
+    public Amagotchi(Context ctx)
     {
+        context = ctx;
         init();
     }
 
-    public static Amagotchi getInstance()
+    public static Amagotchi getInstance(Context ctx)
     {
         if(Amagotchi.instance == null)
-            Amagotchi.instance = new Amagotchi();
+            Amagotchi.instance = new Amagotchi(ctx);
 
         return Amagotchi.instance;
     }
@@ -78,7 +81,7 @@ public class Amagotchi
 
     public static void resetAmagotchi()
     {
-        Amagotchi.instance = new Amagotchi();
+        Amagotchi.instance = new Amagotchi(context);
     }
 
     public static void setContext(Context context)
@@ -90,6 +93,7 @@ public class Amagotchi
     {
         TypedValue tempValue = new TypedValue();
 
+        name = "";
         health = context.getResources().getInteger(R.integer.startValueHealth);
         repletion = context.getResources().getInteger(R.integer.startValueRepletion);
         sleep = context.getResources().getInteger(R.integer.startValueSleep);
@@ -97,6 +101,7 @@ public class Amagotchi
         happiness = context.getResources().getInteger(R.integer.startValueHappiness);
         fitness = context.getResources().getInteger(R.integer.startValueFitness);
         attention = context.getResources().getInteger(R.integer.startValueAttention);
+        age = context.getResources().getInteger(R.integer.ageStandardValue);
 
         context.getResources().getValue(R.dimen.healthPerPeriodStandardValue, tempValue, true);
         healthPerPeriod = tempValue.getFloat();
@@ -122,9 +127,6 @@ public class Amagotchi
         context.getResources().getValue(R.dimen.levelStandardValue, tempValue, true);
         level = (int) tempValue.getFloat();
 
-        context.getResources().getValue(R.dimen.ageStandardValue, tempValue, true);
-        age = tempValue.getFloat();
-
         context.getResources().getValue(R.dimen.weightStandardValue, tempValue, true);
         weight = tempValue.getFloat();
 
@@ -133,6 +135,7 @@ public class Amagotchi
         isSickInfection = false;
         isSickOvereating = false;
         feces = false;
+        fecesCountdown = 0;
         isdead = false;
 
         foodFactory = new FoodFactory();
@@ -295,7 +298,7 @@ public class Amagotchi
         return age;
     }
 
-    public void setAge(double age)
+    public void setAge(int age)
     {
         this.age = age;
     }
@@ -315,12 +318,37 @@ public class Amagotchi
     {
         Log.d(LOG_TAG, "getSaveString() " + name);
 
+        String saveString = "";
+
         if(DEST_SAVE_VERSION.equals("1"))
         {
-            String saveString = DEST_SAVE_VERSION + "," + System.currentTimeMillis()/60000;
+            saveString = DEST_SAVE_VERSION + "," + System.currentTimeMillis()/60000;
 
+            saveString += "," + name;
 
+            saveString += "," + level;
+            saveString += "," + developmentPoints;
+            saveString += "," + timeToHatch;
 
+            saveString += "," + isSickInfection;
+            saveString += "," + isSickOvereating;
+            saveString += "," + feces;
+            saveString += "," + isdead;
+
+            saveString += "," + health;
+            saveString += "," + repletion;
+            saveString += "," + sleep;
+            saveString += "," + motivation;
+            saveString += "," + happiness;
+            saveString += "," + fitness;
+            saveString += "," + attention;
+            saveString += "," + age;
+            saveString += "," + weight;
+
+            saveString += "," + fecesCountdown;
+
+            String hc = String.valueOf(saveString.hashCode()); // Hash
+            saveString += "|" + hc;
         }
 
 
@@ -329,7 +357,7 @@ public class Amagotchi
 
 
 
-        return name;
+        return saveString;
     }
 
     public void loadSaveString(String input)

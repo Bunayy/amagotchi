@@ -125,10 +125,8 @@ public class GameView extends SurfaceView implements Runnable
 
         if(hasPooped)
         {
-            // hier muss dann eventuell abgefragt werden ob  und wie häufig bisher gekackert wurde, dem entsprechend wird die Bitmap dann plaziert
             Rect srcRect = new Rect(0, 0, poopBitmap.getWidth(), poopBitmap.getHeight());
 
-            // responsive shit !
             int destStartX = canvas.getWidth() - poopBitmap.getWidth();
             int destStartY = canvas.getHeight() - poopBitmap.getHeight();
 
@@ -163,7 +161,7 @@ public class GameView extends SurfaceView implements Runnable
                 amountSprites = 5;
                 break;
             default:
-                Log.v("inf", "drawingThread- Fehler mit dem amagotchiEvent");
+                Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");
         }
 
         while(isRunning)

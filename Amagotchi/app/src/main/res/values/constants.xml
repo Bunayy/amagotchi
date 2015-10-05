@@ -8,6 +8,7 @@
     <integer name="startValueFitness">100</integer>
     <integer name="startValueAttention">60</integer>
     <integer name="startValuetimeToHatch">30</integer>
+    <integer name="ageStandardValue">0</integer>
 
     <item name="healthPerPeriodStandardValue" format="float" type="dimen">-0.042</item>
     <item name="repletionPerPeriodStandardValue" format="float" type="dimen">-0.17</item>
@@ -16,7 +17,6 @@
     <item name="happinessPerPeriodStandardValue" format="float" type="dimen">-0.0</item>
     <item name="fitnessPerPeriodStandardValue" format="float" type="dimen">-0.12</item>
     <item name="attentionPerPeriodStandardValue" format="float" type="dimen">-0.28</item>
-    <item name="ageStandardValue" format="float" type="dimen">0.0</item>
     <item name="levelStandardValue" format="float" type="dimen">0.0</item>
     <item name="weightStandardValue" format="float" type="dimen">0.1</item>
 

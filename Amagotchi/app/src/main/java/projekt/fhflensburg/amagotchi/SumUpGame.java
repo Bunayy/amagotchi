@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import java.util.Random;
 
@@ -76,9 +77,10 @@ public class SumUpGame
                 {
                     Log.v(LOG_TAG, "onClick nextTask - setContentView");
                     //hier soll eig die Rückleitung auf die Main-Ansicht des Amagotchi geschehen das klappt aber leider nicht ...
+                    ViewFlipper flipper = (ViewFlipper)activity.findViewById(R.id.flipper);
 
+                    flipper.setDisplayedChild(flipper.indexOfChild(activity.findViewById(R.id.gameView)));
                 }
-
             }
         });
     }
