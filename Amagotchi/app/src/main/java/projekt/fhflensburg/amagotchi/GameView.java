@@ -57,8 +57,8 @@ public class GameView extends SurfaceView implements Runnable
         String spriteSheetName = state + amagotchiType;
         spriteSheet = BitmapFactory.decodeResource(getResources(), res.getIdentifier(spriteSheetName, "drawable", context.getPackageName()));
 
-
         holder = getHolder();
+        holder.setFixedSize(500,500);
 
         drawingThread = new Thread(this);
         drawingThread.start();
