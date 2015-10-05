@@ -118,7 +118,10 @@ public class GameView extends SurfaceView implements Runnable
             Rect srcRect = new Rect(0, 0, poopBitmap.getWidth(), poopBitmap.getHeight());
 
             // responsive shit !
-            Rect destRect = new Rect(50,50,poopBitmap.getWidth(), poopBitmap.getHeight());
+            int destStartX = canvas.getWidth() - poopBitmap.getWidth();
+            int destStartY = canvas.getHeight() - poopBitmap.getHeight();
+
+            Rect destRect = new Rect(destStartX, destStartY,destStartX + poopBitmap.getWidth(),destStartY + poopBitmap.getHeight());
             canvas.drawBitmap(poopBitmap, srcRect,destRect, null);
         }
     }
