@@ -3,4 +3,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="game_view_btn">32dp</dimen>
+    <dimen name="sum_up_game_view_reserved_height">170dp</dimen>
 </resources>

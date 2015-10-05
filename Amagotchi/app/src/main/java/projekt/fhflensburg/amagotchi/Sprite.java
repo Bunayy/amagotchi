@@ -64,8 +64,9 @@ public class Sprite
         // Mit diesem Rect wird der ausgewhlte Bildausschnitt(das Sprite) skaliert, meiner meinung nach schnell verpixelt!
         //Rect destRect = new Rect(canvas.getWidth()/4,canvas.getHeight()/8,canvas.getWidth() - canvas.getWidth()/4,canvas.getHeight()-canvas.getHeight()/3);
 
-        int destWidth = (int)(canvas.getWidth()*.60);
-        int destHeight = (int)(canvas.getWidth()*.60);
+        int smallestSide = Math.min(canvas.getWidth(), canvas.getHeight());
+        int destWidth = (int)(smallestSide*.60);
+        int destHeight = (int)(smallestSide*.60);
 
         int destStartX = canvas.getWidth()/2 - destWidth/2;
         int destStartY = canvas.getHeight()/2 - destHeight/2;

@@ -8,17 +8,19 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-/**
- * Created by User on 21.09.2015.
- */
-public class GameView extends SurfaceView implements Runnable
-{
+import java.util.jar.Attributes;
 
-    private static final String LOG_TAG = "GameView";
+/**
+ * Created by User on 05.10.2015.
+ */
+public class SumUpGameView extends SurfaceView implements Runnable
+{
+    private static final String LOG_TAG = "SumUpGameView";
     //Zugriff-Methode via Singleton
 
     //Hier müssen die Werte des Amagotchi rein! MAYBE Observer ?
@@ -30,15 +32,6 @@ public class GameView extends SurfaceView implements Runnable
     Bitmap spriteSheet;
 
     SurfaceHolder holder;
-
-    boolean isSick = false;
-    //Hier muss noch einmal geschaut werden wie man mehrfache häufchen abfängt
-    boolean hasPooped = true;
-
-    boolean isMainView = true;
-
-    Bitmap poopBitmap;
-
 
     Thread drawingThread = null;
     boolean isRunning = true;
@@ -53,7 +46,7 @@ public class GameView extends SurfaceView implements Runnable
 
     boolean firstTime;
 
-    public GameView(Context context, AttributeSet attrs)
+    public SumUpGameView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
 
@@ -68,9 +61,6 @@ public class GameView extends SurfaceView implements Runnable
 
         ctx = context;
 
-        poopBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.poop_2);
-
-
         firstTime = true;
 
         holder.addCallback(new SurfaceHolder.Callback() {
@@ -80,13 +70,13 @@ public class GameView extends SurfaceView implements Runnable
                 //ImageButton btn = (ImageButton)findViewById(R.id.feedBtn);
                 //int btnHeight = btn.getHeight();
 
-                if(firstTime) {
-
+                if(firstTime)
+                {
 
                     Rect displayDimensions = holder.getSurfaceFrame();
                     displayWidth = displayDimensions.width();
                     displayHeight = displayDimensions.height();
-                    holder.setFixedSize(displayWidth, displayHeight - ((int) (ctx.getResources().getDimension(R.dimen.game_view_btn))) * 2);// hier  müssen wir nochmal gucken bekomme  die referen auf den Btn nicht hin denke das es ihn zu diesem Zeitpunkt noch nicht gibt
+                    holder.setFixedSize(displayWidth, displayHeight - ((int) (ctx.getResources().getDimension(R.dimen.sum_up_game_view_reserved_height))));// hier  müssen wir nochmal gucken bekomme  die referen auf den Btn nicht hin denke das es ihn zu diesem Zeitpunkt noch nicht gibt
                     firstTime = false;
                 }
             }
@@ -105,25 +95,7 @@ public class GameView extends SurfaceView implements Runnable
     }
     public void doDrawings(Canvas canvas)
     {
-        if(isMainView)
-        {
-            canvas.drawColor(Color.rgb(120, 153, 66));
-        }
-        else
-        {
-            canvas.drawColor(Color.rgb(250, 50, 0));
-        }
-
-        if(hasPooped)
-        {
-            Rect srcRect = new Rect(0, 0, poopBitmap.getWidth(), poopBitmap.getHeight());
-
-            int destStartX = canvas.getWidth() - poopBitmap.getWidth();
-            int destStartY = canvas.getHeight() - poopBitmap.getHeight();
-
-            Rect destRect = new Rect(destStartX, destStartY,destStartX + poopBitmap.getWidth(),destStartY + poopBitmap.getHeight());
-            canvas.drawBitmap(poopBitmap, srcRect,destRect, null);
-        }
+        canvas.drawColor(Color.rgb(120, 153, 66));
     }
 
 
@@ -172,7 +144,7 @@ public class GameView extends SurfaceView implements Runnable
             }
 
             Canvas canvas = holder.lockCanvas();
-            Log.d(LOG_TAG, "canvas width: " +canvas.getWidth()+" canvas height"+ canvas.getHeight());
+
             doDrawings(canvas);
             amagotchi.drawAmagotchi(canvas, amagotchiCounter);
             holder.unlockCanvasAndPost(canvas);
@@ -214,5 +186,4 @@ public class GameView extends SurfaceView implements Runnable
             e.printStackTrace();
         }
     }
-
 }

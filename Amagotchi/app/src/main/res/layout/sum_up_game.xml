@@ -3,12 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:padding="15dp"
     >
     <TextView
         android:id="@+id/calculation"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:gravity="center_vertical|center_horizontal"
         android:padding="3dp"
         android:text=""
@@ -55,24 +54,24 @@
         android:textSize="40dp"
         android:background="#ccc"
         />
-    <projekt.fhflensburg.amagotchi.GameView
-        android:id="@id/canvasContainer"
+    <projekt.fhflensburg.amagotchi.SumUpGameView
+        android:id="@+id/sumUpGameViewAmagotchi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_below="@id/result_1"
         android:layout_centerVertical="true"
         >
-    </projekt.fhflensburg.amagotchi.GameView>
+    </projekt.fhflensburg.amagotchi.SumUpGameView>
 
     <Button
         android:id="@+id/nextTaskBtn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         style="?android:attr/borderlessButtonStyle"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_below="@id/canvasContainer"
+        android:layout_below="@id/sumUpGameViewAmagotchi"
         android:text="entscheiden"
         >
     </Button>
