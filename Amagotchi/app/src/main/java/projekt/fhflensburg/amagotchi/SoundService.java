@@ -57,10 +57,42 @@ public class SoundService extends Service
             Log.v(LOG_TAG, "Ressourcen wurden freigegeben");
         }
     }
-    public void makeNoise()
+
+    public void makeNoise(String fileName)
     {
+        Resources res = getApplicationContext().getResources();
+
+        if(mediaPlayer != null)
+        {
+            mediaPlayer.release();
+            mediaPlayer = null;
+            Log.v(LOG_TAG, "Ressourcen wurden freigegeben");
+        }
+
+        mediaPlayer= new MediaPlayer();
+
+        Uri mediaUri = Uri.parse("android.resource://" + getPackageName() + "/" + res.getIdentifier(fileName, "raw", getApplicationContext().getPackageName()));
 
 
+        try
+        {
+            mediaPlayer.setDataSource(getApplicationContext(), mediaUri);
+        }
+        catch (IOException e)
+        {
+            Log.e(LOG_TAG, e.getMessage(),e);
+        }
+
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.prepareAsync();
+
+        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                Log.v(LOG_TAG, "onPrepared()");
+                mp.start();
+            }
+        });
     }
 
     public void playSounds(String action)
@@ -90,34 +122,7 @@ public class SoundService extends Service
                 Log.e(LOG_TAG, "playSound(String action) - action konnte nicht zu einem filenamen aufgelöst werden");
         }
 
-
-
-        Resources res = getApplicationContext().getResources();
-
-        if(mediaPlayer == null) mediaPlayer= new MediaPlayer();
-
-        Uri mediaUri = Uri.parse("android.resource://" + getPackageName() + "/" + res.getIdentifier(fileName, "raw", getApplicationContext().getPackageName()));
-
-
-        try
-        {
-            mediaPlayer.setDataSource(getApplicationContext(), mediaUri);
-        }
-        catch (IOException e)
-        {
-            Log.e(LOG_TAG, e.getMessage(),e);
-        }
-
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        mediaPlayer.prepareAsync();
-
-        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                Log.v(LOG_TAG, "onPrepared()");
-                mp.start();
-            }
-        });
+        makeNoise(fileName);
     }
 
 }

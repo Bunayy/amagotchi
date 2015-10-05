@@ -168,7 +168,6 @@ public class SumUpGame
 
             MainActivity.mSoundService.playSounds("happy");
 
-            equationSolvedValid = false;
         }
         else
         {
@@ -192,7 +191,7 @@ public class SumUpGame
             {
                 tempTV.setBackgroundColor(Color.parseColor("#cccccc"));
             }
-        }, 1000); // 1 second delay (takes millis)
+        }, 500); // 1 second delay (takes millis)
 
         //hier vllt. noch Konstante anlegen zuf 8 aufmerksamkeit +7  verloren 5
         amagotchi.setSleep(amagotchi.getSleep() - 2);
