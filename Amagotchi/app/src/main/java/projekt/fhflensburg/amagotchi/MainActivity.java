@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Service Test
-        Log.v(LOG_TAG, "---DONE---");
+        /*Log.v(LOG_TAG, "---DONE---");
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }, 3000);
-
+*/
 
     }
 
@@ -176,6 +176,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "onNewGame()");
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
 
+        ((SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
+        ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);
+        ((LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
         //Create
         Amagotchi ama = new Amagotchi(name, type, this);
         Amagotchi.setInstance(ama);
@@ -294,6 +297,9 @@ public class MainActivity extends AppCompatActivity {
     {
         Log.d(LOG_TAG, "onLeftOrRightStarted()");
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.leftOrRightGameView)));
+        ((SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
+        ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.INVISIBLE);
+        ((LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee)).setVisibility(View.VISIBLE);
     }
 
     public void onSumUpGameStarted(View v)
@@ -301,6 +307,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "onSumUpGameStarted()");
         SumUpGame sum = new SumUpGame(this);
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.sumUpGameView)));
+        ((SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.VISIBLE);
+        ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.INVISIBLE);
+        ((LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
 
     }
 

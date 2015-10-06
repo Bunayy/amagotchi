@@ -129,8 +129,8 @@ public class GameView extends SurfaceView implements Runnable
 
     public void run()
     {
+        //amagotchi = new Sprite(spriteSheet,amagotchiEvent);
         amagotchi = new Sprite(spriteSheet,amagotchiEvent);
-
         int amountSprites = 0;
         int amagotchiCounter = 0;
 
@@ -172,7 +172,6 @@ public class GameView extends SurfaceView implements Runnable
             }
 
             Canvas canvas = holder.lockCanvas();
-            Log.d(LOG_TAG, "canvas width: " +canvas.getWidth()+" canvas height"+ canvas.getHeight());
             doDrawings(canvas);
             amagotchi.drawAmagotchi(canvas, amagotchiCounter);
             holder.unlockCanvasAndPost(canvas);

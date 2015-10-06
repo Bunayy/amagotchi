@@ -143,7 +143,7 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
             }
             catch (InterruptedException e)
             {
-                Log.e(LOG_TAG, e.getMessage(),e);
+                Log.e(LOG_TAG, e.getMessage(), e);
             }
 
             if(!holder.getSurface().isValid())
@@ -171,15 +171,14 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
             {
                 if((userChooseLeft && amagotchiFacingLeft )||(!userChooseLeft && !amagotchiFacingLeft))
                 {
-                    //amagotchiEvent = AnimationTyp.HAPPY;
                     MainActivity.mSoundService.playSounds("happy");
+                    setAmagotchiEvent(AnimationTyp.NORMAL);
                 }
                 else
                 {
-                    //amagotchiEvent = AnimationTyp.ANGRY;
                     MainActivity.mSoundService.playSounds("unhappy");
+                    setAmagotchiEvent(AnimationTyp.NORMAL);
                 }
-                amagotchiEvent = AnimationTyp.NORMAL;
             }
 
         }

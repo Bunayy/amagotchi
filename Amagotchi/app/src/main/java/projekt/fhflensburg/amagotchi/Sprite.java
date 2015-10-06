@@ -16,7 +16,6 @@ public class Sprite
     Bitmap spriteSheet;
     AnimationTyp event;
 
-    int x,y;
     int width, height;
 
     public Sprite(Bitmap spriteSheet, AnimationTyp event)
@@ -24,7 +23,6 @@ public class Sprite
         this.spriteSheet = spriteSheet;
         this.event = event;
 
-        x = y = 0;
 
         //hier müssen wir mal gucken ob das ganze so elegant ist
         width = spriteSheet.getWidth()/8;
