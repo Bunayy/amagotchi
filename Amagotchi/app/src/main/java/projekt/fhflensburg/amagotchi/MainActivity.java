@@ -323,7 +323,7 @@ public class MainActivity extends AppCompatActivity {
         {
             if (amagotchiClicked)
             {
-                String name = "Hans";
+                String name = nameField.getText().toString();
                 String type = "1";
 
                 mSoundService.playSounds("selection");
