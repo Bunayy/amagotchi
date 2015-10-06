@@ -96,7 +96,13 @@ public class SumUpGame
                         @Override
                         public void run()
                         {
+                            ((SumUpGameView)activity.findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
+                            ((GameView)activity.findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);
+                            ((LeftOrRightGameView)activity.findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
+
+
                             flipper.setDisplayedChild(flipper.indexOfChild(activity.findViewById(R.id.gameView)));
+
                         }
                     }, 1000); // 1 second delay (takes millis)
 
