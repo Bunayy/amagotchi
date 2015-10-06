@@ -22,10 +22,13 @@ public class SumUpGameView extends SurfaceView implements Runnable
     //Zugriff-Methode via Singleton
 
     //Hier müssen die Werte des Amagotchi rein! MAYBE Observer ?
-    String state = "level" +Amagotchi.getState().getLevel();
+    /*String state = "level" +Amagotchi.getState().getLevel();
     String mutation = "_mutation"+ Amagotchi.getState().getMutation();
     String amagotchiType = "_type" + Amagotchi.getState().getType();
-
+*/
+    String state = "level0" ;
+    String mutation = "_mutation1";
+    String amagotchiType = "_type1";
     Sprite amagotchi;
 
     Bitmap spriteSheet;
