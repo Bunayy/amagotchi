@@ -293,6 +293,7 @@ public class MainActivity extends AppCompatActivity {
     {
         Log.d(LOG_TAG, "onLeftOrRightStarted()");
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.leftOrRightGameView)));
+        lorGame = new LeftOrRightGame(this);
         ((SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
         ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.INVISIBLE);
         ((LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee)).setVisibility(View.VISIBLE);
@@ -352,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
         if (mSoundService != null) mSoundService.playSounds("happy");
 
     }
-    
+
     @Override
     public void onBackPressed()
     {
