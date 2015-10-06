@@ -17,7 +17,7 @@ import java.io.IOException;
 /**
  * Created by User on 30.09.2015.
  */
-public class SoundService extends Service
+public class SoundService extends Service implements MediaPlayer.OnCompletionListener
 {
 
     private static String LOG_TAG = "SoundService";
@@ -60,16 +60,18 @@ public class SoundService extends Service
 
     public void makeNoise(String fileName)
     {
-        Resources res = getApplicationContext().getResources();
 
-        if(mediaPlayer != null)
+        if(mediaPlayer != null && !mediaPlayer.isPlaying())
         {
+            mediaPlayer.stop();
             mediaPlayer.release();
-            mediaPlayer = null;
-            Log.v(LOG_TAG, "Ressourcen wurden freigegeben");
         }
 
-        mediaPlayer= new MediaPlayer();
+
+        Resources res = getApplicationContext().getResources();
+
+
+        if(mediaPlayer == null)mediaPlayer= new MediaPlayer();
 
         Uri mediaUri = Uri.parse("android.resource://" + getPackageName() + "/" + res.getIdentifier(fileName, "raw", getApplicationContext().getPackageName()));
 
@@ -125,4 +127,16 @@ public class SoundService extends Service
         makeNoise(fileName);
     }
 
+    public boolean soundServicePlaying()
+    {
+        return mediaPlayer.isPlaying();
+    }
+
+    @Override
+    public void onCompletion(MediaPlayer mp)
+    {
+        mp.stop();
+        mp.reset();
+        Log.d(LOG_TAG,"onCompletion() - Sound wurde komplett abgespielt");
+    }
 }
