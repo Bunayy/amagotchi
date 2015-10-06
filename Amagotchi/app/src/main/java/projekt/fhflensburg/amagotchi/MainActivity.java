@@ -442,7 +442,7 @@ public class MainActivity extends AppCompatActivity {
         healthBar.setVisibility(View.VISIBLE);
         healthBar.setMax(100);
 
-        healthBar.setProgress((int) outAma.getHealth());
+        healthBar.setProgress(Math.min((int) outAma.getHealth(), 100));
 
         ProgressBar repletionBar = (ProgressBar)findViewById(R.id.repletionBar);
         repletionBar.setVisibility(View.VISIBLE);
