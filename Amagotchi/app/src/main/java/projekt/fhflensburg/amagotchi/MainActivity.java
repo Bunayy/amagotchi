@@ -364,6 +364,18 @@ public class MainActivity extends AppCompatActivity {
         lorGV.startCountdown(false);
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        if (Amagotchi.getState() != null)
+        {
+            ((SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
+            ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);
+            ((LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
+            flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+        }
+    }
+
     private ServiceConnection mainServiceConnection = new ServiceConnection() {
 
         @Override
