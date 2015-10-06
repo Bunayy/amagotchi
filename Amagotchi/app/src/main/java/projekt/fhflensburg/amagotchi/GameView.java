@@ -21,9 +21,9 @@ public class GameView extends SurfaceView implements Runnable
     private Amagotchi amagotchiInstance;
 
     //Hier müssen die Werte des Amagotchi rein! MAYBE Observer ?
-    String state = "level" +MainService.getAma().getLevel();
-    String mutation = "_mutation"+ MainService.getAma().getMutation();
-    String amagotchiType = "_type" + MainService.getAma().getType();
+    String state = "level" +Amagotchi.getState().getLevel();
+    String mutation = "_mutation"+ Amagotchi.getState().getMutation();
+    String amagotchiType = "_type" + Amagotchi.getState().getType();
 
     Sprite amagotchi;
 
