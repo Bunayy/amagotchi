@@ -11,9 +11,7 @@ import android.widget.Toast;
 
 import java.util.Random;
 
-/**
- * Created by Howie on 05.10.2015.
- */
+
 public class MainService extends Service
 {
     private static final String LOG_TAG = "MainService";
@@ -49,7 +47,7 @@ public class MainService extends Service
                 while(true)
                 {
                     try {
-                        Thread.sleep(10);
+                        Thread.sleep(60000);
                         handler.sendEmptyMessage(0);
 
                     } catch (InterruptedException e) {
@@ -311,7 +309,7 @@ public class MainService extends Service
 
                     if(ama.getHealth() == 0)
                     {
-                        ama.setisDead(true);
+                       // ama.setisDead(true);
                     }
 
                     ////////////////////////////////////////

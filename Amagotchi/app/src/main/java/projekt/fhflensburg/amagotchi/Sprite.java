@@ -6,9 +6,6 @@ import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
-/**
- * Created by User on 22.09.2015.
- */
 public class Sprite
 {
 

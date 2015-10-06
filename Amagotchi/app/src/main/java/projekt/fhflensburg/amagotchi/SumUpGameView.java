@@ -15,17 +15,16 @@ import android.view.SurfaceView;
 
 import java.util.jar.Attributes;
 
-/**
- * Created by User on 05.10.2015.
- */
+
 public class SumUpGameView extends SurfaceView implements Runnable
 {
     private static final String LOG_TAG = "SumUpGameView";
     //Zugriff-Methode via Singleton
 
     //Hier müssen die Werte des Amagotchi rein! MAYBE Observer ?
-    String state = "egg";
-    String amagotchiType = "_3";
+    String state = "level" +MainService.getAma().getLevel();
+    String mutation = "_mutation"+ MainService.getAma().getMutation();
+    String amagotchiType = "_type" + MainService.getAma().getType();
 
     Sprite amagotchi;
 
@@ -51,7 +50,7 @@ public class SumUpGameView extends SurfaceView implements Runnable
         super(context, attrs);
 
         Resources res = context.getResources();
-        String spriteSheetName = state + amagotchiType;
+        String spriteSheetName = state+mutation + amagotchiType;
         spriteSheet = BitmapFactory.decodeResource(getResources(), res.getIdentifier(spriteSheetName, "drawable", context.getPackageName()));
 
         holder = getHolder();
@@ -102,26 +101,43 @@ public class SumUpGameView extends SurfaceView implements Runnable
     public void run()
     {
         amagotchi = new Sprite(spriteSheet,amagotchiEvent);
-
         int amountSprites = 0;
         int amagotchiCounter = 0;
 
         switch(amagotchiEvent)
         {
             case NORMAL:
-                amountSprites = 3;
-                break;
-            case SLEEPING:
                 amountSprites = 1;
                 break;
-            case DANCING:
-                amountSprites = 3;
-                break;
             case HAPPY:
-                amountSprites = 5;
+                amountSprites = 2;
                 break;
-            case HATCHING:
-                amountSprites = 5;
+            case UNHAPPY:
+                amountSprites = 2;
+                break;
+            case SLEEPING:
+                amountSprites = 2;
+                break;
+            case REFUSE:
+                amountSprites = 1;
+                break;
+            case EATING:
+                amountSprites = 1;
+                break;
+            case THINKING:
+                amountSprites = 1;
+                break;
+            case CLEANING:
+                amountSprites = 4;
+                break;
+            case DEVELOP:
+                amountSprites = 4;
+                break;
+            case TURN_LEFT_RIGHT:
+                amountSprites = 1;
+                break;
+            case DYING:
+                amountSprites = 2;
                 break;
             default:
                 Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");

@@ -12,9 +12,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-/**
- * Created by User on 21.09.2015.
- */
+
 public class GameView extends SurfaceView implements Runnable
 {
 
@@ -23,8 +21,9 @@ public class GameView extends SurfaceView implements Runnable
     private Amagotchi amagotchiInstance;
 
     //Hier müssen die Werte des Amagotchi rein! MAYBE Observer ?
-    String state = "egg";
-    String amagotchiType = "_3";
+    String state = "level" +MainService.getAma().getLevel();
+    String mutation = "_mutation"+ MainService.getAma().getMutation();
+    String amagotchiType = "_type" + MainService.getAma().getType();
 
     Sprite amagotchi;
 
@@ -61,7 +60,7 @@ public class GameView extends SurfaceView implements Runnable
         amagotchiInstance = MainService.getAma();
 
         Resources res = context.getResources();
-        String spriteSheetName = state + amagotchiType;
+        String spriteSheetName = state+mutation + amagotchiType;
         spriteSheet = BitmapFactory.decodeResource(getResources(), res.getIdentifier(spriteSheetName, "drawable", context.getPackageName()));
 
         holder = getHolder();
@@ -83,7 +82,8 @@ public class GameView extends SurfaceView implements Runnable
                 //ImageButton btn = (ImageButton)findViewById(R.id.feedBtn);
                 //int btnHeight = btn.getHeight();
 
-                if(firstTime) {
+                if(firstTime)
+                {
 
 
                     Rect displayDimensions = holder.getSurfaceFrame();
@@ -157,8 +157,10 @@ public class GameView extends SurfaceView implements Runnable
                 break;
             case DEVELOP:
                 amountSprites = 4;
+                break;
             case TURN_LEFT_RIGHT:
                 amountSprites = 1;
+                break;
             case DYING:
                 amountSprites = 2;
                 break;

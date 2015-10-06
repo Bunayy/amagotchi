@@ -1,8 +1,6 @@
 package projekt.fhflensburg.amagotchi;
 
-/**
- * Created by bunay_000 on 29.09.2015.
- */
+
 public class Candy implements Food
 {
     private static Candy instance;

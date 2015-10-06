@@ -2,9 +2,7 @@ package projekt.fhflensburg.amagotchi;
 
 import android.util.TypedValue;
 
-/**
- * Created by bunay_000 on 28.09.2015.
- */
+
 public class Overeating extends Sickness
 {
     private static Overeating instance;

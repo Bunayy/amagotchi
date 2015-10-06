@@ -1,8 +1,6 @@
 package projekt.fhflensburg.amagotchi;
 
-/**
- * Created by bunay_000 on 28.09.2015.
- */
+
 public abstract class Sickness
 {
     public String name;

@@ -1,8 +1,6 @@
 package projekt.fhflensburg.amagotchi;
 
-/**
- * Created by bunay_000 on 29.09.2015.
- */
+
 public class SolidFood implements Food
 {
     private static SolidFood instance;

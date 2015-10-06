@@ -3,15 +3,12 @@ package projekt.fhflensburg.amagotchi;
 import android.app.Activity;
 import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ViewFlipper;
 
 import java.util.Random;
 
-/**
- * Created by User on 06.10.2015.
- */
+
 public class LeftOrRightGame
 {
     private final static String LOG_TAG = "LeftOrRightGame";

@@ -11,9 +11,6 @@ import android.widget.ViewFlipper;
 
 import java.util.Random;
 
-/**
- * Created by User on 03.10.2015.
- */
 public class SumUpGame
 {
     private final String LOG_TAG= "SumUpGame";

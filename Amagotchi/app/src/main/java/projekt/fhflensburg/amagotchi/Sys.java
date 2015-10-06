@@ -7,9 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 
-/**
- * Created by Howie on 05.10.2015.
- */
+
 public class Sys {
 
     private static final String LOG_TAG = "Sys";

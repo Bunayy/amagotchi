@@ -4,9 +4,7 @@ import android.util.Log;
 
 import java.util.Random;
 
-/**
- * Created by User on 03.10.2015.
- */
+
 public class Calculation
 {
     private final String LOG_TAG = "Calculation";

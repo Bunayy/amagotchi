@@ -14,9 +14,7 @@ import android.util.Log;
 import java.io.IOException;
 
 
-/**
- * Created by User on 30.09.2015.
- */
+
 public class SoundService extends Service
 {
 
