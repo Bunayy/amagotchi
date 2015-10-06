@@ -111,9 +111,18 @@ public class MainService extends Service
     private void tick()
     {
         //Log.v(LOG_TAG, "tick " + run);
+
+        //Initialisieren mit Grundwerten
+        double healthPerPeriod = 0.043;
+        double repletionPerPeriod = -0.17;
+        double sleepPerPeriod = -0.1;
+        double motivationPerPeriod = 0.0;
+        double happinessPerPeriod = 0.0;
+        double fitnessPerPeriod = -0.12;
+        double attentionPerPeriod = -0.28;
+
         if(ama != null && run)
         {
-            //Log.v(LOG_TAG, "tickIncoming");
 
             ama.setMotivation(ama.getMotivation() + 0.1);
 
@@ -121,10 +130,14 @@ public class MainService extends Service
 
             //Log.v(LOG_TAG, "Saving");
 
+
+
+
+
+
+
             Sys.saveGame(ama, this);
-
             MainActivity.instance.updateInterface();
-
         }
     }
 

@@ -34,16 +34,14 @@ public class Amagotchi
 
     private int timeToHatch;
 
-    // Feld observable machen
     private boolean isSickInfection;
     private boolean isSickOvereating;
 
-    // Feld observable machen
     private boolean feces;
     private int fecesCountdown;
 
-    // Feld observable machen
     private boolean isDead;
+    private boolean isAsleep;
 
     private double healthPerPeriod;
     private double repletionPerPeriod;
@@ -55,6 +53,10 @@ public class Amagotchi
 
     private FoodFactory foodFactory;
     private Food food;
+
+    //isAsleep,
+
+    //SChalfen, ShitLiegtRum
 
     public Amagotchi(String pName, String pType, Context ctx)
     {
@@ -140,6 +142,7 @@ public class Amagotchi
         feces = false;
         fecesCountdown = 0;
         isDead = false;
+        isAsleep = false;
 
         foodFactory = new FoodFactory();
     }
@@ -407,6 +410,10 @@ public class Amagotchi
 
     public void setisDead(boolean isDead) { this.isDead = isDead; }
 
+    public boolean getIsAsleep() { return isAsleep; }
+
+    public void setIsAsleep(boolean isAsleep) { this.isDead = isAsleep; }
+
     public String getName()
     {
         return name;
@@ -590,6 +597,7 @@ public class Amagotchi
             saveString += "," + isSickOvereating;
             saveString += "," + feces;
             saveString += "," + isDead;
+            saveString += "," + isAsleep;
 
             saveString += "," + health;
             saveString += "," + repletion;
@@ -629,40 +637,47 @@ public class Amagotchi
 
         if(hashCorrect)
         { //hashSplit[0] contains correct SaveString
-            String[] valSplit = hashSplit[0].split(",");
+            try {
+                String[] valSplit = hashSplit[0].split(",");
 
-            Log.v(LOG_TAG, "count: " + valSplit.length);
+                Log.v(LOG_TAG, "count: " + valSplit.length);
 
-            if(valSplit[0].equals("1"))//Save version 1
-            {
-                saveTimestamp = Long.getLong(valSplit[1]);
+                if (valSplit[0].equals("1"))//Save version 1
+                {
+                    saveTimestamp = Long.getLong(valSplit[1]);
 
-                name = valSplit[2];
-                type = valSplit[3];
-                mutation = valSplit[4];
+                    name = valSplit[2];
+                    type = valSplit[3];
+                    mutation = valSplit[4];
 
-                level = Integer.parseInt(valSplit[5]);
-                developmentPoints = Integer.parseInt(valSplit[6]);
-                timeToHatch = Integer.parseInt(valSplit[7]);
+                    level = Integer.parseInt(valSplit[5]);
+                    developmentPoints = Integer.parseInt(valSplit[6]);
+                    timeToHatch = Integer.parseInt(valSplit[7]);
 
-                isSickInfection = Boolean.parseBoolean(valSplit[8]);
-                isSickOvereating = Boolean.parseBoolean(valSplit[9]);
-                feces = Boolean.parseBoolean(valSplit[10]);
-                isDead = Boolean.parseBoolean(valSplit[11]);
+                    isSickInfection = Boolean.parseBoolean(valSplit[8]);
+                    isSickOvereating = Boolean.parseBoolean(valSplit[9]);
+                    feces = Boolean.parseBoolean(valSplit[10]);
+                    isDead = Boolean.parseBoolean(valSplit[11]);
+                    isAsleep = Boolean.parseBoolean(valSplit[12]);
 
-                health = Double.parseDouble(valSplit[12]);
-                repletion = Double.parseDouble(valSplit[13]);
-                sleep = Double.parseDouble(valSplit[14]);
-                motivation = Double.parseDouble(valSplit[15]);
-                happiness = Double.parseDouble(valSplit[16]);
-                fitness = Double.parseDouble(valSplit[17]);
-                attention = Double.parseDouble(valSplit[18]);
-                age = Integer.parseInt(valSplit[19]);
-                weight = Double.parseDouble(valSplit[20]);
+                    health = Double.parseDouble(valSplit[13]);
+                    repletion = Double.parseDouble(valSplit[14]);
+                    sleep = Double.parseDouble(valSplit[15]);
+                    motivation = Double.parseDouble(valSplit[16]);
+                    happiness = Double.parseDouble(valSplit[17]);
+                    fitness = Double.parseDouble(valSplit[18]);
+                    attention = Double.parseDouble(valSplit[19]);
+                    age = Integer.parseInt(valSplit[20]);
+                    weight = Double.parseDouble(valSplit[21]);
 
-                fecesCountdown = Integer.parseInt(valSplit[21]);
+                    fecesCountdown = Integer.parseInt(valSplit[22]);
+                }
             }
-
+            catch(Exception e)
+            {
+                Log.v(LOG_TAG, "Parsing Gamefile failed. Version Conflict ?");
+                return;
+            }
         }
         else
         {

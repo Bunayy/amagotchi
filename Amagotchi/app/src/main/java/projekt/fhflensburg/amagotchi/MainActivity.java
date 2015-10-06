@@ -400,9 +400,10 @@ public class MainActivity extends AppCompatActivity {
         temp += "Is Sick Overeating: " + outAma.getIsSickOveraeting() + "\n";
         temp += "feces: " + outAma.getFeces() + "\n";
         temp += "feces Countdown: " + outAma.getFecesCountdown() + "\n";
-        temp += "Is Dead: " + outAma.getIsDead() + "\n\n";
+        temp += "Is Dead: " + outAma.getIsDead() + "\n";
+        temp += "Is Asleep: " + outAma.getIsAsleep() + "\n\n";
 
-        temp += "health: " + outAma.getHealth() + "\n";
+        /*temp += "health: " + outAma.getHealth() + "\n";
         temp += "repletion: " + outAma.getRepletion() + "\n";
         temp += "sleep: " + outAma.getSleep() + "\n";
         temp += "motivation: " + outAma.getMotivation() + "\n";
@@ -410,7 +411,17 @@ public class MainActivity extends AppCompatActivity {
         temp += "fitness: " + outAma.getFitness() + "\n";
         temp += "attention: " + outAma.getAttention() + "\n";
         temp += "age: " + outAma.getAge() + "\n";
-        temp += "weight: " + outAma.getWeight() + "\n";
+        temp += "weight: " + outAma.getWeight() + "\n";*/
+
+        temp += "health: " + String.format("%.1f", outAma.getHealth()) + "\n";
+        temp += "repletion: " + String.format("%.1f", outAma.getRepletion()) + "\n";
+        temp += "sleep: " + String.format("%.1f", outAma.getSleep()) + "\n";
+        temp += "motivation: " + String.format("%.1f", outAma.getMotivation()) + "\n";
+        temp += "happiness: " + String.format("%.1f", outAma.getHappiness()) + "\n";
+        temp += "fitness: " + String.format("%.1f", outAma.getFitness()) + "\n";
+        temp += "attention: " + String.format("%.1f", outAma.getAttention()) + "\n";
+        temp += "age: " + String.format("%.1f", outAma.getAge()) + "\n";
+        temp += "weight: " + String.format("%.1f", outAma.getWeight()) + "\n";
 
         textViewStatsMain.setText(temp);
     }
