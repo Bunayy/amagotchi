@@ -87,19 +87,19 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Service Test
-        /*Log.v(LOG_TAG, "---DONE---");
+        Log.v(LOG_TAG, "---DONE---");
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 // Do something after 5s = 5000ms
-                Log.v(LOG_TAG, "---2s---");
+                Log.v(LOG_TAG, "---3s---");
                 if (mainServiceBound)
                 {
-                    Log.v(LOG_TAG, "---BOUND---" + mainService.getTest());
+                    //Log.v(LOG_TAG, "---BOUND---" + mainService.getTest());
                 }
             }
-        }, 2000);*/
+        }, 3000);
 
 
     }
@@ -162,16 +162,28 @@ public class MainActivity extends AppCompatActivity {
     public void onNewGame(View view)
     {
         String name = "Hans";
-        Integer type = 1;
+        String type = "1";
 
         mSoundService.playSounds("selection");
         Log.d(LOG_TAG, "onNewGame()");
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+
+        //Create
+        Amagotchi ama = new Amagotchi(name, type, this);
+        Amagotchi.setInstance(ama);
+        MainService.setAma(ama);
+        MainService.run();
     }
 
     public void onContGame(View view)
     {
         Log.d(LOG_TAG, "onContGame()");
+
+        //Load
+        Amagotchi ama = Sys.loadGame(this);
+        Amagotchi.setInstance(ama);
+        MainService.setAma(ama);
+        MainService.run();
     }
 
     public void onSettings(View view)
