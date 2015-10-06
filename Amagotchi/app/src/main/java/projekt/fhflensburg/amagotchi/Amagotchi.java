@@ -54,8 +54,6 @@ public class Amagotchi
     private FoodFactory foodFactory;
     private Food food;
 
-    //isAsleep,
-
     //SChalfen, ShitLiegtRum
 
     public Amagotchi(String pName, String pType, Context ctx)
@@ -414,10 +412,7 @@ public class Amagotchi
 
     public void setIsAsleep(boolean isAsleep) { this.isDead = isAsleep; }
 
-    public String getName()
-    {
-        return name;
-    }
+    public String getName() { return name; }
 
     public void setName(String name)
     {
@@ -554,7 +549,7 @@ public class Amagotchi
         this.fecesCountdown = fecesCountdown;
     }
 
-    public double getAge()
+    public int getAge()
     {
         return age;
     }
