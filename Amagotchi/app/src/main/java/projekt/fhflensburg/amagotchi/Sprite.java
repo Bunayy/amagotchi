@@ -43,18 +43,41 @@ public class Sprite
             case HAPPY:
                 row =1;
                 break;
-            case SLEEPING:
+            case UNHAPPY:
                 row =2;
                 break;
-            case HATCHING:
+            case SLEEPING:
+                row =3;
+                break;
+            case REFUSE:
+                row =4;
+                break;
+            case EATING:
                 row =5;
                 break;
-            case TURN_LEFT_RIGHT:
+            case THINKING:
                 row =6;
-            case SLEEPING:
-                row =1;
+                break;
+            case CLEANING:
+                row =7;
+                break;
+            case WALKING:
+                row =8;
+                break;
+            case DEVELOP:
+                row =9;
+                break;
+            case TURN_LEFT_RIGHT:
+                row =10;
+                break;
+            case DYING:
+                row =11;
+                break;
+            case HATCHING:
+                row =12;
+                break;
             default:
-                Log.v("inf", "Error drawAmagotchi()");
+                Log.e(LOG_TAG, "Error drawAmagotchi()");
         }
 
 
