@@ -5,13 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.PaintDrawable;
-import android.media.MediaPlayer;
-import android.os.Debug;
-import android.os.Environment;
-import android.os.Handler;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,10 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
+
+import java.text.DecimalFormat;
 
 import projekt.fhflensburg.amagotchi.MainService.MyBinder;
 
@@ -449,6 +443,53 @@ public class MainActivity extends AppCompatActivity {
         healthBar.setMax(100);
 
         healthBar.setProgress((int) outAma.getHealth());
+
+        ProgressBar repletionBar = (ProgressBar)findViewById(R.id.repletionBar);
+        repletionBar.setVisibility(View.VISIBLE);
+        repletionBar.setMax(100);
+
+        repletionBar.setProgress((int) outAma.getRepletion());
+
+        ProgressBar sleepBar = (ProgressBar)findViewById(R.id.sleepBar);
+        sleepBar.setVisibility(View.VISIBLE);
+        sleepBar.setMax(100);
+
+        sleepBar.setProgress((int) outAma.getSleep());
+
+        ProgressBar motivationBar = (ProgressBar)findViewById(R.id.motivationBar);
+        motivationBar.setVisibility(View.VISIBLE);
+        motivationBar.setMax(100);
+
+        motivationBar.setProgress((int) outAma.getMotivation());
+
+        ProgressBar happinessBar = (ProgressBar)findViewById(R.id.happinessBar);
+        happinessBar.setVisibility(View.VISIBLE);
+        happinessBar.setMax(100);
+
+        happinessBar.setProgress((int) outAma.getHappiness());
+
+        ProgressBar fitnessBar = (ProgressBar)findViewById(R.id.fitnessBar);
+        fitnessBar.setVisibility(View.VISIBLE);
+        fitnessBar.setMax(100);
+
+        fitnessBar.setProgress((int) outAma.getFitness());
+
+        ProgressBar attentionBar = (ProgressBar)findViewById(R.id.attentionBar);
+        attentionBar.setVisibility(View.VISIBLE);
+        attentionBar.setMax(100);
+
+        attentionBar.setProgress((int) outAma.getAttention());
+
+        TextView nameText = (TextView)findViewById(R.id.nameText);
+        nameText.setText(outAma.getName());
+
+        TextView ageText = (TextView)findViewById(R.id.ageText);
+        ageText.setText(String.valueOf(outAma.getAge()));
+
+        DecimalFormat f = new DecimalFormat("#0.00");
+
+        TextView weightText = (TextView)findViewById(R.id.weightText);
+        weightText.setText(String.valueOf(f.format(outAma.getWeight())));
     }
 
 }
