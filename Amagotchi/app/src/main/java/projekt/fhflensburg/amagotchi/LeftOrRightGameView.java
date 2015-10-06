@@ -11,8 +11,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
-import android.widget.ImageButton;
 
 import java.util.Random;
 
@@ -172,14 +170,14 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
                 if((userChooseLeft && amagotchiFacingLeft )||(!userChooseLeft && !amagotchiFacingLeft))
                 {
                     MainActivity.mSoundService.playSounds("happy");
-                    //setAmagotchiEvent(AnimationTyp.NORMAL);
                     amagotchi = new Sprite(spriteSheet, AnimationTyp.NORMAL);
+                    amagotchiEvent = AnimationTyp.NORMAL;
                 }
                 else
                 {
                     MainActivity.mSoundService.playSounds("unhappy");
-                    //setAmagotchiEvent(AnimationTyp.NORMAL);
                     amagotchi = new Sprite(spriteSheet, AnimationTyp.NORMAL);
+                    amagotchiEvent = AnimationTyp.NORMAL;
                 }
             }
 

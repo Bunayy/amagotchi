@@ -19,7 +19,8 @@ public class GameView extends SurfaceView implements Runnable
 {
 
     private static final String LOG_TAG = "GameView";
-    //Zugriff-Methode via Singleton
+
+    private Amagotchi amagotchiInstance;
 
     //Hier müssen die Werte des Amagotchi rein! MAYBE Observer ?
     String state = "egg";
@@ -56,6 +57,8 @@ public class GameView extends SurfaceView implements Runnable
     public GameView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
+
+        amagotchiInstance = MainService.getAma();
 
         Resources res = context.getResources();
         String spriteSheetName = state + amagotchiType;
@@ -105,16 +108,9 @@ public class GameView extends SurfaceView implements Runnable
     }
     public void doDrawings(Canvas canvas)
     {
-        if(isMainView)
-        {
-            canvas.drawColor(Color.rgb(120, 153, 66));
-        }
-        else
-        {
-            canvas.drawColor(Color.rgb(250, 50, 0));
-        }
+        canvas.drawColor(Color.rgb(120, 153, 66));
 
-        if(hasPooped)
+        if(Amagotchi.getState().getFeces())
         {
             Rect srcRect = new Rect(0, 0, poopBitmap.getWidth(), poopBitmap.getHeight());
 
@@ -122,14 +118,13 @@ public class GameView extends SurfaceView implements Runnable
             int destStartY = canvas.getHeight() - poopBitmap.getHeight();
 
             Rect destRect = new Rect(destStartX, destStartY,destStartX + poopBitmap.getWidth(),destStartY + poopBitmap.getHeight());
-            canvas.drawBitmap(poopBitmap, srcRect,destRect, null);
+            canvas.drawBitmap(poopBitmap, srcRect, destRect, null);
         }
     }
 
 
     public void run()
     {
-        //amagotchi = new Sprite(spriteSheet,amagotchiEvent);
         amagotchi = new Sprite(spriteSheet,amagotchiEvent);
         int amountSprites = 0;
         int amagotchiCounter = 0;
