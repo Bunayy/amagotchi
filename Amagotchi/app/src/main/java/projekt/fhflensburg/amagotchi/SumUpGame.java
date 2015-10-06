@@ -30,11 +30,16 @@ public class SumUpGame
 
 
     private Activity activity;
-    private int solvedCalculations;
 
     TextView tempTV;
 
     ViewFlipper flipper;
+
+    private  final int  MAX_ROUNDS = 3;
+    private int wonGames = 0;
+    private int solvedEquations = 0;
+
+
 
     private Amagotchi amagotchi;
 
@@ -58,8 +63,6 @@ public class SumUpGame
         calculationTwo = new Calculation();
         calculationThree = new Calculation();
 
-        solvedCalculations = 0;
-
         Button nextTaskBtn;
 
         calculationTV = (TextView)activity.findViewById(R.id.calculation);
@@ -71,44 +74,52 @@ public class SumUpGame
 
         nextTaskBtn = (Button)activity.findViewById(R.id.nextTaskBtn);
 
-        nextTaskBtn.setOnClickListener(new View.OnClickListener()
-        {
+        flipper = (ViewFlipper)activity.findViewById(R.id.flipper);
+
+
+        nextTaskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
 
                 solveEquation();
-                if (solvedCalculations < 2)
+                if (solvedEquations < 2)
                 {
-                    solvedCalculations++;
+                    solvedEquations++;
                     provideTask();
                 }
                 else
                 {
-                    Log.v(LOG_TAG, "onClick nextTask - setContentView");
-                    //hier soll eig die Rückleitung auf die Main-Ansicht des Amagotchi geschehen das klappt aber leider nicht ...
-                    flipper = (ViewFlipper)activity.findViewById(R.id.flipper);
-
-                    Handler reDo = new Handler();
-
-                    reDo.postDelayed(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            ((SumUpGameView)activity.findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
-                            ((GameView)activity.findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);
-                            ((LeftOrRightGameView)activity.findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
-
-
-                            flipper.setDisplayedChild(flipper.indexOfChild(activity.findViewById(R.id.gameView)));
-
-                        }
-                    }, 1000); // 1 second delay (takes millis)
-
+                    endGame();
                 }
             }
         });
+    }
+
+
+    public void endGame()
+    {
+        //hier soll eig die Rückleitung auf die Main-Ansicht des Amagotchi geschehen das klappt aber leider nicht ...
+        Handler reDo = new Handler();
+
+        reDo.postDelayed(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                if(wonGames >(int)(MAX_ROUNDS/2))
+                {
+                    //wonMinigame
+                    MainActivity.mSoundService.playSounds("happy");
+                }
+
+                ((SumUpGameView)activity.findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
+                ((GameView)activity.findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);
+                ((LeftOrRightGameView)activity.findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
+
+
+                flipper.setDisplayedChild(flipper.indexOfChild(activity.findViewById(R.id.gameView)));
+            }
+        }, 1000); // 1 second delay (takes millis)
     }
 
     public void provideTask()
@@ -119,7 +130,7 @@ public class SumUpGame
         wResultTwo = new Random().nextInt(28);
 
 
-        switch (solvedCalculations)
+        switch (solvedEquations)
         {
             case 0:
                 equationNow = calculationOne;
@@ -148,7 +159,10 @@ public class SumUpGame
         int amagochtiChoise = new Random().nextInt(3)+1;
         boolean equationSolvedValid = false;
 
-        if(amagochtiChoise == 1) equationSolvedValid = true;
+        if(amagochtiChoise == 1)
+        {
+            equationSolvedValid = true;
+        }
 
 
         switch (amagochtiChoise)
@@ -170,9 +184,9 @@ public class SumUpGame
         {
             tempTV.setBackgroundColor(Color.parseColor("#32CD32"));
 
-            amagotchi.setMotivation(amagotchi.getMotivation() + 1);
-
             MainActivity.mSoundService.playSounds("happy");
+
+            wonGames++;
 
         }
         else
@@ -181,15 +195,13 @@ public class SumUpGame
 
             tempTV.setBackgroundColor(Color.parseColor("#cc0000"));
 
-            //Konstanten !
-            amagotchi.setMotivation(amagotchi.getMotivation() - 1);
-            amagotchi.setAttention(amagotchi.getAttention() + 2);
         }
 
         //Zurücksetzen der "Farbe"
         Handler reDo = new Handler();
 
-        reDo.postDelayed(new Runnable() {
+        reDo.postDelayed(new Runnable()
+        {
             private long time = 0;
 
             @Override
@@ -198,9 +210,5 @@ public class SumUpGame
                 tempTV.setBackgroundColor(Color.parseColor("#cccccc"));
             }
         }, 500); // 1 second delay (takes millis)
-
-        //hier vllt. noch Konstante anlegen zuf 8 aufmerksamkeit +7  verloren 5
-        amagotchi.setSleep(amagotchi.getSleep() - 2);
     }
-
 }
