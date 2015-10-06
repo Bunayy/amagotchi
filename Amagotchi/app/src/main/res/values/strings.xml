@@ -9,6 +9,7 @@
     <string name="game_history_bn">Spielhistorie</string>
 
     <string name="name_textedit">Name</string>
+    <string name="choose_amagotchi_description">Wählen Sie bitte ein Amagotchi aus. Bedenken Sie, dass Ihre Wahl im Nachhinein nicht mehr geändert werden kann, ohne ihren Fortschritt dabei zu löschen.</string>
 
     <string name="solid_food_description">Dieses Nahrungsmittel sättigt schenll ist jedoch nicht so gut für die Fitness sollte daher mit Vorsicht verwendet werden.</string>
     <string name="candy_food_description">Dieses Nahrungsmittel hebt die Motivation und das Wohlbefinden des Amagotchi ist  dennoch nicht so gesund!</string>
