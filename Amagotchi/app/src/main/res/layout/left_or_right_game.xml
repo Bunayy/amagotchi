@@ -12,7 +12,6 @@
         android:layout_alignParentLeft="true"
         android:src="@drawable/arrow_left_btn"
         style="?android:attr/borderlessButtonStyle"
-        android:onClick="onLeftPicked"
         />
 
     <projekt.fhflensburg.amagotchi.LeftOrRightGameView
@@ -32,6 +31,5 @@
         android:layout_toRightOf="@id/lorGameViewAmagee"
         android:src="@drawable/arrow_right_btn"
         style="?android:attr/borderlessButtonStyle"
-        android:onClick="onRightPicked"
         />
 </RelativeLayout>

@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "MainActivity";
     public static MainActivity instance;
 
+
     //Refrences
     private ViewFlipper flipper;
     private TextView textViewStatsMain;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean amagotchiClicked = false;
 
 
-    public LeftOrRightGameView lorGV;
+    public LeftOrRightGame lorGame;
     //Bei Start der App
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -351,19 +352,7 @@ public class MainActivity extends AppCompatActivity {
         if (mSoundService != null) mSoundService.playSounds("happy");
 
     }
-
-    public void onLeftPicked(View v)
-    {
-        lorGV = (LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee);
-        lorGV.startCountdown(true);
-    }
-
-    public void onRightPicked(View v)
-    {
-        lorGV = (LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee);
-        lorGV.startCountdown(false);
-    }
-
+    
     @Override
     public void onBackPressed()
     {
