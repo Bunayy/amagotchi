@@ -108,7 +108,7 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
             public void onClick(View v)
             {
                 changeDirectionCounter = new Random().nextInt(4)+2;
-                //amagotchiEvent = AnimationTyp.TURN_LEFT_RIGHT;
+                amagotchiEvent = AnimationTyp.TURN_LEFT_RIGHT;
                 userChooseLeft = true;
             }
         });
@@ -120,7 +120,7 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
             public void onClick(View v)
             {
                 changeDirectionCounter = new Random().nextInt(4)+2;
-                //amagotchiEvent = AnimationTyp.TURN_LEFT_RIGHT;
+                amagotchiEvent = AnimationTyp.TURN_LEFT_RIGHT;
                 userChooseLeft = false;
             }
         });
