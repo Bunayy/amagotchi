@@ -416,7 +416,7 @@ public class MainActivity extends AppCompatActivity {
         Amagotchi outAma = MainService.getAma();
         String temp = "";
 
-        temp += "Name: " + outAma.getName() + "\n";
+        /*temp += "Name: " + outAma.getName() + "\n";
         temp += "Type: " + outAma.getType() + "\n";
         temp += "Mutation: " + outAma.getMutation() + "\n\n";
 
@@ -429,7 +429,7 @@ public class MainActivity extends AppCompatActivity {
         temp += "feces: " + outAma.getFeces() + "\n";
         temp += "feces Countdown: " + outAma.getFecesCountdown() + "\n";
         temp += "Is Dead: " + outAma.getIsDead() + "\n";
-        temp += "Is Asleep: " + outAma.getIsAsleep() + "\n\n";
+        temp += "Is Asleep: " + outAma.getIsAsleep() + "\n\n";*/
 
         /*temp += "health: " + outAma.getHealth() + "\n";
         temp += "repletion: " + outAma.getRepletion() + "\n";
@@ -441,7 +441,7 @@ public class MainActivity extends AppCompatActivity {
         temp += "age: " + outAma.getAge() + "\n";
         temp += "weight: " + outAma.getWeight() + "\n";*/
 
-        temp += "health: " + String.format("%.1f", outAma.getHealth()) + "\n";
+        /*temp += "health: " + String.format("%.1f", outAma.getHealth()) + "\n";
         temp += "repletion: " + String.format("%.1f", outAma.getRepletion()) + "\n";
         temp += "sleep: " + String.format("%.1f", outAma.getSleep()) + "\n";
         temp += "motivation: " + String.format("%.1f", outAma.getMotivation()) + "\n";
@@ -451,7 +451,8 @@ public class MainActivity extends AppCompatActivity {
         temp += "age: " + outAma.getAge() + "\n";
         temp += "weight: " + String.format("%.1f", outAma.getWeight()) + "\n";
 
-        textViewStatsMain.setText(temp);
+        textViewStatsMain.setText(temp);*/
+
     }
 
 }
