@@ -42,7 +42,8 @@ public class Sprite
             case NORMAL:
                 row = 0;
                 break;
-            case SLEEPING:
+            //case SLEEPING:
+            case TURN_LEFT_RIGHT:
                 row =1;
                 break;
             case HAPPY:
