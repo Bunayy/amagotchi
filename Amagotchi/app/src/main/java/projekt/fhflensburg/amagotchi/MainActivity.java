@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         flipper = (ViewFlipper) findViewById(R.id.flipper);
 
         //Refrences
-        textViewStatsMain = (TextView) findViewById(R.id.textViewStatsMain);
+        //textViewStatsMain = (TextView) findViewById(R.id.textViewStatsMain);
 
 
 /*
