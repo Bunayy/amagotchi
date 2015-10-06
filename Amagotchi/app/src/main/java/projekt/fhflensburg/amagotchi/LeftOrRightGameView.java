@@ -143,7 +143,7 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
             }
             catch (InterruptedException e)
             {
-                e.printStackTrace();
+                Log.e(LOG_TAG, e.getMessage(),e);
             }
 
             if(!holder.getSurface().isValid())
@@ -167,9 +167,9 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
                 amagotchiFacingLeft = !amagotchiFacingLeft;
                 changeDirectionCounter--;
             }
-            else if(changeDirectionCounter == 0)
+            else if(changeDirectionCounter == 0 && amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT)
             {
-                if(userChooseLeft && amagotchiFacingLeft)
+                if((userChooseLeft && amagotchiFacingLeft )||(!userChooseLeft && !amagotchiFacingLeft))
                 {
                     //amagotchiEvent = AnimationTyp.HAPPY;
                     MainActivity.mSoundService.playSounds("happy");
@@ -177,8 +177,9 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
                 else
                 {
                     //amagotchiEvent = AnimationTyp.ANGRY;
-                    MainActivity.mSoundService.playSounds("happy");
+                    MainActivity.mSoundService.playSounds("unhappy");
                 }
+                amagotchiEvent = AnimationTyp.NORMAL;
             }
 
         }
@@ -209,8 +210,9 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
         {
             drawingThread.join();
         }
-        catch (InterruptedException e) {
-            e.printStackTrace();
+        catch (InterruptedException e)
+        {
+            Log.e(LOG_TAG, e.getMessage(), e);
         }
     }
 
