@@ -110,16 +110,16 @@ public class MainService extends Service
 
     private void tick()
     {
-        Log.v(LOG_TAG, "tick " + run);
+        //Log.v(LOG_TAG, "tick " + run);
         if(ama != null && run)
         {
-            Log.v(LOG_TAG, "tickIncoming");
+            //Log.v(LOG_TAG, "tickIncoming");
 
             ama.setMotivation(ama.getMotivation() + 0.1);
 
-            Log.v(LOG_TAG, "MotIs: " + ama.getMotivation());
+            //Log.v(LOG_TAG, "MotIs: " + ama.getMotivation());
 
-            Log.v(LOG_TAG, "Saving");
+            //Log.v(LOG_TAG, "Saving");
 
             Sys.saveGame(ama, this);
 
