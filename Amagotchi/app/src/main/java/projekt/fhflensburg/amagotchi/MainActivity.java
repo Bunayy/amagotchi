@@ -5,13 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.PaintDrawable;
-import android.media.MediaPlayer;
-import android.os.Debug;
-import android.os.Environment;
-import android.os.Handler;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,10 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
+
+import java.text.DecimalFormat;
 
 import projekt.fhflensburg.amagotchi.MainService.MyBinder;
 
@@ -31,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "MainActivity";
     public static MainActivity instance;
+
 
     //Refrences
     private ViewFlipper flipper;
@@ -48,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean amagotchiClicked = false;
 
 
-    public LeftOrRightGameView lorGV;
+    public static LeftOrRightGame lorGame;
     //Bei Start der App
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         flipper = (ViewFlipper) findViewById(R.id.flipper);
 
         //Refrences
-        textViewStatsMain = (TextView) findViewById(R.id.textViewStatsMain);
+        //textViewStatsMain = (TextView) findViewById(R.id.textViewStatsMain);
 
 
 /*
@@ -292,6 +288,7 @@ public class MainActivity extends AppCompatActivity {
     {
         Log.d(LOG_TAG, "onLeftOrRightStarted()");
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.leftOrRightGameView)));
+        lorGame = new LeftOrRightGame(this);
         ((SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
         ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.INVISIBLE);
         ((LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee)).setVisibility(View.VISIBLE);
@@ -352,18 +349,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onLeftPicked(View v)
-    {
-        lorGV = (LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee);
-        lorGV.startCountdown(true);
-    }
-
-    public void onRightPicked(View v)
-    {
-        lorGV = (LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee);
-        lorGV.startCountdown(false);
-    }
-
     @Override
     public void onBackPressed()
     {
@@ -416,7 +401,7 @@ public class MainActivity extends AppCompatActivity {
         Amagotchi outAma = MainService.getAma();
         String temp = "";
 
-        temp += "Name: " + outAma.getName() + "\n";
+        /*temp += "Name: " + outAma.getName() + "\n";
         temp += "Type: " + outAma.getType() + "\n";
         temp += "Mutation: " + outAma.getMutation() + "\n\n";
 
@@ -429,7 +414,7 @@ public class MainActivity extends AppCompatActivity {
         temp += "feces: " + outAma.getFeces() + "\n";
         temp += "feces Countdown: " + outAma.getFecesCountdown() + "\n";
         temp += "Is Dead: " + outAma.getIsDead() + "\n";
-        temp += "Is Asleep: " + outAma.getIsAsleep() + "\n\n";
+        temp += "Is Asleep: " + outAma.getIsAsleep() + "\n\n";*/
 
         /*temp += "health: " + outAma.getHealth() + "\n";
         temp += "repletion: " + outAma.getRepletion() + "\n";
@@ -441,7 +426,7 @@ public class MainActivity extends AppCompatActivity {
         temp += "age: " + outAma.getAge() + "\n";
         temp += "weight: " + outAma.getWeight() + "\n";*/
 
-        temp += "health: " + String.format("%.1f", outAma.getHealth()) + "\n";
+        /*temp += "health: " + String.format("%.1f", outAma.getHealth()) + "\n";
         temp += "repletion: " + String.format("%.1f", outAma.getRepletion()) + "\n";
         temp += "sleep: " + String.format("%.1f", outAma.getSleep()) + "\n";
         temp += "motivation: " + String.format("%.1f", outAma.getMotivation()) + "\n";
@@ -451,7 +436,60 @@ public class MainActivity extends AppCompatActivity {
         temp += "age: " + outAma.getAge() + "\n";
         temp += "weight: " + String.format("%.1f", outAma.getWeight()) + "\n";
 
-        textViewStatsMain.setText(temp);
+        textViewStatsMain.setText(temp);*/
+
+        ProgressBar healthBar = (ProgressBar)findViewById(R.id.healthBar);
+        healthBar.setVisibility(View.VISIBLE);
+        healthBar.setMax(100);
+
+        healthBar.setProgress(Math.min((int) outAma.getHealth(), 100));
+
+        ProgressBar repletionBar = (ProgressBar)findViewById(R.id.repletionBar);
+        repletionBar.setVisibility(View.VISIBLE);
+        repletionBar.setMax(100);
+
+        repletionBar.setProgress((int) outAma.getRepletion());
+
+        ProgressBar sleepBar = (ProgressBar)findViewById(R.id.sleepBar);
+        sleepBar.setVisibility(View.VISIBLE);
+        sleepBar.setMax(100);
+
+        sleepBar.setProgress((int) outAma.getSleep());
+
+        ProgressBar motivationBar = (ProgressBar)findViewById(R.id.motivationBar);
+        motivationBar.setVisibility(View.VISIBLE);
+        motivationBar.setMax(100);
+
+        motivationBar.setProgress((int) outAma.getMotivation());
+
+        ProgressBar happinessBar = (ProgressBar)findViewById(R.id.happinessBar);
+        happinessBar.setVisibility(View.VISIBLE);
+        happinessBar.setMax(100);
+
+        happinessBar.setProgress((int) outAma.getHappiness());
+
+        ProgressBar fitnessBar = (ProgressBar)findViewById(R.id.fitnessBar);
+        fitnessBar.setVisibility(View.VISIBLE);
+        fitnessBar.setMax(100);
+
+        fitnessBar.setProgress((int) outAma.getFitness());
+
+        ProgressBar attentionBar = (ProgressBar)findViewById(R.id.attentionBar);
+        attentionBar.setVisibility(View.VISIBLE);
+        attentionBar.setMax(100);
+
+        attentionBar.setProgress((int) outAma.getAttention());
+
+        TextView nameText = (TextView)findViewById(R.id.nameText);
+        nameText.setText(outAma.getName());
+
+        TextView ageText = (TextView)findViewById(R.id.ageText);
+        ageText.setText(String.valueOf(outAma.getAge()));
+
+        DecimalFormat f = new DecimalFormat("#0.00");
+
+        TextView weightText = (TextView)findViewById(R.id.weightText);
+        weightText.setText(String.valueOf(f.format(outAma.getWeight())));
     }
 
 }

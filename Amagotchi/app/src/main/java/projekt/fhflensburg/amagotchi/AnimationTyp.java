@@ -6,13 +6,16 @@ package projekt.fhflensburg.amagotchi;
 public enum AnimationTyp
 {
     NORMAL,
-    SLEEPING,
     HAPPY,
     UNHAPPY,
-    DANCING,
-    ANGRY,
-    HUNGRY,
-    HATCHING,
-    TURN_LEFT_RIGHT
-    //REFUSE  ???
+    SLEEPING,
+    REFUSE,
+    EATING,
+    THINKING,
+    CLEANING,
+    WALKING,
+    DEVELOP,
+    TURN_LEFT_RIGHT,
+    DYING,
+    HATCHING
 }

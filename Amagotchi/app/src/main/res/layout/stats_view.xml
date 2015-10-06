@@ -2,18 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="match_parent" android:layout_height="match_parent">
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="-"
-    android:id="@+id/textViewStatsMain"
-    android:layout_marginTop="35dp"
-    android:layout_marginLeft="19dp"
-    android:layout_marginStart="19dp"
-    android:layout_alignParentTop="true"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true"
-    android:textColor="@android:color/black" />
+
 
     <Button
         style="?android:attr/borderlessButtonStyle"
@@ -25,4 +14,212 @@ android:layout_width="match_parent" android:layout_height="match_parent">
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="27dp" />
+
+    <ProgressBar
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/healthBar"
+        android:progress="50"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/buttonBack"
+        android:layout_alignStart="@+id/buttonBack" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gesundheit"
+        android:id="@+id/healthBarLabel"
+        android:layout_marginLeft="52dp"
+        android:layout_marginStart="52dp"
+        android:layout_alignBottom="@+id/healthBar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sättigung"
+        android:id="@+id/repletionBarLabel"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/healthBar"
+        android:layout_alignRight="@+id/healthBarLabel"
+        android:layout_alignEnd="@+id/healthBarLabel" />
+
+    <ProgressBar
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/repletionBar"
+        android:progress="50"
+        android:layout_alignTop="@+id/repletionBarLabel"
+        android:layout_alignLeft="@+id/healthBar"
+        android:layout_alignStart="@+id/healthBar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Schlaf"
+        android:id="@+id/sleepBarLabel"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/repletionBar"
+        android:layout_alignRight="@+id/repletionBarLabel"
+        android:layout_alignEnd="@+id/repletionBarLabel" />
+
+    <ProgressBar
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/sleepBar"
+        android:progress="50"
+        android:layout_alignTop="@+id/sleepBarLabel"
+        android:layout_alignLeft="@+id/repletionBar"
+        android:layout_alignStart="@+id/repletionBar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Motivation"
+        android:id="@+id/motivationBarLabel"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/sleepBar"
+        android:layout_alignRight="@+id/sleepBarLabel"
+        android:layout_alignEnd="@+id/sleepBarLabel" />
+
+    <ProgressBar
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/motivationBar"
+        android:progress="50"
+        android:layout_alignTop="@+id/motivationBarLabel"
+        android:layout_alignLeft="@+id/sleepBar"
+        android:layout_alignStart="@+id/sleepBar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zufriedenheit"
+        android:id="@+id/happinessBarLabel"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/motivationBar"
+        android:layout_alignRight="@+id/motivationBarLabel"
+        android:layout_alignEnd="@+id/motivationBarLabel" />
+
+    <ProgressBar
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/happinessBar"
+        android:progress="50"
+        android:layout_alignTop="@+id/happinessBarLabel"
+        android:layout_alignLeft="@+id/motivationBar"
+        android:layout_alignStart="@+id/motivationBar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fitness"
+        android:id="@+id/fitnessBarLabel"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/happinessBar"
+        android:layout_alignRight="@+id/happinessBarLabel"
+        android:layout_alignEnd="@+id/happinessBarLabel" />
+
+    <ProgressBar
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/fitnessBar"
+        android:progress="50"
+        android:layout_alignTop="@+id/fitnessBarLabel"
+        android:layout_alignLeft="@+id/happinessBar"
+        android:layout_alignStart="@+id/happinessBar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aufmerksamkeit"
+        android:id="@+id/attentionBarLabel"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/fitnessBar"
+        android:layout_alignRight="@+id/fitnessBarLabel"
+        android:layout_alignEnd="@+id/fitnessBarLabel" />
+
+    <ProgressBar
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/attentionBar"
+        android:progress="50"
+        android:layout_alignTop="@+id/attentionBarLabel"
+        android:layout_alignLeft="@+id/fitnessBar"
+        android:layout_alignStart="@+id/fitnessBar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Name:"
+        android:id="@+id/nameLabel"
+        android:layout_below="@+id/attentionBar"
+        android:layout_alignRight="@+id/attentionBarLabel"
+        android:layout_alignEnd="@+id/attentionBarLabel"
+        android:layout_marginTop="61dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Alter:"
+        android:id="@+id/ageLabel"
+        android:layout_below="@+id/nameLabel"
+        android:layout_alignRight="@+id/nameLabel"
+        android:layout_alignEnd="@+id/nameLabel"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Gewicht:"
+        android:id="@+id/weightLabel"
+        android:layout_below="@+id/ageLabel"
+        android:layout_alignRight="@+id/ageLabel"
+        android:layout_alignEnd="@+id/ageLabel"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:id="@+id/nameText"
+        android:layout_marginLeft="43dp"
+        android:layout_marginStart="43dp"
+        android:layout_above="@+id/ageLabel"
+        android:layout_alignLeft="@+id/attentionBar"
+        android:layout_alignStart="@+id/attentionBar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:id="@+id/ageText"
+        android:layout_alignTop="@+id/ageLabel"
+        android:layout_alignLeft="@+id/nameText"
+        android:layout_alignStart="@+id/nameText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:id="@+id/weightText"
+        android:layout_alignTop="@+id/weightLabel"
+        android:layout_alignLeft="@+id/ageText"
+        android:layout_alignStart="@+id/ageText" />
+
 </RelativeLayout>

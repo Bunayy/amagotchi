@@ -7,13 +7,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
-import android.widget.ViewFlipper;
 
 import java.util.Random;
 
@@ -47,18 +44,6 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
 
     boolean firstTime;
 
-
-    boolean amagotchiFacingLeft = true;
-    int changeDirectionCounter = 0;
-    public boolean userChooseLeft;
-
-
-    final int MAX_ROUNDS = 5;
-    int playedRounds= 0;
-    int wonRounds= 0;
-
-    ViewFlipper flipper;
-
     public LeftOrRightGameView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
@@ -78,17 +63,15 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
 
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
-            public void surfaceCreated(SurfaceHolder holder)
-            {
+            public void surfaceCreated(SurfaceHolder holder) {
                 //ImageButton btn = (ImageButton)findViewById(R.id.feedBtn);
                 //int btnHeight = btn.getHeight();
 
-                if(firstTime)
-                {
+                if (firstTime) {
                     Rect displayDimensions = holder.getSurfaceFrame();
                     displayWidth = displayDimensions.width();
                     displayHeight = displayDimensions.height();
-                    holder.setFixedSize(displayWidth - displayWidth/4, displayHeight - displayHeight/3);// hier  müssen wir nochmal gucken bekomme  die referen auf den Btn nicht hin denke das es ihn zu diesem Zeitpunkt noch nicht gibt
+                    holder.setFixedSize(displayWidth - displayWidth / 4, displayHeight - displayHeight / 3);// hier  müssen wir nochmal gucken bekomme  die referen auf den Btn nicht hin denke das es ihn zu diesem Zeitpunkt noch nicht gibt
                     firstTime = false;
                 }
             }
@@ -104,8 +87,6 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
             }
         });
 
-
-        flipper = (ViewFlipper)findViewById(R.id.flipper);
     }
     public void doDrawings(Canvas canvas)
     {
@@ -171,14 +152,14 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
 
             amagotchiCounter++;
 
-            if(changeDirectionCounter > 0 && amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT)
+            if(MainActivity.lorGame.changeDirectionCounter > 0 && amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT)
             {
-                amagotchiFacingLeft = !amagotchiFacingLeft;
-                changeDirectionCounter--;
+                MainActivity.lorGame.amagotchiFacingLeft = !MainActivity.lorGame.amagotchiFacingLeft;
+                MainActivity.lorGame.changeDirectionCounter--;
             }
-            else if(changeDirectionCounter == 0 && amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT)
+            else if(MainActivity.lorGame.changeDirectionCounter == 0 && amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT)
             {
-                if((userChooseLeft && amagotchiFacingLeft )||(!userChooseLeft && !amagotchiFacingLeft))
+                if((MainActivity.lorGame.userChooseLeft && MainActivity.lorGame.amagotchiFacingLeft )||(!MainActivity.lorGame.userChooseLeft && !MainActivity.lorGame.amagotchiFacingLeft))
                 {
                     MainActivity.mSoundService.playSounds("happy");
                     amagotchi = new Sprite(spriteSheet, AnimationTyp.NORMAL);
@@ -192,33 +173,6 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
                 }
             }
 
-            if(playedRounds == MAX_ROUNDS)
-            {
-                if(wonRounds >= 3)
-                {
-                    //Amagotchi belohnen
-
-                }
-
-
-                // Aus dem UI-Thread behandeln !
-                Handler updateUI = new Handler();
-
-                updateUI.postDelayed(new Runnable()
-                {
-                    @Override
-                    public void run() {
-
-                        ((SumUpGameView) findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
-                        ((GameView) findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);
-                        ((LeftOrRightGameView) findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
-
-                        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
-                    }
-                }, 1000); // 1 second delay (takes millis)
-
-
-            }
         }
 
     }
@@ -253,12 +207,4 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
         }
     }
 
-    public void startCountdown(boolean turnLeft)
-    {
-        userChooseLeft = turnLeft;
-        changeDirectionCounter = new Random().nextInt(4)+2;
-        setAmagotchiEvent(AnimationTyp.TURN_LEFT_RIGHT);
-
-        playedRounds++;
-    }
 }
