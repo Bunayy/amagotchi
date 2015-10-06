@@ -40,16 +40,19 @@ public class Sprite
             case NORMAL:
                 row = 0;
                 break;
-            //case SLEEPING:
-            case TURN_LEFT_RIGHT:
+            case HAPPY:
                 row =1;
                 break;
-            case HAPPY:
+            case SLEEPING:
                 row =2;
                 break;
             case HATCHING:
                 row =5;
                 break;
+            case TURN_LEFT_RIGHT:
+                row =6;
+            case SLEEPING:
+                row =1;
             default:
                 Log.v("inf", "Error drawAmagotchi()");
         }

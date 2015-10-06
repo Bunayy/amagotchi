@@ -106,7 +106,7 @@ public class SumUpGame
             @Override
             public void run()
             {
-                if(wonGames >(int)(MAX_ROUNDS/2))
+                if(wonGames >((int)(MAX_ROUNDS/2)))
                 {
                     //wonMinigame
                     MainActivity.mSoundService.playSounds("happy");
@@ -115,7 +115,6 @@ public class SumUpGame
                 ((SumUpGameView)activity.findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
                 ((GameView)activity.findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);
                 ((LeftOrRightGameView)activity.findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
-
 
                 flipper.setDisplayedChild(flipper.indexOfChild(activity.findViewById(R.id.gameView)));
             }
