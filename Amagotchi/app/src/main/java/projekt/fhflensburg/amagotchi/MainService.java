@@ -257,6 +257,27 @@ public class MainService extends Service
                     ama.setFitness(ama.getFitness() + fitnessThisPeriod);
                     ama.setAttention(ama.getAttention() + attentionThisPeriod);
 
+                    if(ama.getHealth() < 0)
+                        ama.setHealth(0);
+
+                    if(ama.getRepletion() < 0)
+                        ama.setRepletion(0);
+
+                    if(ama.getSleep() < 0)
+                        ama.setSleep(0);
+
+                    if(ama.getMotivation() < 0)
+                        ama.setMotivation(0);
+
+                    if(ama.getHappiness() < 0)
+                        ama.setHappiness(0);
+
+                    if(ama.getFitness() < 0)
+                        ama.setFitness(0);
+
+                    if(ama.getAttention() < 0)
+                        ama.setAttention(0);
+
 
                     ////////////////////////////////////////
                     // Aufmerksamkeit
@@ -304,6 +325,11 @@ public class MainService extends Service
                             ama.setFeces(true);
                             ama.setFecesCountdown(180);
                         }
+                    }
+
+                    if(ama.getHealth() == 0)
+                    {
+                        ama.setisDead(true);
                     }
 
                 }
