@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import projekt.fhflensburg.amagotchi.MainService.MyBinder;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     boolean mSoundServiceBounded = false;
 
     //Zuletzt gewähltes Amagotchi
-    private int lastAmagotchiClicked = 0;
+    private boolean amagotchiClicked = false;
 
 
     public LeftOrRightGameView lorGV;
@@ -177,22 +178,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onNewGame(View view)
     {
-        String name = "Hans";
-        String type = "1";
-
-        mSoundService.playSounds("selection");
-        Log.d(LOG_TAG, "onNewGame()");
-        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
-
-        ((SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
-        ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);
-        ((LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
-        //Create
-        Amagotchi ama = new Amagotchi(name, type, this);
-        Amagotchi.setInstance(ama);
-        MainService.setAma(ama);
-        MainService.run();
-        //flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.newGameView)));
+        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.newGameView)));
     }
 
     public void onContGame(View view)
@@ -210,8 +196,7 @@ public class MainActivity extends AppCompatActivity {
     public void onSettings(View view)
     {
         Log.d(LOG_TAG, "onSettings():");
-        //flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.settingsView)));
-        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.newGameView)));
+        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.settingsView)));
     }
 
     public void onGameHistory(View view)
@@ -325,8 +310,39 @@ public class MainActivity extends AppCompatActivity {
 
     public void onAmagotchiClicked(View v)
     {
+        amagotchiClicked = true;
         ImageButton clickedAmagotchi = (ImageButton) v;
         v.setBackgroundColor(Color.GRAY);
+    }
+    public void onBeginNewGame(View v)
+    {
+        TextView nameField = (TextView)findViewById(R.id.amagotchi_name_edittext);
+        if(nameField.getText().length() == 0)
+            Toast.makeText(getApplicationContext(), "Bitte geben Sie einen Namen an.", Toast.LENGTH_SHORT).show();
+        else
+        {
+            if (amagotchiClicked)
+            {
+                String name = "Hans";
+                String type = "1";
+
+                mSoundService.playSounds("selection");
+                Log.d(LOG_TAG, "onNewGame()");
+
+                ((SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
+                ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);
+                ((LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
+                //Create
+                Amagotchi ama = new Amagotchi(name, type, this);
+                Amagotchi.setInstance(ama);
+                MainService.setAma(ama);
+                MainService.run();
+
+                flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+            }
+            else
+                Toast.makeText(getApplicationContext(), "Bitte wählen Sie ein Amagotchi aus.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void onSoundCheck(View v)
@@ -346,6 +362,18 @@ public class MainActivity extends AppCompatActivity {
     {
         lorGV = (LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee);
         lorGV.startCountdown(false);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        if (Amagotchi.getState() != null)
+        {
+            ((SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
+            ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);
+            ((LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
+            flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+        }
     }
 
     private ServiceConnection mainServiceConnection = new ServiceConnection() {
@@ -400,9 +428,10 @@ public class MainActivity extends AppCompatActivity {
         temp += "Is Sick Overeating: " + outAma.getIsSickOveraeting() + "\n";
         temp += "feces: " + outAma.getFeces() + "\n";
         temp += "feces Countdown: " + outAma.getFecesCountdown() + "\n";
-        temp += "Is Dead: " + outAma.getIsDead() + "\n\n";
+        temp += "Is Dead: " + outAma.getIsDead() + "\n";
+        temp += "Is Asleep: " + outAma.getIsAsleep() + "\n\n";
 
-        temp += "health: " + outAma.getHealth() + "\n";
+        /*temp += "health: " + outAma.getHealth() + "\n";
         temp += "repletion: " + outAma.getRepletion() + "\n";
         temp += "sleep: " + outAma.getSleep() + "\n";
         temp += "motivation: " + outAma.getMotivation() + "\n";
@@ -410,7 +439,17 @@ public class MainActivity extends AppCompatActivity {
         temp += "fitness: " + outAma.getFitness() + "\n";
         temp += "attention: " + outAma.getAttention() + "\n";
         temp += "age: " + outAma.getAge() + "\n";
-        temp += "weight: " + outAma.getWeight() + "\n";
+        temp += "weight: " + outAma.getWeight() + "\n";*/
+
+        temp += "health: " + String.format("%.1f", outAma.getHealth()) + "\n";
+        temp += "repletion: " + String.format("%.1f", outAma.getRepletion()) + "\n";
+        temp += "sleep: " + String.format("%.1f", outAma.getSleep()) + "\n";
+        temp += "motivation: " + String.format("%.1f", outAma.getMotivation()) + "\n";
+        temp += "happiness: " + String.format("%.1f", outAma.getHappiness()) + "\n";
+        temp += "fitness: " + String.format("%.1f", outAma.getFitness()) + "\n";
+        temp += "attention: " + String.format("%.1f", outAma.getAttention()) + "\n";
+        temp += "age: " + outAma.getAge() + "\n"; 
+        temp += "weight: " + String.format("%.1f", outAma.getWeight()) + "\n";
 
         textViewStatsMain.setText(temp);
     }

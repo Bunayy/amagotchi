@@ -35,6 +35,16 @@
         android:layout_below="@+id/choose_amagotchi_textview"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cont_btn"
+        android:id="@+id/cont_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:onClick="onBeginNewGame"
+        android:layout_below="@+id/amagotchi_1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp" />
 
 
 </RelativeLayout>
