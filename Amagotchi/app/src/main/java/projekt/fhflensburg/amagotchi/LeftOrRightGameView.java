@@ -154,7 +154,7 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
 
             amagotchiCounter++;
 
-            if(changeDirectionCounter > 0 && amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT)
+            if(MainActivity.lorGame.changeDirectionCounter > 0 && amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT)
             {
                 amagotchiFacingLeft = !amagotchiFacingLeft;
                 changeDirectionCounter--;

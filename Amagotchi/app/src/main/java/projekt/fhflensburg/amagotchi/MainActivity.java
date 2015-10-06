@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean amagotchiClicked = false;
 
 
-    public LeftOrRightGame lorGame;
+    public static LeftOrRightGame lorGame;
     //Bei Start der App
     @Override
     protected void onCreate(Bundle savedInstanceState) {
