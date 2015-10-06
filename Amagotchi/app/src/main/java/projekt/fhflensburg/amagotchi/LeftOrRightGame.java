@@ -18,6 +18,8 @@ public class LeftOrRightGame
 
     Activity activity;
 
+    Amagotchi amaGee = MainService.getAma();
+
     boolean amagotchiFacingLeft = true;
     int changeDirectionCounter = 0;
     public boolean userChooseLeft;
@@ -78,6 +80,7 @@ public class LeftOrRightGame
                     ((LeftOrRightGameView)activity.findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
 
                     flipper.setDisplayedChild(flipper.indexOfChild(activity.findViewById(R.id.gameView)));
+
                 }
             }, 1000); // 1 second delay (takes millis)
         }
@@ -93,4 +96,5 @@ public class LeftOrRightGame
 
         endGame();
     }
+
 }
