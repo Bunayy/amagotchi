@@ -143,12 +143,32 @@ public class MainService extends Service
                     if (ama.getTimeToHatch() > 1) {
                         ama.setTimeToHatch(ama.getTimeToHatch() - 1);
                     } else {
+                        ama.setTimeToHatch(0);
                         ama.setLevel(1);
                     }
                 } else {
                     ////////////////////////////////////////
                     // This Period
                     ////////////////////////////////////////
+
+                    //Gamble Overeating
+                    if (ama.getRepletion() >= 120) {
+                        ama.setIsSickOveraeting(true);
+                        healthThisPeriod -= 25;
+                        motivationThisPeriod -= 15;
+                    } else if (ama.getRepletion() >= 110) {
+                        if (r.nextInt(10) > 7) {
+                            ama.setIsSickOveraeting(true);
+                            healthThisPeriod -= 25;
+                            motivationThisPeriod -= 15;
+                        }
+                    } else if (ama.getRepletion() >= 105) {
+                        if (r.nextInt(4) == 1) {
+                            ama.setIsSickOveraeting(true);
+                            healthThisPeriod -= 25;
+                            motivationThisPeriod -= 15;
+                        }
+                    }
 
                     //Feces Countdown
                     if (ama.getFecesCountdown() > 1) {
@@ -157,6 +177,7 @@ public class MainService extends Service
                         ama.setIsSickInfection(true);
                         healthThisPeriod -= 30;
                         motivationThisPeriod -= 15;
+                        attentionThisPeriod -= 10;
                         ama.setFecesCountdown(0);
                     }
 
@@ -223,6 +244,7 @@ public class MainService extends Service
                         healthThisPeriod -= 0.042;
                     }
 
+
                     ////////////////////////////////////////
                     // Berechnung
                     ////////////////////////////////////////
@@ -236,9 +258,42 @@ public class MainService extends Service
                     ama.setAttention(ama.getAttention() + attentionThisPeriod);
 
 
-                    //Aufmerksamkeit
+                    ////////////////////////////////////////
+                    // Aufmerksamkeit
+                    ////////////////////////////////////////
 
-                    //loopCount
+                    if(oldAttention >= 75 && ama.getAttention() < 75)
+                    {
+                        ama.setHappiness(ama.getHappiness() - 5);
+                    }
+
+                    if(oldAttention >= 50 && ama.getAttention() < 50)
+                    {
+                        ama.setHappiness(ama.getHappiness() - 10);
+                    }
+
+                    if(oldAttention >= 25 && ama.getAttention() < 25)
+                    {
+                        ama.setHappiness(ama.getHappiness() - 20);
+                    }
+
+
+                    ////////////////////////////////////////
+                    // 30 Min Loop
+                    ////////////////////////////////////////
+
+                    if(loopCount > 29)
+                    {
+                        //Hier 20 min loop
+
+
+
+                        loopCount = 0;
+                    }
+                    else
+                    {
+                        loopCount++;
+                    }
 
 
                     //Gamble Feces
@@ -248,19 +303,6 @@ public class MainService extends Service
                         if (r.nextInt(4) == 2) {
                             ama.setFeces(true);
                             ama.setFecesCountdown(180);
-                        }
-                    }
-
-                    //Gamble Overeating
-                    if (ama.getRepletion() >= 120) {
-                        ama.setIsSickOveraeting(true);
-                    } else if (ama.getRepletion() >= 110) {
-                        if (r.nextInt(10) > 7) {
-                            ama.setIsSickOveraeting(true);
-                        }
-                    } else if (ama.getRepletion() >= 105) {
-                        if (r.nextInt(4) == 1) {
-                            ama.setIsSickOveraeting(true);
                         }
                     }
 
@@ -276,24 +318,125 @@ public class MainService extends Service
 
 
     //INPUT
+    public void doFeedHealthy()
+    {
+        ama.setHealth(ama.getHealth() + 10);
+        ama.setRepletion(ama.getRepletion() + 7);
+        ama.setHappiness(ama.getHappiness() - 7);
+        ama.setFitness(ama.getFitness() + 5);
+        ama.setAttention(ama.getAttention() + 1);
+
+        if(ama.getRepletion() >= 100)
+            ama.setSleep(ama.getSleep() - 5);
+
+        Sys.saveGame(ama, this);
+        MainActivity.instance.updateInterface();
+    }
+
     public void doFeedBurger()
     {
-        ama.setLevel(ama.getLevel() + 1);
+        ama.setRepletion(ama.getRepletion() + 20);
+        ama.setHappiness(ama.getHappiness() + 6);
+        ama.setFitness(ama.getFitness() - 3);
+        ama.setAttention(ama.getAttention() + 3);
+
+        if(ama.getRepletion() >= 100)
+            ama.setSleep(ama.getSleep() - 20);
+
+        Sys.saveGame(ama, this);
+        MainActivity.instance.updateInterface();
     }
 
     public void doFeedSweets()
     {
+        ama.setRepletion(ama.getRepletion() + 12);
+        ama.setMotivation(ama.getMotivation() + 15);
+        ama.setHappiness(ama.getHappiness() + 8);
+        ama.setFitness(ama.getFitness() - 9);
+        ama.setAttention(ama.getAttention() + 3);
 
+        if(ama.getRepletion() >= 100)
+            ama.setSleep(ama.getSleep() - 10);
+
+        Sys.saveGame(ama, this);
+        MainActivity.instance.updateInterface();
     }
 
-    public void doFeedHealthy()
+    public void wonMiniGame()
     {
+        ama.setSleep(ama.getSleep() - 5);
+        ama.setMotivation(ama.getMotivation() + 3);
+        ama.setHappiness(ama.getHappiness() + 8);
+        ama.setAttention(ama.getAttention() + 7);
 
+        Sys.saveGame(ama, this);
+        MainActivity.instance.updateInterface();
     }
 
+    public void lostMiniGame()
+    {
+        ama.setSleep(ama.getSleep() - 5);
+        ama.setMotivation(ama.getMotivation() - 2);
+        ama.setAttention(ama.getAttention() + 5);
 
+        Sys.saveGame(ama, this);
+        MainActivity.instance.updateInterface();
+    }
 
-    //OUTPUT
+    public void cleanAma()
+    {
+        ama.setHappiness(ama.getHappiness() + 5);
+        ama.setAttention(ama.getAttention() + 3);
+
+        ama.setFecesCountdown(0);
+        ama.setFeces(false);
+
+        Sys.saveGame(ama, this);
+        MainActivity.instance.updateInterface();
+    }
+
+    public void giveMedicine()
+    {
+        ama.setHealth(ama.getHealth() + 40);
+        ama.setHappiness(ama.getHappiness() - 35);
+        ama.setAttention(ama.getAttention() + 3);
+
+        //Infektion heilen
+        if(ama.getIsSickInfection() && !ama.getFeces())
+            ama.setIsSickInfection(false);
+
+        //Überfressen heilen
+        if(ama.getIsSickOveraeting())
+        {
+            ama.setFeces(true);
+            ama.setFecesCountdown(180);
+        }
+
+        Sys.saveGame(ama, this);
+        MainActivity.instance.updateInterface();
+    }
+
+    public void doEggEntertain()
+    {
+        if(ama.getLevel() == 0)
+        {
+            ama.setTimeToHatch(ama.getTimeToHatch() - 2);
+
+        }
+        Sys.saveGame(ama, this);
+        MainActivity.instance.updateInterface();
+    }
+
+    public void doEggWarm()
+    {
+        if(ama.getLevel() == 0)
+        {
+            ama.setTimeToHatch(ama.getTimeToHatch() - 2);
+
+        }
+        Sys.saveGame(ama, this);
+        MainActivity.instance.updateInterface();
+    }
 
 
 }
