@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -443,6 +444,11 @@ public class MainActivity extends AppCompatActivity {
 
         textViewStatsMain.setText(temp);*/
 
+        ProgressBar healthBar = (ProgressBar)findViewById(R.id.healthBar);
+        healthBar.setVisibility(View.VISIBLE);
+        healthBar.setMax(100);
+
+        healthBar.setProgress((int) outAma.getHealth());
     }
 
 }
