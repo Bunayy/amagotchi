@@ -420,7 +420,7 @@ public class MainActivity extends AppCompatActivity {
         temp += "happiness: " + String.format("%.1f", outAma.getHappiness()) + "\n";
         temp += "fitness: " + String.format("%.1f", outAma.getFitness()) + "\n";
         temp += "attention: " + String.format("%.1f", outAma.getAttention()) + "\n";
-        temp += "age: " + String.format("%.1f", outAma.getAge()) + "\n";
+        temp += "age: " + String.format("%.1f", outAma.getAge()) + "\n"; 
         temp += "weight: " + String.format("%.1f", outAma.getWeight()) + "\n";
 
         textViewStatsMain.setText(temp);
