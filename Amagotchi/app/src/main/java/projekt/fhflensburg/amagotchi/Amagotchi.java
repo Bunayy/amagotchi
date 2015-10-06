@@ -43,7 +43,7 @@ public class Amagotchi
     private int fecesCountdown;
 
     // Feld observable machen
-    private boolean isdead;
+    private boolean isDead;
 
     private double healthPerPeriod;
     private double repletionPerPeriod;
@@ -139,7 +139,7 @@ public class Amagotchi
         isSickOvereating = false;
         feces = false;
         fecesCountdown = 0;
-        isdead = false;
+        isDead = false;
 
         foodFactory = new FoodFactory();
     }
@@ -388,7 +388,7 @@ public class Amagotchi
     //Muss noch umgesetzt werden
     public void ripAmagotchi()
     {
-        isdead = true;
+        isDead = true;
     }
 
     public boolean getFeces() { return feces; }
@@ -399,9 +399,13 @@ public class Amagotchi
 
     public void setIsSickInfection(Boolean val) { this.isSickInfection = val; }
 
-    public Boolean getisSickOveraeting() { return isSickOvereating; }
+    public Boolean getIsSickOveraeting() { return isSickOvereating; }
 
     public void setIsSickOveraeting(Boolean val) { this.isSickOvereating = val; }
+
+    public boolean getIsDead() { return isDead; }
+
+    public void setisDead(boolean isDead) { this.isDead = isDead; }
 
     public String getName()
     {
@@ -411,6 +415,26 @@ public class Amagotchi
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public String getType()
+    {
+        return type;
+    }
+
+    public void setType(String type)
+    {
+        this.type = type;
+    }
+
+    public String getMutation()
+    {
+        return mutation;
+    }
+
+    public void setMutation(String mutation)
+    {
+        this.mutation = mutation;
     }
 
     public double getHealth()
@@ -493,6 +517,36 @@ public class Amagotchi
         this.level = level;
     }
 
+    public int getDevelopmentPoints()
+    {
+        return developmentPoints;
+    }
+
+    public void setDevelopmentPoints(int developmentPoints)
+    {
+        this.developmentPoints = developmentPoints;
+    }
+
+    public int getTimeToHatch()
+    {
+        return timeToHatch;
+    }
+
+    public void setTimeToHatch(int timeToHatch)
+    {
+        this.timeToHatch = timeToHatch;
+    }
+
+    public int getFecesCountdown()
+    {
+        return fecesCountdown;
+    }
+
+    public void setFecesCountdown(int fecesCountdown)
+    {
+        this.fecesCountdown = fecesCountdown;
+    }
+
     public double getAge()
     {
         return age;
@@ -535,7 +589,7 @@ public class Amagotchi
             saveString += "," + isSickInfection;
             saveString += "," + isSickOvereating;
             saveString += "," + feces;
-            saveString += "," + isdead;
+            saveString += "," + isDead;
 
             saveString += "," + health;
             saveString += "," + repletion;
@@ -594,7 +648,7 @@ public class Amagotchi
                 isSickInfection = Boolean.parseBoolean(valSplit[8]);
                 isSickOvereating = Boolean.parseBoolean(valSplit[9]);
                 feces = Boolean.parseBoolean(valSplit[10]);
-                isdead = Boolean.parseBoolean(valSplit[11]);
+                isDead = Boolean.parseBoolean(valSplit[11]);
 
                 health = Double.parseDouble(valSplit[12]);
                 repletion = Double.parseDouble(valSplit[13]);

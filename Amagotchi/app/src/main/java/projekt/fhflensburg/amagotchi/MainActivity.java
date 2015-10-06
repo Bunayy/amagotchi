@@ -196,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
         Amagotchi.setInstance(ama);
         MainService.setAma(ama);
         MainService.run();
+        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
     }
 
     public void onSettings(View view)
@@ -370,10 +371,21 @@ public class MainActivity extends AppCompatActivity {
     public void updateInterface()
     {
         Amagotchi outAma = MainService.getAma();
-        String temp = "Stats:\n";
+        String temp = "";
 
         temp += "Name: " + outAma.getName() + "\n";
+        temp += "Type: " + outAma.getType() + "\n";
+        temp += "Mutation: " + outAma.getMutation() + "\n\n";
+
         temp += "Level: " + outAma.getLevel() + "\n";
+        temp += "Development Points: " + outAma.getDevelopmentPoints() + "\n";
+        temp += "Time To Hatch: " + outAma.getTimeToHatch() + "\n\n";
+
+        temp += "Is Sick Infection: " + outAma.getIsSickInfection() + "\n";
+        temp += "Is Sick Overeating: " + outAma.getIsSickOveraeting() + "\n";
+        temp += "feces: " + outAma.getFeces() + "\n";
+        temp += "feces Countdown: " + outAma.getFecesCountdown() + "\n";
+        temp += "Is Dead: " + outAma.getIsDead() + "\n\n";
 
         temp += "health: " + outAma.getHealth() + "\n";
         temp += "repletion: " + outAma.getRepletion() + "\n";
