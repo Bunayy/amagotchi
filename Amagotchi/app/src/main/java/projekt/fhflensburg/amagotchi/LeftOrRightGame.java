@@ -89,6 +89,7 @@ public class LeftOrRightGame
 
     public void startCountdown(boolean turnLeft)
     {
+        MainActivity.mSoundService.playSounds("selection");
         userChooseLeft = turnLeft;
         changeDirectionCounter = new Random().nextInt(4)+2;
         ((LeftOrRightGameView)activity.findViewById(R.id.lorGameViewAmagee)).setAmagotchiEvent(AnimationTyp.TURN_LEFT_RIGHT);
