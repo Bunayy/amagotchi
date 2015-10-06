@@ -4,6 +4,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PaintDrawable;
 import android.media.MediaPlayer;
 import android.os.Debug;
 import android.os.Environment;
@@ -15,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -37,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     //Sound Service
     public static SoundService mSoundService;
     boolean mSoundServiceBounded = false;
+
+    //Zuletzt gewähltes Amagotchi
+    private int lastAmagotchiClicked = 0;
 
 
     public LeftOrRightGameView lorGV;
@@ -202,7 +210,8 @@ public class MainActivity extends AppCompatActivity {
     public void onSettings(View view)
     {
         Log.d(LOG_TAG, "onSettings():");
-        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.settingsView)));
+        //flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.settingsView)));
+        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.newGameView)));
     }
 
     public void onGameHistory(View view)
@@ -312,6 +321,12 @@ public class MainActivity extends AppCompatActivity {
         ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.INVISIBLE);
         ((LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
 
+    }
+
+    public void onAmagotchiClicked(View v)
+    {
+        ImageButton clickedAmagotchi = (ImageButton) v;
+        v.setBackgroundColor(Color.GRAY);
     }
 
     public void onSoundCheck(View v)

@@ -30,6 +30,7 @@
         android:id="@+id/amagotchi_1"
         android:src="@drawable/egg_1"
         android:layout_marginTop="84dp"
+        android:background="@android:color/transparent"
         android:onClick="onAmagotchiClicked"
         android:layout_below="@+id/choose_amagotchi_textview"
         android:layout_centerHorizontal="true" />
