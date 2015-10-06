@@ -175,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
         Amagotchi.setInstance(ama);
         MainService.setAma(ama);
         MainService.run();
+        //flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.newGameView)));
     }
 
     public void onContGame(View view)
@@ -201,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
     public void onFeedingPressed(View v)
     {
         Log.d(LOG_TAG, "Gib Gib GIb !");
+        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.foodChooserView)));
     }
 
     public void onLightPressed(View v)
