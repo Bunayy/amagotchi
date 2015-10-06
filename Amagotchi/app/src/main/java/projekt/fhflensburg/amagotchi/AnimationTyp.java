@@ -12,6 +12,7 @@ public enum AnimationTyp
     DANCING,
     ANGRY,
     HUNGRY,
-    HATCHING
+    HATCHING,
+    TURN_LEFT_RIGHT
     //REFUSE  ???
 }

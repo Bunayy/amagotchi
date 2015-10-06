@@ -11,6 +11,10 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.ImageButton;
+
+import java.util.Random;
 
 /**
  * Created by User on 06.10.2015.
@@ -42,6 +46,14 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
 
     boolean firstTime;
 
+
+    ImageButton leftBtn, rightBtn;
+
+    boolean amagotchiFacingLeft = true;
+    int changeDirectionCounter = 0;
+    boolean userChooseLeft;
+
+
     public LeftOrRightGameView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
@@ -71,7 +83,7 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
                     Rect displayDimensions = holder.getSurfaceFrame();
                     displayWidth = displayDimensions.width();
                     displayHeight = displayDimensions.height();
-                    holder.setFixedSize(displayWidth/3, displayHeight - displayHeight/3);// hier  müssen wir nochmal gucken bekomme  die referen auf den Btn nicht hin denke das es ihn zu diesem Zeitpunkt noch nicht gibt
+                    holder.setFixedSize(displayWidth - displayWidth/4, displayHeight - displayHeight/3);// hier  müssen wir nochmal gucken bekomme  die referen auf den Btn nicht hin denke das es ihn zu diesem Zeitpunkt noch nicht gibt
                     firstTime = false;
                 }
             }
@@ -87,6 +99,31 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
             }
         });
 
+        leftBtn = (ImageButton)findViewById(R.id.leftBtn);
+        rightBtn = (ImageButton)findViewById(R.id.rightBtn);
+
+        leftBtn.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                changeDirectionCounter = new Random().nextInt(4)+2;
+                //amagotchiEvent = AnimationTyp.TURN_LEFT_RIGHT;
+                userChooseLeft = true;
+            }
+        });
+
+
+        rightBtn.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                changeDirectionCounter = new Random().nextInt(4)+2;
+                //amagotchiEvent = AnimationTyp.TURN_LEFT_RIGHT;
+                userChooseLeft = false;
+            }
+        });
     }
     public void doDrawings(Canvas canvas)
     {
@@ -118,6 +155,9 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
             case HATCHING:
                 amountSprites = 5;
                 break;
+            case TURN_LEFT_RIGHT:
+                amountSprites = 1;
+                break;
             default:
                 Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");
         }
@@ -148,6 +188,25 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
                 amagotchiCounter = -1;
 
             amagotchiCounter++;
+
+            if(changeDirectionCounter > 0 && amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT)
+            {
+                amagotchiFacingLeft = !amagotchiFacingLeft;
+                changeDirectionCounter--;
+            }
+            else if(changeDirectionCounter == 0)
+            {
+                if(userChooseLeft && amagotchiFacingLeft)
+                {
+                    //amagotchiEvent = AnimationTyp.HAPPY;
+                    MainActivity.mSoundService.playSounds("happy");
+                }
+                else
+                {
+                    //amagotchiEvent = AnimationTyp.ANGRY;
+                    MainActivity.mSoundService.playSounds("happy");
+                }
+            }
 
         }
 
