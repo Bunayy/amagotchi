@@ -110,7 +110,7 @@ public class GameView extends SurfaceView implements Runnable
     {
         canvas.drawColor(Color.rgb(120, 153, 66));
 
-        if(amagotchiInstance.getFeces())
+        if(Amagotchi.getState().getFeces())
         {
             Rect srcRect = new Rect(0, 0, poopBitmap.getWidth(), poopBitmap.getHeight());
 

@@ -170,14 +170,14 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
                 if((userChooseLeft && amagotchiFacingLeft )||(!userChooseLeft && !amagotchiFacingLeft))
                 {
                     MainActivity.mSoundService.playSounds("happy");
-                    //setAmagotchiEvent(AnimationTyp.NORMAL);
                     amagotchi = new Sprite(spriteSheet, AnimationTyp.NORMAL);
+                    amagotchiEvent = AnimationTyp.NORMAL;
                 }
                 else
                 {
                     MainActivity.mSoundService.playSounds("unhappy");
-                    //setAmagotchiEvent(AnimationTyp.NORMAL);
                     amagotchi = new Sprite(spriteSheet, AnimationTyp.NORMAL);
+                    amagotchiEvent = AnimationTyp.NORMAL;
                 }
             }
 
