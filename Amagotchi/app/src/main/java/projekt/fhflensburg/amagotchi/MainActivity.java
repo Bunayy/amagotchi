@@ -245,7 +245,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onCleaningPressed(View v)
     {
-        Log.v("test", "Reinigen");
+        Log.v(LOG_TAG, "Clean");
+        if (mainServiceBound)
+        {
+            mainService.cleanAma();
+        }
     }
 
     public void onStatsPressed(View v)
@@ -264,7 +268,10 @@ public class MainActivity extends AppCompatActivity {
     public void onMedicinePressed(View v)
     {
         //Log.d(LOG_TAG, "Ih bah Medizin !");
-        //ama.healAmagotchi();
+        if (mainServiceBound)
+        {
+            mainService.giveMedicine();
+        }
     }
 
     public void onDisciplinePressed(View v)
@@ -323,7 +330,6 @@ public class MainActivity extends AppCompatActivity {
         {
             if (amagotchiClicked)
             {
-                String name = "Hans";
                 String type = "1";
 
                 mSoundService.playSounds("selection");
@@ -333,7 +339,7 @@ public class MainActivity extends AppCompatActivity {
                 ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);
                 ((LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
                 //Create
-                Amagotchi ama = new Amagotchi(name, type, this);
+                Amagotchi ama = new Amagotchi(nameField.getText().toString(), type, this);
                 Amagotchi.setInstance(ama);
                 MainService.setAma(ama);
                 MainService.run();
