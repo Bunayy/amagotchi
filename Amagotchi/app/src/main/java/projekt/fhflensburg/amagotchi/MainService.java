@@ -87,6 +87,11 @@ public class MainService extends Service
         ama = pAma;
     }
 
+    public static Amagotchi getAma()
+    {
+        return ama;
+    }
+
     public static void run()
     {
         run = true;
@@ -118,10 +123,31 @@ public class MainService extends Service
 
             Sys.saveGame(ama, this);
 
+            MainActivity.instance.updateInterface();
+
         }
     }
 
 
+    //INPUT
+    public void doFeedBurger()
+    {
+        ama.setLevel(ama.getLevel() + 1);
+    }
+
+    public void doFeedSweets()
+    {
+
+    }
+
+    public void doFeedHealthy()
+    {
+
+    }
+
+
+
+    //OUTPUT
 
 
 }

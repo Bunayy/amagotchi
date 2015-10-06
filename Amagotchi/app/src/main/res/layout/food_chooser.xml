@@ -12,7 +12,7 @@
         android:layout_marginTop="60dp"
         android:id="@+id/solidFoodBtn"
         android:src="@drawable/burger"
-        android:onClick="feedSelection"
+        android:onClick="onFeedBurger"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
         android:layout_below="@id/solidFoodBtn"
         android:id="@+id/candyFoodBtn"
         android:src="@drawable/chocolate"
-        android:onClick="feedSelection"
+        android:onClick="onFeedSweets"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
         android:layout_below="@id/candyFoodBtn"
         android:id="@+id/healthyFoodBtn"
         android:src="@drawable/aple"
-        android:onClick="feedSelection"
+        android:onClick="onFeedHealthy"
         />
     <TextView
         android:layout_width="wrap_content"

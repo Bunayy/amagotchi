@@ -26,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "MainActivity";
     public static MainActivity instance;
 
+    //Refrences
     private ViewFlipper flipper;
+    private TextView textViewStatsMain;
 
     //Main Service
     MainService mainService;
@@ -46,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
         this.instance = this;
 
         flipper = (ViewFlipper) findViewById(R.id.flipper);
+
+        //Refrences
+        textViewStatsMain = (TextView) findViewById(R.id.textViewStatsMain);
+
 
 /*
         //Log.v(LOG_TAG, "---BEFORE------------------");
@@ -201,8 +207,36 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onFeedingPressed(View v)
     {
-        Log.d(LOG_TAG, "Gib Gib GIb !");
+        Log.d(LOG_TAG, "onFeedingPressed");
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.foodChooserView)));
+    }
+
+    public void onFeedBurger(View v)
+    {
+        Log.d(LOG_TAG, "onFeedBurger");
+        if (mainServiceBound)
+        {
+            mainService.doFeedBurger();
+        }
+        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+    }
+    public void onFeedSweets(View v)
+    {
+        Log.d(LOG_TAG, "onFeedSweets");
+        if (mainServiceBound)
+        {
+            mainService.doFeedSweets();
+        }
+        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+    }
+    public void onFeedHealthy(View v)
+    {
+        Log.d(LOG_TAG, "onFeedHealthy");
+        if (mainServiceBound)
+        {
+            mainService.doFeedHealthy();
+        }
+        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
     }
 
     public void onLightPressed(View v)
@@ -218,9 +252,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void onStatsPressed(View v)
     {
-        Log.d(LOG_TAG, "Hier sind deine Stats");
+        Log.d(LOG_TAG, "onStatsPressed");
+        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.statsView)));
+
     }
 
+    public void onStatsBack(View v)
+    {
+        Log.d(LOG_TAG, "onStatsBack");
+        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+
+    }
     public void onMedicinePressed(View v)
     {
         //Log.d(LOG_TAG, "Ih bah Medizin !");
@@ -315,5 +357,26 @@ public class MainActivity extends AppCompatActivity {
             mSoundService = null;
         }
     };
+
+    public void updateInterface()
+    {
+        Amagotchi outAma = MainService.getAma();
+        String temp = "Stats:\n";
+
+        temp += "Name: " + outAma.getName() + "\n";
+        temp += "Level: " + outAma.getLevel() + "\n";
+
+        temp += "health: " + outAma.getHealth() + "\n";
+        temp += "repletion: " + outAma.getRepletion() + "\n";
+        temp += "sleep: " + outAma.getSleep() + "\n";
+        temp += "motivation: " + outAma.getMotivation() + "\n";
+        temp += "happiness: " + outAma.getHappiness() + "\n";
+        temp += "fitness: " + outAma.getFitness() + "\n";
+        temp += "attention: " + outAma.getAttention() + "\n";
+        temp += "age: " + outAma.getAge() + "\n";
+        temp += "weight: " + outAma.getWeight() + "\n";
+
+        textViewStatsMain.setText(temp);
+    }
 
 }

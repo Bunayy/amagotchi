@@ -15,6 +15,7 @@
         <include android:id="@+id/sumUpGameView" layout="@layout/sum_up_game" />
         <include android:id="@+id/leftOrRightGameView" layout="@layout/left_or_right_game" />
         <include android:id="@+id/newGameView" layout="@layout/new_game_view" />
+        <include android:id="@+id/statsView" layout="@layout/stats_view" />
     </ViewFlipper>
 
 </RelativeLayout>
