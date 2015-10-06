@@ -26,7 +26,7 @@ public class Sprite
 
         //hier müssen wir mal gucken ob das ganze so elegant ist
         width = spriteSheet.getWidth()/8;
-        height = spriteSheet.getHeight()/8;
+        height = spriteSheet.getHeight()/13;
 
     }
 
