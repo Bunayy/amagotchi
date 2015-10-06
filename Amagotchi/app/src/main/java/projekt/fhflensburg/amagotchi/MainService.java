@@ -49,7 +49,7 @@ public class MainService extends Service
                 while(true)
                 {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(10);
                         handler.sendEmptyMessage(0);
 
                     } catch (InterruptedException e) {
@@ -299,24 +299,6 @@ public class MainService extends Service
                     }
 
 
-                    ////////////////////////////////////////
-                    // 30 Min Loop
-                    ////////////////////////////////////////
-
-                    if(loopCount > 29)
-                    {
-                        //Hier 20 min loop
-
-
-
-                        loopCount = 0;
-                    }
-                    else
-                    {
-                        loopCount++;
-                    }
-
-
                     //Gamble Feces
                     if (ama.getAge() % 60 == 0 && !ama.getFeces()) {
                         Log.v(LOG_TAG, "PoopGamble");
@@ -332,6 +314,89 @@ public class MainService extends Service
                         ama.setisDead(true);
                     }
 
+                    ////////////////////////////////////////
+                    // 30 Min Loop
+                    ////////////////////////////////////////
+
+                    if(loopCount > 29)
+                    {
+                        if(ama.getHealth() >= 70)
+                            ama.setDevelopmentPoints(ama.getDevelopmentPoints() + 1);
+                        if(ama.getRepletion() >= 60)
+                            ama.setDevelopmentPoints(ama.getDevelopmentPoints() + 1);
+                        if(ama.getSleep() >= 40)
+                            ama.setDevelopmentPoints(ama.getDevelopmentPoints() + 1);
+                        if(ama.getMotivation() >= 70)
+                            ama.setDevelopmentPoints(ama.getDevelopmentPoints() + 1);
+                        if(ama.getHappiness() >= 70)
+                            ama.setDevelopmentPoints(ama.getDevelopmentPoints() + 1);
+                        if(ama.getFitness() >= 70)
+                            ama.setDevelopmentPoints(ama.getDevelopmentPoints() + 1);
+                        if(ama.getAttention() >= 70)
+                            ama.setDevelopmentPoints(ama.getDevelopmentPoints() + 1);
+
+                        loopCount = 0;
+                    }
+                    else
+                    {
+                        loopCount++;
+                    }
+
+                    if(ama.getAge() % 720 == 0)//12 Stunden
+                    {
+                        ama.setLevel(ama.getLevel() + 1);
+
+                        //Max 168 Dev Points
+                        //Unterscheidung der Spielerleistung hier
+                        //Falls neues Spritesheet vorhanden ist, hier durchnummerieren
+                        if(ama.getDevelopmentPoints() >= 100)
+                        {
+                            ama.setMutation("1");
+                        }
+                        else
+                        {
+                            ama.setMutation("1");
+                        }
+
+                        ama.setDevelopmentPoints(0);
+                    }
+
+
+                    /*switch(ama.getLevel())
+                    {
+                        case 1:
+
+                            break;
+                        case 2:
+
+                            break;
+                        case 3:
+
+                            break;
+                        case 4:
+
+                            break;
+                        case 5:
+
+                            break;
+                        case 6:
+
+                            break;
+                        case 7:
+
+                            break;
+                        case 8:
+
+                            break;
+                        case 9:
+
+                            break;
+                        case 10:
+
+                            break;
+                        default:
+                    }*/
+
                 }
                 //Altern
                 ama.setAge(ama.getAge() + 1);
@@ -344,7 +409,7 @@ public class MainService extends Service
 
 
     //INPUT
-    public void doFeedHealthy()
+    public static void doFeedHealthy()
     {
         ama.setHealth(ama.getHealth() + 10);
         ama.setRepletion(ama.getRepletion() + 7);
@@ -355,11 +420,11 @@ public class MainService extends Service
         if(ama.getRepletion() >= 100)
             ama.setSleep(ama.getSleep() - 5);
 
-        Sys.saveGame(ama, this);
+        Sys.saveGame(ama, MainActivity.instance);
         MainActivity.instance.updateInterface();
     }
 
-    public void doFeedBurger()
+    public static void doFeedBurger()
     {
         ama.setRepletion(ama.getRepletion() + 20);
         ama.setHappiness(ama.getHappiness() + 6);
@@ -369,11 +434,11 @@ public class MainService extends Service
         if(ama.getRepletion() >= 100)
             ama.setSleep(ama.getSleep() - 20);
 
-        Sys.saveGame(ama, this);
+        Sys.saveGame(ama, MainActivity.instance);
         MainActivity.instance.updateInterface();
     }
 
-    public void doFeedSweets()
+    public static void doFeedSweets()
     {
         ama.setRepletion(ama.getRepletion() + 12);
         ama.setMotivation(ama.getMotivation() + 15);
@@ -384,32 +449,32 @@ public class MainService extends Service
         if(ama.getRepletion() >= 100)
             ama.setSleep(ama.getSleep() - 10);
 
-        Sys.saveGame(ama, this);
+        Sys.saveGame(ama, MainActivity.instance);
         MainActivity.instance.updateInterface();
     }
 
-    public void wonMiniGame()
+    public static void wonMiniGame()
     {
         ama.setSleep(ama.getSleep() - 5);
         ama.setMotivation(ama.getMotivation() + 3);
         ama.setHappiness(ama.getHappiness() + 8);
         ama.setAttention(ama.getAttention() + 7);
 
-        Sys.saveGame(ama, this);
+        Sys.saveGame(ama, MainActivity.instance);
         MainActivity.instance.updateInterface();
     }
 
-    public void lostMiniGame()
+    public static void lostMiniGame()
     {
         ama.setSleep(ama.getSleep() - 5);
         ama.setMotivation(ama.getMotivation() - 2);
         ama.setAttention(ama.getAttention() + 5);
 
-        Sys.saveGame(ama, this);
+        Sys.saveGame(ama, MainActivity.instance);
         MainActivity.instance.updateInterface();
     }
 
-    public void cleanAma()
+    public static void cleanAma()
     {
         ama.setHappiness(ama.getHappiness() + 5);
         ama.setAttention(ama.getAttention() + 3);
@@ -417,11 +482,11 @@ public class MainService extends Service
         ama.setFecesCountdown(0);
         ama.setFeces(false);
 
-        Sys.saveGame(ama, this);
+        Sys.saveGame(ama, MainActivity.instance);
         MainActivity.instance.updateInterface();
     }
 
-    public void giveMedicine()
+    public static void giveMedicine()
     {
         ama.setHealth(ama.getHealth() + 40);
         ama.setHappiness(ama.getHappiness() - 35);
@@ -438,29 +503,29 @@ public class MainService extends Service
             ama.setFecesCountdown(180);
         }
 
-        Sys.saveGame(ama, this);
+        Sys.saveGame(ama, MainActivity.instance);
         MainActivity.instance.updateInterface();
     }
 
-    public void doEggEntertain()
+    public static void doEggEntertain()
     {
         if(ama.getLevel() == 0)
         {
             ama.setTimeToHatch(ama.getTimeToHatch() - 2);
 
         }
-        Sys.saveGame(ama, this);
+        Sys.saveGame(ama, MainActivity.instance);
         MainActivity.instance.updateInterface();
     }
 
-    public void doEggWarm()
+    public static void doEggWarm()
     {
         if(ama.getLevel() == 0)
         {
             ama.setTimeToHatch(ama.getTimeToHatch() - 2);
 
         }
-        Sys.saveGame(ama, this);
+        Sys.saveGame(ama, MainActivity.instance);
         MainActivity.instance.updateInterface();
     }
 

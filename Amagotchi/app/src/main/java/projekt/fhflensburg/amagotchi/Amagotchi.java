@@ -96,7 +96,7 @@ public class Amagotchi
 
         name = pName;
         type = pType;
-        mutation = "0";
+        mutation = "1";
         health = context.getResources().getInteger(R.integer.startValueHealth);
         repletion = context.getResources().getInteger(R.integer.startValueRepletion);
         sleep = context.getResources().getInteger(R.integer.startValueSleep);
