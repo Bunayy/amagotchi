@@ -597,14 +597,14 @@ public class Amagotchi
                 isdead = Boolean.parseBoolean(valSplit[11]);
 
                 health = Double.parseDouble(valSplit[12]);
-                health = Double.parseDouble(valSplit[13]);
-                health = Double.parseDouble(valSplit[14]);
-                health = Double.parseDouble(valSplit[15]);
-                health = Double.parseDouble(valSplit[16]);
-                health = Double.parseDouble(valSplit[17]);
-                health = Double.parseDouble(valSplit[18]);
-                health = Double.parseDouble(valSplit[19]);
-                health = Double.parseDouble(valSplit[20]);
+                repletion = Double.parseDouble(valSplit[13]);
+                sleep = Double.parseDouble(valSplit[14]);
+                motivation = Double.parseDouble(valSplit[15]);
+                happiness = Double.parseDouble(valSplit[16]);
+                fitness = Double.parseDouble(valSplit[17]);
+                attention = Double.parseDouble(valSplit[18]);
+                age = Integer.parseInt(valSplit[19]);
+                weight = Double.parseDouble(valSplit[20]);
 
                 fecesCountdown = Integer.parseInt(valSplit[21]);
             }
