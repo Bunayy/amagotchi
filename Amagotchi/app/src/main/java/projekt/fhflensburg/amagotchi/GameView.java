@@ -132,19 +132,35 @@ public class GameView extends SurfaceView implements Runnable
         switch(amagotchiEvent)
         {
             case NORMAL:
-                amountSprites = 3;
-                break;
-            case SLEEPING:
                 amountSprites = 1;
                 break;
-            case DANCING:
-                amountSprites = 3;
-                break;
             case HAPPY:
-                amountSprites = 5;
+                amountSprites = 2;
                 break;
-            case HATCHING:
-                amountSprites = 5;
+            case UNHAPPY:
+                amountSprites = 2;
+                break;
+            case SLEEPING:
+                amountSprites = 2;
+                break;
+            case REFUSE:
+                amountSprites = 1;
+                break;
+            case EATING:
+                amountSprites = 1;
+                break;
+            case THINKING:
+                amountSprites = 1;
+                break;
+            case CLEANING:
+                amountSprites = 4;
+                break;
+            case DEVELOP:
+                amountSprites = 4;
+            case TURN_LEFT_RIGHT:
+                amountSprites = 1;
+            case DYING:
+                amountSprites = 2;
                 break;
             default:
                 Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");

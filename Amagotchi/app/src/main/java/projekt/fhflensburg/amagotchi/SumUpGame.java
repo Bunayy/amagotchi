@@ -108,7 +108,7 @@ public class SumUpGame
             {
                 if(wonGames >((int)(MAX_ROUNDS/2)))
                 {
-                    //wonMinigame
+                    MainService.wonMiniGame();
                     MainActivity.mSoundService.playSounds("happy");
                 }
 
@@ -193,19 +193,16 @@ public class SumUpGame
             MainActivity.mSoundService.playSounds("unhappy");
 
             tempTV.setBackgroundColor(Color.parseColor("#cc0000"));
-
         }
 
         //Zurücksetzen der "Farbe"
         Handler reDo = new Handler();
 
-        reDo.postDelayed(new Runnable()
-        {
+        reDo.postDelayed(new Runnable() {
             private long time = 0;
 
             @Override
-            public void run()
-            {
+            public void run() {
                 tempTV.setBackgroundColor(Color.parseColor("#cccccc"));
             }
         }, 500); // 1 second delay (takes millis)

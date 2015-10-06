@@ -65,6 +65,7 @@ public class LeftOrRightGame
             if(wonRounds >= 3)
             {
                 //Amagotchi belohnen
+                MainService.wonMiniGame();
             }
 
             // Aus dem UI-Thread behandeln !
