@@ -20,8 +20,8 @@ public class MainService extends Service
     static Handler handler;
 
     //Daten
-    Amagotchi ama = null;
-    Boolean run = false;
+    static Amagotchi ama = null;
+    static Boolean run = false;
 
     @Override
     public void onCreate() {
@@ -44,7 +44,7 @@ public class MainService extends Service
                 while(true)
                 {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(2000);
                         handler.sendEmptyMessage(0);
 
                     } catch (InterruptedException e) {
@@ -82,12 +82,17 @@ public class MainService extends Service
 
     }
 
-    public void run()
+    public static void setAma(Amagotchi pAma)
+    {
+        ama = pAma;
+    }
+
+    public static void run()
     {
         run = true;
     }
 
-    public void stop()
+    public static void stop()
     {
         run = false;
     }
@@ -98,14 +103,22 @@ public class MainService extends Service
         }
     }
 
-
     private void tick()
     {
-        Log.v(LOG_TAG, "tick");
+        Log.v(LOG_TAG, "tick " + run);
+        if(ama != null && run)
+        {
+            Log.v(LOG_TAG, "tickIncoming");
 
+            ama.setMotivation(ama.getMotivation() + 0.1);
 
+            Log.v(LOG_TAG, "MotIs: " + ama.getMotivation());
 
+            Log.v(LOG_TAG, "Saving");
 
+            Sys.saveGame(ama, this);
+
+        }
     }
 
 
