@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ViewFlipper;
 
+import java.util.Random;
+
 /**
  * Created by User on 06.10.2015.
  */
@@ -42,16 +44,14 @@ public class LeftOrRightGame
         leftBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((LeftOrRightGameView)activity.findViewById(R.id.lorGameViewAmagee)).startCountdown(true);
-                playedRounds++;
+               startCountdown(true);
             }
         });
 
         rightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((LeftOrRightGameView)activity.findViewById(R.id.lorGameViewAmagee)).startCountdown(false);
-                playedRounds++;
+                startCountdown(false);
             }
         });
     }
@@ -81,5 +81,16 @@ public class LeftOrRightGame
                 }
             }, 1000); // 1 second delay (takes millis)
         }
+
+    }
+
+    public void startCountdown(boolean turnLeft)
+    {
+        userChooseLeft = turnLeft;
+        changeDirectionCounter = new Random().nextInt(4)+2;
+        ((LeftOrRightGameView)activity.findViewById(R.id.lorGameViewAmagee)).setAmagotchiEvent(AnimationTyp.TURN_LEFT_RIGHT);
+        playedRounds++;
+
+        endGame();
     }
 }
