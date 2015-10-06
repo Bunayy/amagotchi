@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     public static SoundService mSoundService;
     boolean mSoundServiceBounded = false;
 
+
+    public LeftOrRightGameView lorGV;
     //Bei Start der App
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -251,6 +253,18 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "onSoundCheck()");
         if (mSoundService != null) mSoundService.playSounds("happy");
 
+    }
+
+    public void onLeftPicked(View v)
+    {
+        lorGV = (LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee);
+        lorGV.startCountdown(true);
+    }
+
+    public void onRightPicked(View v)
+    {
+        lorGV = (LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee);
+        lorGV.startCountdown(false);
     }
 
     private ServiceConnection mainServiceConnection = new ServiceConnection() {

@@ -14,14 +14,14 @@
         style="?android:attr/borderlessButtonStyle"
         android:onClick="onLeftPicked"
         />
+
     <projekt.fhflensburg.amagotchi.LeftOrRightGameView
-        android:id="@+id/leftOrRightGameViewAmagotchi"
+        android:id="@+id/lorGameViewAmagee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/leftBtn"
-        >
-    </projekt.fhflensburg.amagotchi.LeftOrRightGameView>
+        android:layout_toRightOf="@id/leftBtn">
+        </projekt.fhflensburg.amagotchi.LeftOrRightGameView>
 
     <ImageButton
         android:id="@+id/rightBtn"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:layout_toRightOf="@id/leftOrRightGameViewAmagotchi"
+        android:layout_toRightOf="@id/lorGameViewAmagee"
         android:src="@drawable/arrow_right_btn"
         style="?android:attr/borderlessButtonStyle"
         android:onClick="onRightPicked"

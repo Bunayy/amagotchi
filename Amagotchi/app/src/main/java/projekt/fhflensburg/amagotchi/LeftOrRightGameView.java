@@ -47,11 +47,9 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
     boolean firstTime;
 
 
-    ImageButton leftBtn, rightBtn;
-
     boolean amagotchiFacingLeft = true;
     int changeDirectionCounter = 0;
-    boolean userChooseLeft;
+    public boolean userChooseLeft;
 
 
     public LeftOrRightGameView(Context context, AttributeSet attrs)
@@ -99,31 +97,6 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
             }
         });
 
-        leftBtn = (ImageButton)findViewById(R.id.leftBtn);
-        rightBtn = (ImageButton)findViewById(R.id.rightBtn);
-
-        leftBtn.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                changeDirectionCounter = new Random().nextInt(4)+2;
-                amagotchiEvent = AnimationTyp.TURN_LEFT_RIGHT;
-                userChooseLeft = true;
-            }
-        });
-
-
-        rightBtn.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                changeDirectionCounter = new Random().nextInt(4)+2;
-                amagotchiEvent = AnimationTyp.TURN_LEFT_RIGHT;
-                userChooseLeft = false;
-            }
-        });
     }
     public void doDrawings(Canvas canvas)
     {
@@ -239,5 +212,12 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
         catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void startCountdown(boolean turnLeft)
+    {
+        userChooseLeft = turnLeft;
+        changeDirectionCounter = new Random().nextInt(4)+2;
+        setAmagotchiEvent(AnimationTyp.TURN_LEFT_RIGHT);
     }
 }
