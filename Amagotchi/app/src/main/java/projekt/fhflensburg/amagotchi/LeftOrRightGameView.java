@@ -93,38 +93,39 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
 
     public void doDrawings(Canvas canvas)
     {
-        canvas.drawColor(Color.rgb(120, 153, 66));
+        if(canvas != null) {
+            canvas.drawColor(Color.rgb(120, 153, 66));
 
-        int amountSprites = 0;
+            int amountSprites = 0;
 
-        switch(amagotchiEvent)
-        {
-            case NORMAL:
-                amountSprites = 1;
-                break;
-            case HAPPY:
-                amountSprites = 2;
-                break;
-            case UNHAPPY:
-                amountSprites = 2;
-                break;
-            case TURN_LEFT_RIGHT:
-                amountSprites = 1;
-                break;
-            case DEVELOP:
-                amountSprites = 4;
-                break;
-            default:
-                Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");
+            switch (amagotchiEvent) {
+                case NORMAL:
+                    amountSprites = 1;
+                    break;
+                case HAPPY:
+                    amountSprites = 2;
+                    break;
+                case UNHAPPY:
+                    amountSprites = 2;
+                    break;
+                case TURN_LEFT_RIGHT:
+                    amountSprites = 1;
+                    break;
+                case DEVELOP:
+                    amountSprites = 4;
+                    break;
+                default:
+                    Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");
+            }
+
+            amagotchi = new Sprite(GameView.spriteSheet, amagotchiEvent);
+            amagotchi.drawAmagotchi(canvas, paintedSprites);
+
+            if (paintedSprites == amountSprites)
+                paintedSprites = -1;
+
+            paintedSprites++;
         }
-
-        amagotchi = new Sprite(GameView.spriteSheet,amagotchiEvent);
-        amagotchi.drawAmagotchi(canvas, paintedSprites);
-
-        if(paintedSprites == amountSprites)
-            paintedSprites = -1;
-
-        paintedSprites++;
     }
 
 
@@ -160,6 +161,8 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
         {
             if((MainActivity.lorGame.userChooseLeft && MainActivity.lorGame.amagotchiFacingLeft )||(!MainActivity.lorGame.userChooseLeft && !MainActivity.lorGame.amagotchiFacingLeft))
             {
+                Log.d(LOG_TAG, "Bin in Alles richtig gemacht mein bester!");
+
                 MainActivity.mSoundService.playSounds("happy");
                 amagotchiEvent = AnimationTyp.HAPPY;
 
@@ -182,7 +185,7 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
                 amagotchiEvent = AnimationTyp.NORMAL;
                 */
                 MainActivity.mSoundService.playSounds("unhappy");
-                amagotchiEvent=AnimationTyp.UNHAPPY;
+                amagotchiEvent = AnimationTyp.UNHAPPY;
                 Handler timer = new Handler();
 
                 timer.postDelayed(new Runnable()

@@ -121,87 +121,91 @@ public class GameView extends SurfaceView implements Runnable
 
     public void doDrawings(Canvas canvas)
     {
-        canvas.drawColor(Color.rgb(120, 153, 66));
+        if(canvas != null) {
 
-        int amountSprites = 0;
-
-        if(amaGee.getFeces())
-        {
-            Rect srcRect = new Rect(0, 0, poopBitmap.getWidth(), poopBitmap.getHeight());
-
-            int destStartX = canvas.getWidth() - poopBitmap.getWidth();
-            int destStartY = canvas.getHeight() - poopBitmap.getHeight();
-
-            Rect destRect = new Rect(destStartX, destStartY,destStartX + poopBitmap.getWidth(),destStartY + poopBitmap.getHeight());
-            canvas.drawBitmap(poopBitmap, srcRect, destRect, null);
-        }
-
-        if(amaGee.getLevel() > 0)
-        {
-            switch(amagotchiEvent)
+            if(!amaGee.getIsAsleep())
             {
-                case NORMAL:
-                    amountSprites = 1;
-                    break;
-                case HAPPY:
-                    amountSprites = 2;
-                    break;
-                case UNHAPPY:
-                    amountSprites = 2;
-                    break;
-                case SLEEPING:
-                    amountSprites = 2;
-                    break;
-                case REFUSE:
-                    amountSprites = 1;
-                    break;
-                case EATING:
-                    amountSprites = 1;
-                    break;
-                case THINKING:
-                    amountSprites = 1;
-                    break;
-                case CLEANING:
-                    amountSprites = 4;
-                    break;
-                case DEVELOP:
-                    amountSprites = 4;
-                    break;
-                case TURN_LEFT_RIGHT:
-                    amountSprites = 1;
-                    break;
-                case DYING:
-                    amountSprites = 2;
-                    break;
-                default:
-                    Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");
+                canvas.drawColor(Color.rgb(120, 153, 66));
             }
-        }
-        else
-        {
-            switch (amagotchiEvent)
-            {
-                case NORMAL:
-                    amountSprites = 3;
-                    break;
-                case HAPPY:
-                    amountSprites = 5;
-                    break;
-                case HATCHING:
-                    amountSprites = 5;
-                    break;
-                default:
-                    Log.e(LOG_TAG, "Fehler beim Setzen der amountSprites");
+            else {
+                canvas.drawColor(Color.rgb(0, 0, 0));
             }
+
+
+            int amountSprites = 0;
+
+            if (amaGee.getFeces()) {
+                Rect srcRect = new Rect(0, 0, poopBitmap.getWidth(), poopBitmap.getHeight());
+
+                int destStartX = canvas.getWidth() - poopBitmap.getWidth();
+                int destStartY = canvas.getHeight() - poopBitmap.getHeight();
+
+                Rect destRect = new Rect(destStartX, destStartY, destStartX + poopBitmap.getWidth(), destStartY + poopBitmap.getHeight());
+                canvas.drawBitmap(poopBitmap, srcRect, destRect, null);
+            }
+
+            if (amaGee.getLevel() > 0) {
+                switch (amagotchiEvent) {
+                    case NORMAL:
+                        amountSprites = 1;
+                        break;
+                    case HAPPY:
+                        amountSprites = 2;
+                        break;
+                    case UNHAPPY:
+                        amountSprites = 2;
+                        break;
+                    case SLEEPING:
+                        amountSprites = 2;
+                        break;
+                    case REFUSE:
+                        amountSprites = 1;
+                        break;
+                    case EATING:
+                        amountSprites = 1;
+                        break;
+                    case THINKING:
+                        amountSprites = 1;
+                        break;
+                    case CLEANING:
+                        amountSprites = 4;
+                        break;
+                    case DEVELOP:
+                        amountSprites = 4;
+                        break;
+                    case TURN_LEFT_RIGHT:
+                        amountSprites = 1;
+                        break;
+                    case DYING:
+                        amountSprites = 2;
+                        break;
+                    default:
+                        Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");
+                }
+            } else {
+                switch (amagotchiEvent) {
+                    case NORMAL:
+                        amountSprites = 3;
+                        break;
+                    case HAPPY:
+                        amountSprites = 5;
+                        break;
+                    case HATCHING:
+                        amountSprites = 5;
+                        break;
+                    default:
+                        Log.e(LOG_TAG, "Fehler beim Setzen der amountSprites");
+                }
+            }
+
+            amagotchi = new Sprite(spriteSheet, amagotchiEvent);
+            amagotchi.drawAmagotchi(canvas, paintedSprites);
+
+            if (paintedSprites == amountSprites)
+                paintedSprites = -1;
+
+            paintedSprites++;
         }
-
-        amagotchi = new Sprite(spriteSheet,amagotchiEvent);
-        amagotchi.drawAmagotchi(canvas, paintedSprites);
-
-        if(paintedSprites == amountSprites)
-            paintedSprites = -1;
-
-        paintedSprites++;
     }
 
 

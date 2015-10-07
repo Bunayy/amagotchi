@@ -92,38 +92,39 @@ public class SumUpGameView extends SurfaceView implements Runnable
 
     public void doDrawings(Canvas canvas)
     {
-        canvas.drawColor(Color.rgb(120, 153, 66));
+        if(canvas != null) {
+            canvas.drawColor(Color.rgb(120, 153, 66));
 
-        int amountSprites = 0;
+            int amountSprites = 0;
 
-        switch(amagotchiEvent)
-        {
-            case NORMAL:
-                amountSprites = 1;
-                break;
-            case HAPPY:
-                amountSprites = 2;
-                break;
-            case UNHAPPY:
-                amountSprites = 2;
-                break;
-            case THINKING:
-                amountSprites = 1;
-                break;
-            case DEVELOP:
-                amountSprites = 4;
-                break;
-            default:
-                Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");
+            switch (amagotchiEvent) {
+                case NORMAL:
+                    amountSprites = 1;
+                    break;
+                case HAPPY:
+                    amountSprites = 2;
+                    break;
+                case UNHAPPY:
+                    amountSprites = 2;
+                    break;
+                case THINKING:
+                    amountSprites = 1;
+                    break;
+                case DEVELOP:
+                    amountSprites = 4;
+                    break;
+                default:
+                    Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");
+            }
+
+            amagotchi = new Sprite(GameView.spriteSheet, amagotchiEvent);
+            amagotchi.drawAmagotchi(canvas, paintedSprites);
+
+            if (paintedSprites == amountSprites)
+                paintedSprites = -1;
+
+            paintedSprites++;
         }
-
-        amagotchi = new Sprite(GameView.spriteSheet,amagotchiEvent);
-        amagotchi.drawAmagotchi(canvas, paintedSprites);
-
-        if(paintedSprites == amountSprites)
-            paintedSprites = -1;
-
-        paintedSprites++;
     }
 
     public void run()

@@ -118,7 +118,6 @@ public class SumUpGame
                         }
                     }, 1500);
                 }
-
                 MainActivity.sugv.setVisibility(View.INVISIBLE);
                 MainActivity.gv.setVisibility(View.VISIBLE);
                 MainActivity.lorgv.setVisibility(View.INVISIBLE);
