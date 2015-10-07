@@ -123,12 +123,12 @@ public class GameView extends SurfaceView implements Runnable
     {
         if(canvas != null) {
 
-            if(!amaGee.getIsAsleep())
+            if(amaGee.isLightOff())
             {
-                canvas.drawColor(Color.rgb(120, 153, 66));
+                canvas.drawColor(Color.BLACK);
             }
             else {
-                canvas.drawColor(Color.rgb(0, 0, 0));
+                canvas.drawColor(Color.rgb(120, 153, 66));
             }
 
 
