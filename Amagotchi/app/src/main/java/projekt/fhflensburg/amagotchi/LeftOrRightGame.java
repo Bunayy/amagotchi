@@ -101,13 +101,18 @@ public class LeftOrRightGame
         MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.TURN_LEFT_RIGHT);
         playedRounds++;
 
-        if(changeDirectionCounter > 0 && MainActivity.lorgv.amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT)
+        endGame();
+    }
+
+    public void checkChangeDirection()
+    {
+        if(MainActivity.lorGame.changeDirectionCounter > 0 && MainActivity.lorgv.amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT)
         {
-            amagotchiFacingLeft = !amagotchiFacingLeft;
-            changeDirectionCounter--;
+            MainActivity.lorGame.amagotchiFacingLeft = !MainActivity.lorGame.amagotchiFacingLeft;
+            MainActivity.lorGame.changeDirectionCounter--;
         }
-        else if(changeDirectionCounter == 0 && MainActivity.lorgv.amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT) {
-            if ((userChooseLeft && amagotchiFacingLeft) || (!userChooseLeft && !amagotchiFacingLeft)) {
+        else if(MainActivity.lorGame.changeDirectionCounter == 0 && MainActivity.lorgv.amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT) {
+            if ((MainActivity.lorGame.userChooseLeft && MainActivity.lorGame.amagotchiFacingLeft) || (!MainActivity.lorGame.userChooseLeft && !MainActivity.lorGame.amagotchiFacingLeft)) {
 
                 MainActivity.mSoundService.playSounds("happy");
                 MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.HAPPY);
@@ -126,8 +131,7 @@ public class LeftOrRightGame
                 MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.UNHAPPY);
                 Handler timer = new Handler();
 
-                timer.postDelayed(new Runnable()
-                {
+                timer.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.NORMAL);
@@ -135,7 +139,6 @@ public class LeftOrRightGame
                 }, 1500);
             }
         }
-        endGame();
     }
 
 }
