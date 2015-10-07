@@ -326,15 +326,17 @@ public class MainActivity extends AppCompatActivity {
                 mSoundService.playSounds("selection");
                 Log.d(LOG_TAG, "onNewGame()");
 
-                ((SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
-                ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);
-                ((LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
                 //Create
                 Amagotchi ama = new Amagotchi(name, type, this);
                 Amagotchi.setInstance(ama);
                 MainService.setAma(ama);
                 MainService.run();
 
+                ((GameView)findViewById(R.id.canvasContainer)).updateAmagotchiInformation();
+
+                ((SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
+                ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);
+                ((LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
                 flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
             }
             else
