@@ -178,7 +178,8 @@ public class EggGameView extends SurfaceView implements Runnable
         {
             drawingThread.join();
         }
-        catch (InterruptedException e) {
+        catch (InterruptedException e)
+        {
             e.printStackTrace();
         }
     }

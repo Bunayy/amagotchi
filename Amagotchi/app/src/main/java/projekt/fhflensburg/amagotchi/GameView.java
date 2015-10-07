@@ -125,7 +125,7 @@ public class GameView extends SurfaceView implements Runnable
 
             if(amaGee.isLightOff())
             {
-                canvas.drawColor(Color.rgb(50,50,50));
+                canvas.drawColor(Color.rgb(25,25,25));
             }
             else {
                 canvas.drawColor(Color.rgb(120, 153, 66));
@@ -144,58 +144,44 @@ public class GameView extends SurfaceView implements Runnable
                 canvas.drawBitmap(poopBitmap, srcRect, destRect, null);
             }
 
-            if (amaGee.getLevel() > 0) {
-                switch (amagotchiEvent) {
-                    case NORMAL:
-                        amountSprites = 1;
-                        break;
-                    case HAPPY:
-                        amountSprites = 2;
-                        break;
-                    case UNHAPPY:
-                        amountSprites = 2;
-                        break;
-                    case SLEEPING:
-                        amountSprites = 2;
-                        break;
-                    case REFUSE:
-                        amountSprites = 1;
-                        break;
-                    case EATING:
-                        amountSprites = 1;
-                        break;
-                    case THINKING:
-                        amountSprites = 1;
-                        break;
-                    case CLEANING:
-                        amountSprites = 4;
-                        break;
-                    case DEVELOP:
-                        amountSprites = 4;
-                        break;
-                    case TURN_LEFT_RIGHT:
-                        amountSprites = 1;
-                        break;
-                    case DYING:
-                        amountSprites = 2;
-                        break;
-                    default:
-                        Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");
-                }
-            } else {
-                switch (amagotchiEvent) {
-                    case NORMAL:
-                        amountSprites = 3;
-                        break;
-                    case HAPPY:
-                        amountSprites = 5;
-                        break;
-                    case HATCHING:
-                        amountSprites = 5;
-                        break;
-                    default:
-                        Log.e(LOG_TAG, "Fehler beim Setzen der amountSprites");
-                }
+            switch (amagotchiEvent)
+            {
+                case NORMAL:
+                    amountSprites = 1;
+                    break;
+                case HAPPY:
+                    amountSprites = 2;
+                    break;
+                case UNHAPPY:
+                    amountSprites = 2;
+                    break;
+                case SLEEPING:
+                    amountSprites = 2;
+                    break;
+                case REFUSE:
+                    amountSprites = 1;
+                    break;
+                case EATING:
+                    amountSprites = 1;
+                    break;
+                case THINKING:
+                    amountSprites = 1;
+                    break;
+                case CLEANING:
+                    amountSprites = 4;
+                    break;
+                case DEVELOP:
+                    amountSprites = 4;
+                    break;
+                case TURN_LEFT_RIGHT:
+                    amountSprites = 1;
+                    break;
+                case DYING:
+                    amountSprites = 2;
+                    break;
+                default:
+                    Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");
+
             }
 
             amagotchi = new Sprite(spriteSheet, amagotchiEvent);

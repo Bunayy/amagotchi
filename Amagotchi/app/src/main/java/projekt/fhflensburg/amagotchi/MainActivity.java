@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -260,6 +261,18 @@ public class MainActivity extends AppCompatActivity {
     public void onCleaningPressed(View v)
     {
         Log.v("test", "Reinigen");
+        gv.setAmagotchiEvent(AnimationTyp.CLEANING);
+
+        Handler timer = new Handler();
+
+        timer.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+               gv.setAmagotchiEvent(AnimationTyp.NORMAL);
+            }
+        }, 2500);
+
+        MainService.cleanAma();
     }
 
     public void onStatsPressed(View v)
