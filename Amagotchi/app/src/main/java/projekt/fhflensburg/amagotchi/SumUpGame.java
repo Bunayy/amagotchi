@@ -86,7 +86,14 @@ public class SumUpGame
                 }
                 else
                 {
-                    endGame();
+                    Handler timer = new Handler();
+
+                    timer.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            endGame();
+                        }
+                    }, 500);
                 }
             }
         });
@@ -95,6 +102,22 @@ public class SumUpGame
 
     public void endGame()
     {
+
+        MainActivity.sugv.setVisibility(View.INVISIBLE);
+        MainActivity.gv.setVisibility(View.VISIBLE);
+        flipper.setDisplayedChild(flipper.indexOfChild(activity.findViewById(R.id.gameView)));
+
+        if(wonGames >((int)(MAX_ROUNDS/2)))
+        {
+            MainService.wonMiniGame();
+            MainActivity.gv.setAmagotchiEvent(AnimationTyp.HAPPY);
+        }
+        else
+        {
+            MainService.lostMiniGame();
+            MainActivity.gv.setAmagotchiEvent(AnimationTyp.UNHAPPY);
+        }
+
         //hier soll eig die Rückleitung auf die Main-Ansicht des Amagotchi geschehen das klappt aber leider nicht ...
         Handler reDo = new Handler();
 
@@ -103,28 +126,10 @@ public class SumUpGame
             @Override
             public void run()
             {
-                if(wonGames >((int)(MAX_ROUNDS/2)))
-                {
-                    MainService.wonMiniGame();
-                    MainActivity.mSoundService.playSounds("happy");
-                    MainActivity.sugv.setAmagotchiEvent(AnimationTyp.HAPPY);
-
-                    Handler timer = new Handler();
-
-                    timer.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            MainActivity.sugv.setAmagotchiEvent(AnimationTyp.NORMAL);
-                        }
-                    }, 1500);
-                }
-                MainActivity.sugv.setVisibility(View.INVISIBLE);
-                MainActivity.gv.setVisibility(View.VISIBLE);
-                MainActivity.lorgv.setVisibility(View.INVISIBLE);
-
-                flipper.setDisplayedChild(flipper.indexOfChild(activity.findViewById(R.id.gameView)));
+                MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
+                MainActivity.sugv.setAmagotchiEvent(AnimationTyp.NORMAL);
             }
-        }, 1000); // 1 second delay (takes millis)
+        }, 1500);
     }
 
     public void provideTask()

@@ -59,11 +59,20 @@ public class LeftOrRightGame
     {
         if(playedRounds == MAX_ROUNDS)
         {
+            MainActivity.lorgv.setVisibility(View.INVISIBLE);
+            MainActivity.gv.setVisibility(View.VISIBLE);
+            flipper.setDisplayedChild(flipper.indexOfChild(activity.findViewById(R.id.gameView)));
+
             if(wonRounds > ((int)(MAX_ROUNDS/2)))
             {
                 //Amagotchi belohnen
                 MainService.wonMiniGame();
-                MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.HAPPY);
+                MainActivity.gv.setAmagotchiEvent(AnimationTyp.HAPPY);
+            }
+            else
+            {
+                MainService.lostMiniGame();
+                MainActivity.gv.setAmagotchiEvent(AnimationTyp.UNHAPPY);
             }
 
             // Aus dem UI-Thread behandeln !
@@ -74,13 +83,8 @@ public class LeftOrRightGame
                 @Override
                 public void run()
                 {
-                    MainActivity.sugv.setVisibility(View.INVISIBLE);
-                    MainActivity.gv.setVisibility(View.VISIBLE);
-                    MainActivity.lorgv.setVisibility(View.INVISIBLE);
-
-                    flipper.setDisplayedChild(flipper.indexOfChild(activity.findViewById(R.id.gameView)));
-
                     MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.NORMAL);
+                    MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
                 }
             }, 1500); // 1 second delay (takes millis)
         }
