@@ -530,6 +530,7 @@ public class MainService extends Service
         {
             ama.setFeces(true);
             ama.setFecesCountdown(180);
+            ama.setRepletion(100);
         }
 
         Sys.saveGame(ama, MainActivity.instance);
