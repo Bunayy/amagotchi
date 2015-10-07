@@ -41,6 +41,7 @@ public class Amagotchi
 
     private boolean isDead;
     private boolean isAsleep;
+    private boolean lightOff;
 
     private double healthPerPeriod;
     private double repletionPerPeriod;
@@ -140,6 +141,7 @@ public class Amagotchi
         fecesCountdown = 0;
         isDead = false;
         isAsleep = false;
+        lightOff = false;
 
         foodFactory = new FoodFactory();
     }
@@ -386,6 +388,10 @@ public class Amagotchi
     }
 
     //Muss noch umgesetzt werden
+    public boolean isLightOff() { return lightOff; }
+
+    public void setLightOff(boolean lightOff) { this.lightOff = lightOff; }
+
     public void ripAmagotchi()
     {
         isDead = true;

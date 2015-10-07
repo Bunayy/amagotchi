@@ -7,8 +7,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import java.util.Random;
 
@@ -152,8 +150,6 @@ public class MainService extends Service
                             public void run() {
                                 ama.setLevel(1);
                                 MainActivity.gv.updateAmagotchiInformation();
-                                MainActivity.lorgv.updateAmagotchiInformation();
-                                MainActivity.sugv.updateAmagotchiInformation();
 
                                 //MainActivity.flipper.setDisplayedChild(MainActivity.flipper.indexOfChild(MainActivity.instance.findViewById(R.id.gameView)));
                                 MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
@@ -519,6 +515,14 @@ public class MainService extends Service
 
         Sys.saveGame(ama, MainActivity.instance);
         MainActivity.instance.updateInterface();
+    }
+
+    public static void lightTurnedOnOff()
+    {
+        if (ama.isLightOff())
+        {
+
+        }
     }
 
     public static void doEggEntertain()
