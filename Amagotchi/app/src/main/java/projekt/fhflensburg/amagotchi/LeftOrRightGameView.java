@@ -186,9 +186,7 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
                     amagotchiEvent = AnimationTyp.NORMAL;
                 }
             }
-
         }
-
     }
 
     public void setAmagotchiEvent(AnimationTyp animation)
