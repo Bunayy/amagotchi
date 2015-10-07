@@ -63,6 +63,7 @@ public class LeftOrRightGame
             {
                 //Amagotchi belohnen
                 MainService.wonMiniGame();
+                MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.HAPPY);
             }
 
             // Aus dem UI-Thread behandeln !
@@ -73,14 +74,15 @@ public class LeftOrRightGame
                 @Override
                 public void run()
                 {
-                    ((SumUpGameView) activity.findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
-                    ((GameView) activity.findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);
-                    ((LeftOrRightGameView)activity.findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
+                    MainActivity.sugv.setVisibility(View.INVISIBLE);
+                    MainActivity.gv.setVisibility(View.VISIBLE);
+                    MainActivity.lorgv.setVisibility(View.INVISIBLE);
 
                     flipper.setDisplayedChild(flipper.indexOfChild(activity.findViewById(R.id.gameView)));
 
+                    MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.NORMAL);
                 }
-            }, 1000); // 1 second delay (takes millis)
+            }, 1500); // 1 second delay (takes millis)
         }
 
     }
@@ -90,7 +92,7 @@ public class LeftOrRightGame
         MainActivity.mSoundService.playSounds("selection");
         userChooseLeft = turnLeft;
         changeDirectionCounter = new Random().nextInt(4)+2;
-        ((LeftOrRightGameView)activity.findViewById(R.id.lorGameViewAmagee)).setAmagotchiEvent(AnimationTyp.TURN_LEFT_RIGHT);
+        MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.TURN_LEFT_RIGHT);
         playedRounds++;
 
         endGame();

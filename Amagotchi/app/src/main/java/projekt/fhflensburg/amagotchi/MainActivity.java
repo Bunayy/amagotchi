@@ -344,7 +344,9 @@ public class MainActivity extends AppCompatActivity {
                 MainService.setAma(ama);
                 MainService.run();
 
-                ((GameView)findViewById(R.id.canvasContainer)).init();
+                gv.init();
+                sugv.init();
+                lorgv.init();
 
                 sugv.setVisibility(View.INVISIBLE);
                 gv.setVisibility(View.VISIBLE);

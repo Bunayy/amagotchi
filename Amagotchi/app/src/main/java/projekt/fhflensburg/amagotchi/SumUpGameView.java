@@ -101,40 +101,39 @@ public class SumUpGameView extends SurfaceView implements Runnable
         level = "level" + amaGee.getLevel();
         mutation = "_mutation" +  amaGee.getMutation();
         amagotchiType = "_type" + amaGee.getType();
+
+        Resources res = ctx.getResources();
+        String spriteSheetName = level + mutation + amagotchiType;
+        spriteSheet = BitmapFactory.decodeResource(getResources(), res.getIdentifier(spriteSheetName, "drawable", ctx.getPackageName()));
     }
 
     public void doDrawings(Canvas canvas)
     {
         canvas.drawColor(Color.rgb(120, 153, 66));
 
-
-        ///_____________________________
-
         int amountSprites = 0;
 
-        if(amaGee.getLevel() > 0)
+        switch(amagotchiEvent)
         {
-            switch(amagotchiEvent)
-            {
-                case NORMAL:
-                    amountSprites = 1;
-                    break;
-                case HAPPY:
-                    amountSprites = 2;
-                    break;
-                case UNHAPPY:
-                    amountSprites = 2;
-                    break;
-                case THINKING:
-                    amountSprites = 1;
-                    break;
-                case DEVELOP:
-                    amountSprites = 4;
-                    break;
-                default:
-                    Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");
-            }
+            case NORMAL:
+                amountSprites = 1;
+                break;
+            case HAPPY:
+                amountSprites = 2;
+                break;
+            case UNHAPPY:
+                amountSprites = 2;
+                break;
+            case THINKING:
+                amountSprites = 1;
+                break;
+            case DEVELOP:
+                amountSprites = 4;
+                break;
+            default:
+                Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");
         }
+
         amagotchi = new Sprite(spriteSheet,amagotchiEvent);
         amagotchi.drawAmagotchi(canvas, paintedSprites);
 
