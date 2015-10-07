@@ -330,8 +330,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void onStatsBack(View v)
     {
+        Amagotchi outAma = MainService.getAma();
         Log.d(LOG_TAG, "onStatsBack");
-        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+        if (outAma.getLevel() != 0)
+            flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+        else
+            flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.eggGameView)));
 
     }
     public void onMedicinePressed(View v)
