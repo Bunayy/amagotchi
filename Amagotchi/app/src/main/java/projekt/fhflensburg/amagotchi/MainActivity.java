@@ -245,6 +245,13 @@ public class MainActivity extends AppCompatActivity {
     public void onLightPressed(View v)
     {
         Log.d(LOG_TAG, "Licht An/Aus");
+        MainService.lightTurnedOnOff();
+
+        sugv.setVisibility(View.INVISIBLE);
+        gv.setVisibility(View.VISIBLE);
+        lorgv.setVisibility(View.INVISIBLE);
+
+        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
 
     }
 

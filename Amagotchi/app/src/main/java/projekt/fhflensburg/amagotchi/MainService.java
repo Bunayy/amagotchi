@@ -522,13 +522,14 @@ public class MainService extends Service
         if (ama.isLightOff())
         {
             ama.setLightOff(false);
-            if (ama.getIsAsleep())
-                ama.setIsAsleep(false);
+            ama.setIsAsleep(false);
+            MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
         }
         else
         {
             ama.setLightOff(true);
             ama.setIsAsleep(true);
+            MainActivity.gv.setAmagotchiEvent(AnimationTyp.SLEEPING);
         }
     }
 
