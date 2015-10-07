@@ -609,6 +609,8 @@ public class Amagotchi
             saveString += "," + age;
             saveString += "," + weight;
 
+            saveString += "," + lightOff;
+
             saveString += "," + fecesCountdown;
 
             String hc = String.valueOf(saveString.hashCode()); // Hash
@@ -670,7 +672,9 @@ public class Amagotchi
                     age = Integer.parseInt(valSplit[20]);
                     weight = Double.parseDouble(valSplit[21]);
 
-                    fecesCountdown = Integer.parseInt(valSplit[22]);
+                    lightOff = Boolean.parseBoolean(valSplit[22]);
+
+                    fecesCountdown = Integer.parseInt(valSplit[23]);
                 }
             }
             catch(Exception e)
