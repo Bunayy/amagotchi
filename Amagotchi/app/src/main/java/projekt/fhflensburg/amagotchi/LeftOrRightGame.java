@@ -59,7 +59,7 @@ public class LeftOrRightGame
     {
         if(playedRounds == MAX_ROUNDS)
         {
-            if(wonRounds >= 3)
+            if(wonRounds > ((int)(MAX_ROUNDS/2)))
             {
                 //Amagotchi belohnen
                 MainService.wonMiniGame();

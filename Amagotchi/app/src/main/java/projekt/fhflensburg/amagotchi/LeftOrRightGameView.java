@@ -161,7 +161,8 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
             if((MainActivity.lorGame.userChooseLeft && MainActivity.lorGame.amagotchiFacingLeft )||(!MainActivity.lorGame.userChooseLeft && !MainActivity.lorGame.amagotchiFacingLeft))
             {
                 MainActivity.mSoundService.playSounds("happy");
-                MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.HAPPY);
+                amagotchiEvent = AnimationTyp.HAPPY;
+
                 Handler timer = new Handler();
 
                 timer.postDelayed(new Runnable()
@@ -169,12 +170,9 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
                     @Override
                     public void run()
                     {
-                        MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.NORMAL);
+                        amagotchiEvent= AnimationTyp.NORMAL;
                     }
                 }, 1500);
-
-                //amagotchi = new Sprite(spriteSheet, AnimationTyp.NORMAL);
-                //amagotchiEvent = AnimationTyp.NORMAL;
             }
             else
             {
@@ -184,7 +182,7 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
                 amagotchiEvent = AnimationTyp.NORMAL;
                 */
                 MainActivity.mSoundService.playSounds("unhappy");
-                MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.UNHAPPY);
+               amagotchiEvent=AnimationTyp.UNHAPPY;
                 Handler timer = new Handler();
 
                 timer.postDelayed(new Runnable()
@@ -192,7 +190,7 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
                     @Override
                     public void run()
                     {
-                        MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.NORMAL);
+                       amagotchiEvent = AnimationTyp.NORMAL;
                     }
                 }, 1500);
             }
