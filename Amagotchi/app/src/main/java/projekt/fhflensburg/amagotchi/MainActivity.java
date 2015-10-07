@@ -338,6 +338,7 @@ public class MainActivity extends AppCompatActivity {
     {
         //Log.d(LOG_TAG, "Ih bah Medizin !");
         //ama.healAmagotchi();
+        MainService.giveMedicine();
     }
 
     public void onDisciplinePressed(View v)
