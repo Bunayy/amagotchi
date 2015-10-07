@@ -2,6 +2,7 @@ package projekt.fhflensburg.amagotchi;
 
 import android.app.Activity;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ViewFlipper;
@@ -40,7 +41,8 @@ public class LeftOrRightGame
         leftBtn = (ImageButton)activity.findViewById(R.id.leftBtn);
         rightBtn = (ImageButton)activity.findViewById(R.id.rightBtn);
 
-        leftBtn.setOnClickListener(new View.OnClickListener() {
+        leftBtn.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                startCountdown(true);
@@ -99,6 +101,40 @@ public class LeftOrRightGame
         MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.TURN_LEFT_RIGHT);
         playedRounds++;
 
+        if(changeDirectionCounter > 0 && MainActivity.lorgv.amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT)
+        {
+            amagotchiFacingLeft = !amagotchiFacingLeft;
+            changeDirectionCounter--;
+        }
+        else if(changeDirectionCounter == 0 && MainActivity.lorgv.amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT) {
+            if ((userChooseLeft && amagotchiFacingLeft) || (!userChooseLeft && !amagotchiFacingLeft)) {
+
+                MainActivity.mSoundService.playSounds("happy");
+                MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.HAPPY);
+
+                Handler timer = new Handler();
+
+                timer.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.NORMAL);
+                    }
+                }, 1500);
+            } else {
+
+                MainActivity.mSoundService.playSounds("unhappy");
+                MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.UNHAPPY);
+                Handler timer = new Handler();
+
+                timer.postDelayed(new Runnable()
+                {
+                    @Override
+                    public void run() {
+                        MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.NORMAL);
+                    }
+                }, 1500);
+            }
+        }
         endGame();
     }
 

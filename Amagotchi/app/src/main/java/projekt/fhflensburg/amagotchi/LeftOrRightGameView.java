@@ -151,44 +151,6 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
             doDrawings(canvas);
             holder.unlockCanvasAndPost(canvas);
 
-            if(MainActivity.lorGame.changeDirectionCounter > 0 && amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT)
-            {
-                MainActivity.lorGame.amagotchiFacingLeft = !MainActivity.lorGame.amagotchiFacingLeft;
-                MainActivity.lorGame.changeDirectionCounter--;
-            }
-            else if(MainActivity.lorGame.changeDirectionCounter == 0 && amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT) {
-                if ((MainActivity.lorGame.userChooseLeft && MainActivity.lorGame.amagotchiFacingLeft) || (!MainActivity.lorGame.userChooseLeft && !MainActivity.lorGame.amagotchiFacingLeft)) {
-                    Log.d(LOG_TAG, "Bin in Alles richtig gemacht mein bester!");
-
-                    MainActivity.mSoundService.playSounds("happy");
-                    amagotchiEvent = AnimationTyp.HAPPY;
-
-                    Handler timer = new Handler();
-
-                    timer.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            amagotchiEvent = AnimationTyp.NORMAL;
-                        }
-                    }, 1500);
-                } else {
-                    /*
-                    MainActivity.mSoundService.playSounds("unhappy");
-                    amagotchi = new Sprite(spriteSheet, AnimationTyp.NORMAL);
-                    amagotchiEvent = AnimationTyp.NORMAL;
-                    */
-                    MainActivity.mSoundService.playSounds("unhappy");
-                    amagotchiEvent = AnimationTyp.UNHAPPY;
-                    Handler timer = new Handler();
-
-                    timer.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            amagotchiEvent = AnimationTyp.NORMAL;
-                        }
-                    }, 1500);
-                }
-            }
         }
     }
 
