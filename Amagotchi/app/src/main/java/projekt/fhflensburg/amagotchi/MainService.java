@@ -557,7 +557,8 @@ public class MainService extends Service
         if(ama.getLevel() == 0)
         {
             ama.setTimeToHatch(ama.getTimeToHatch() - 2);
-
+            if (ama.getAttention() <= 98)
+                ama.setAttention(ama.getAttention() + 2);
         }
         Sys.saveGame(ama, MainActivity.instance);
         MainActivity.instance.updateInterface();
@@ -568,7 +569,8 @@ public class MainService extends Service
         if(ama.getLevel() == 0)
         {
             ama.setTimeToHatch(ama.getTimeToHatch() - 2);
-
+            if (ama.getAttention() <= 98)
+                ama.setAttention(ama.getAttention() + 2);
         }
         Sys.saveGame(ama, MainActivity.instance);
         MainActivity.instance.updateInterface();
