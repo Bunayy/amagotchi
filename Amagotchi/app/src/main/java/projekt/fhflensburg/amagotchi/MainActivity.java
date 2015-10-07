@@ -370,10 +370,16 @@ public class MainActivity extends AppCompatActivity {
     {
         if (Amagotchi.getState() != null)
         {
+            Amagotchi outAma = MainService.getAma();
             sugv.setVisibility(View.INVISIBLE);
             gv.setVisibility(View.VISIBLE);
             lorgv.setVisibility(View.INVISIBLE);
-            flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+            if (outAma.getLevel() != 0)
+                flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+            else
+            {
+                //flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+            }
         }
     }
 
