@@ -18,4 +18,7 @@
     <string name="higher_or_lower_description">Schätze ob die nächste Zahl größer oder kleiner ist als die vorherige.</string>
     <string name="left_or_right_description">Rate ob das Amagotchi am Ende der Runde nach links oder nach rechts gedreht sein wird.</string>
     <string name="sum_up_game_description">In diesem Minigame wird dem Amagotchi eine Aufgabe gestellt und 3 mögliche Lösungen gegeben, das Amagotchi muss sich für die richtige Lösung entscheiden.</string>
+    <string name="talking_to_egg">Amagotchi gut zureden</string>
+    <string name="warming_egg">Ei Wärmen</string>
+    <string name="stats">Statistik</string>
 </resources>

@@ -16,6 +16,7 @@
         <include android:id="@+id/leftOrRightGameView" layout="@layout/left_or_right_game" />
         <include android:id="@+id/newGameView" layout="@layout/new_game_view" />
         <include android:id="@+id/statsView" layout="@layout/stats_view" />
+        <include android:id="@+id/eggGameView" layout="@layout/egg_game_view"/>
     </ViewFlipper>
 
 </RelativeLayout>

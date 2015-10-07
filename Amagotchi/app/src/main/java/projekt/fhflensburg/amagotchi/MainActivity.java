@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     public static GameView gv;
     public static SumUpGameView sugv;
     public static LeftOrRightGameView lorgv;
+    public static EggGameView egv;
 
 
     //Main Service
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         gv = (GameView)findViewById(R.id.canvasContainer);
         sugv = (SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi);
         lorgv = (LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee);
+        egv = (EggGameView)findViewById(R.id.eggGameViewAmaGee);
 
         //Service Test
         /*Log.v(LOG_TAG, "---DONE---");
@@ -250,8 +252,8 @@ public class MainActivity extends AppCompatActivity {
         sugv.setVisibility(View.INVISIBLE);
         gv.setVisibility(View.VISIBLE);
         lorgv.setVisibility(View.INVISIBLE);
+        egv.setVisibility(View.INVISIBLE);
 
-        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
 
     }
 
@@ -308,6 +310,7 @@ public class MainActivity extends AppCompatActivity {
         sugv.setVisibility(View.INVISIBLE);
         gv.setVisibility(View.INVISIBLE);
         lorgv.setVisibility(View.VISIBLE);
+        egv.setVisibility(View.INVISIBLE);
 
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.leftOrRightGameView)));
     }
@@ -321,6 +324,7 @@ public class MainActivity extends AppCompatActivity {
         sugv.setVisibility(View.VISIBLE);
         gv.setVisibility(View.INVISIBLE);
         lorgv.setVisibility(View.INVISIBLE);
+        egv.setVisibility(View.INVISIBLE);
 
     }
 
@@ -356,11 +360,13 @@ public class MainActivity extends AppCompatActivity {
                 lorgv.init();
 
                 sugv.setVisibility(View.INVISIBLE);
-                gv.setVisibility(View.VISIBLE);
+                gv.setVisibility(View.INVISIBLE);
                 lorgv.setVisibility(View.INVISIBLE);
+                egv.setVisibility(View.VISIBLE);
+
 
                 updateInterface();
-                flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+                flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.eggGameView)));
             }
             else
                 Toast.makeText(getApplicationContext(), "Bitte wählen Sie ein Amagotchi aus.", Toast.LENGTH_SHORT).show();
@@ -383,11 +389,13 @@ public class MainActivity extends AppCompatActivity {
             sugv.setVisibility(View.INVISIBLE);
             gv.setVisibility(View.VISIBLE);
             lorgv.setVisibility(View.INVISIBLE);
+            egv.setVisibility(View.INVISIBLE);
+
             if (outAma.getLevel() != 0)
                 flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
             else
             {
-                //flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+                flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.eggGameView)));
             }
         }
     }
@@ -521,6 +529,17 @@ public class MainActivity extends AppCompatActivity {
 
         TextView weightText = (TextView)findViewById(R.id.weightText);
         weightText.setText(String.valueOf(f.format(outAma.getWeight())));
+    }
+
+
+    public void onWarmEgg(View v)
+    {
+
+    }
+
+    public void onTalkingToEgg(View v)
+    {
+
     }
 
 }

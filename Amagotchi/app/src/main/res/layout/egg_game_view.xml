@@ -6,7 +6,7 @@
         android:id="@+id/statsEggBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stats"
+        android:text="@string/stats"
         style="?android:attr/borderlessButtonStyle"
         android:onClick="onStatsPressed"
         />
@@ -15,13 +15,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/statsEggBtn"
-        android:text="Ei Wärmen"
+        android:text="@string/warming_egg"
         style="?android:attr/borderlessButtonStyle"
-        android:onClick="onLightPressed"
+        android:onClick="onWarmEgg"
         />
 
     <projekt.fhflensburg.amagotchi.GameView
-        android:id="@+id/canvasContainer"
+        android:id="@+id/eggGameViewAmaGee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/statsEggBtn"
@@ -33,10 +33,10 @@
         android:id="@+id/talkToAmagotchiBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/canvasContainer"
-        android:text="Amagotchi gut zureden"
+        android:layout_below="@id/eggGameViewAmaGee"
+        android:text="@string/talking_to_egg"
         style="?android:attr/borderlessButtonStyle"
-        android:onClick="onMedicinePressed"
+        android:onClick="onTalkingToEgg"
         />
 
 </RelativeLayout>

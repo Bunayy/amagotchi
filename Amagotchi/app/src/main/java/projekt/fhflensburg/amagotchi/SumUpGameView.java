@@ -54,7 +54,7 @@ public class SumUpGameView extends SurfaceView implements Runnable
     {
         if(MainService.getAma() != null)
         {
-            amagotchiEvent = AnimationTyp.NORMAL;
+            amagotchiEvent = AnimationTyp.THINKING;
 
             amaGee = MainService.getAma();
 

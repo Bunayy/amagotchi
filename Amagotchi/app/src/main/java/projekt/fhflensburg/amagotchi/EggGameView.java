@@ -25,15 +25,7 @@ public class EggGameView extends SurfaceView implements Runnable
     String mutation;
     String amagotchiType;
 
-/*
-    String level = "level0" ;
-    String mutation = "_mutation1";
-    String amagotchiType = "_type1";
-*/
-
     Sprite amagotchi;
-
-    Bitmap spriteSheet;
 
     SurfaceHolder holder;
 
@@ -70,17 +62,11 @@ public class EggGameView extends SurfaceView implements Runnable
             amagotchiEvent = AnimationTyp.NORMAL;
 
             amaGee = MainService.getAma();
-            updateAmagotchiInformation();
-            Resources res = ctx.getResources();
-            String spriteSheetName = level + mutation + amagotchiType;
-            spriteSheet = BitmapFactory.decodeResource(getResources(), res.getIdentifier(spriteSheetName, "drawable", ctx.getPackageName()));
 
             holder = getHolder();
 
             drawingThread = new Thread(this);
             drawingThread.start();
-
-            poopBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.poop_2);
 
             firstTime = true;
 
@@ -91,7 +77,7 @@ public class EggGameView extends SurfaceView implements Runnable
                         Rect displayDimensions = holder.getSurfaceFrame();
                         displayWidth = displayDimensions.width();
                         displayHeight = displayDimensions.height();
-                        holder.setFixedSize(displayWidth, displayHeight - ((int) (ctx.getResources().getDimension(R.dimen.game_view_btn))) * 2);// hier  müssen wir nochmal gucken bekomme  die referen auf den Btn nicht hin denke das es ihn zu diesem Zeitpunkt noch nicht gibt
+                        holder.setFixedSize(displayWidth, displayHeight - ((int) (ctx.getResources().getDimension(R.dimen.game_view_btn))) * 2);
                         firstTime = false;
                     }
                 }
@@ -110,53 +96,46 @@ public class EggGameView extends SurfaceView implements Runnable
     }
 
 
-    public void updateAmagotchiInformation()
-    {
-        level = "level" + amaGee.getLevel();
-        mutation = "_mutation" +  amaGee.getMutation();
-        amagotchiType = "_type" + amaGee.getType();
-    }
-
     public void doDrawings(Canvas canvas)
     {
-        canvas.drawColor(Color.rgb(120, 153, 66));
+        if(canvas != null) {
+            canvas.drawColor(Color.rgb(120, 153, 66));
 
-        int amountSprites = 0;
+            int amountSprites = 0;
 
-        if(amaGee.getFeces())
-        {
-            Rect srcRect = new Rect(0, 0, poopBitmap.getWidth(), poopBitmap.getHeight());
+            if (amaGee.getFeces()) {
+                Rect srcRect = new Rect(0, 0, poopBitmap.getWidth(), poopBitmap.getHeight());
 
-            int destStartX = canvas.getWidth() - poopBitmap.getWidth();
-            int destStartY = canvas.getHeight() - poopBitmap.getHeight();
+                int destStartX = canvas.getWidth() - poopBitmap.getWidth();
+                int destStartY = canvas.getHeight() - poopBitmap.getHeight();
 
-            Rect destRect = new Rect(destStartX, destStartY,destStartX + poopBitmap.getWidth(),destStartY + poopBitmap.getHeight());
-            canvas.drawBitmap(poopBitmap, srcRect, destRect, null);
+                Rect destRect = new Rect(destStartX, destStartY, destStartX + poopBitmap.getWidth(), destStartY + poopBitmap.getHeight());
+                canvas.drawBitmap(poopBitmap, srcRect, destRect, null);
+            }
+
+            switch (amagotchiEvent) {
+                case NORMAL:
+                    amountSprites = 3;
+                    break;
+                case HAPPY:
+                    amountSprites = 5;
+                    break;
+                case HATCHING:
+                    amountSprites = 5;
+                    break;
+                default:
+                    Log.e(LOG_TAG, "Fehler beim Setzen der amountSprites");
+            }
+
+
+            amagotchi = new Sprite(GameView.spriteSheet, amagotchiEvent);
+            amagotchi.drawAmagotchi(canvas, paintedSprites);
+
+            if (paintedSprites == amountSprites)
+                paintedSprites = -1;
+
+            paintedSprites++;
         }
-
-        switch (amagotchiEvent)
-        {
-            case NORMAL:
-                amountSprites = 3;
-                break;
-            case HAPPY:
-                amountSprites = 5;
-                break;
-            case HATCHING:
-                amountSprites = 5;
-                break;
-            default:
-                Log.e(LOG_TAG, "Fehler beim Setzen der amountSprites");
-        }
-
-
-        amagotchi = new Sprite(spriteSheet,amagotchiEvent);
-        amagotchi.drawAmagotchi(canvas, paintedSprites);
-
-        if(paintedSprites == amountSprites)
-            paintedSprites = -1;
-
-        paintedSprites++;
     }
 
 
