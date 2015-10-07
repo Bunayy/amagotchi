@@ -230,6 +230,8 @@ public class GameView extends SurfaceView implements Runnable
 
     public void setAmagotchiEvent(AnimationTyp animation)
     {
+
+        Log.d(LOG_TAG, "HUHU " +animation);
         paintedSprites = 0;
         this.amagotchiEvent= animation;
 

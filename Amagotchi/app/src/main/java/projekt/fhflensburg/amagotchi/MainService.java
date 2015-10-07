@@ -153,6 +153,7 @@ public class MainService extends Service
                                 ama.setLevel(1);
                                 MainActivity.gv.updateAmagotchiInformation();
                                 //MainActivity.flipper.setDisplayedChild(MainActivity.flipper.indexOfChild(MainActivity.instance.findViewById(R.id.gameView)));
+                                MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
                             }
                         }, 4000); // 1 second delay (takes millis)
                     }
