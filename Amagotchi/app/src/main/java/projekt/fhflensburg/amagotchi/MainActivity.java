@@ -332,7 +332,7 @@ public class MainActivity extends AppCompatActivity {
                 MainService.setAma(ama);
                 MainService.run();
 
-                ((GameView)findViewById(R.id.canvasContainer)).updateAmagotchiInformation();
+                ((GameView)findViewById(R.id.canvasContainer)).init();
 
                 ((SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
                 ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);

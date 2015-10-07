@@ -23,8 +23,8 @@ public class GameView extends SurfaceView implements Runnable
     //Hier müssen die Werte des Amagotchi rein! MAYBE Observer ?
 
     String level;
-    String mutation = "_mutation"+ Amagotchi.getState().getMutation();
-    String amagotchiType = "_type" + Amagotchi.getState().getType();
+    String mutation;
+    String amagotchiType;
 
 /*
     String state = "level0" ;
@@ -62,7 +62,6 @@ public class GameView extends SurfaceView implements Runnable
 
         ctx = context;
 
-        init();
     }
 
 
@@ -70,12 +69,10 @@ public class GameView extends SurfaceView implements Runnable
     {
         if(MainService.getAma() != null)
         {
-            setAmagotchiEvent(AnimationTyp.NORMAL);
+            amagotchiEvent = AnimationTyp.NORMAL;
 
             amaGee = MainService.getAma();
-
             updateAmagotchiInformation();
-
             Resources res = ctx.getResources();
             String spriteSheetName = level + mutation + amagotchiType;
             spriteSheet = BitmapFactory.decodeResource(getResources(), res.getIdentifier(spriteSheetName, "drawable", ctx.getPackageName()));
@@ -178,6 +175,23 @@ public class GameView extends SurfaceView implements Runnable
                     break;
                 default:
                     Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");
+            }
+        }
+        else
+        {
+            switch (amagotchiEvent)
+            {
+                case NORMAL:
+                    amountSprites = 3;
+                    break;
+                case HAPPY:
+                    amountSprites = 5;
+                    break;
+                case HATCHING:
+                    amountSprites = 5;
+                    break;
+                default:
+                    Log.e(LOG_TAG, "Fehler beim Setzen der amountSprites");
             }
         }
 
