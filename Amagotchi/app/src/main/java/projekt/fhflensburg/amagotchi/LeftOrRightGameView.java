@@ -18,7 +18,7 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
     private static final String LOG_TAG = "LeftOrRightGameView";
 
     //Hier müssen die Werte des Amagotchi rein! MAYBE Observer ?
-   /* String state = "level" +Amagotchi.getState().getLevel();
+   /* String level = "level" +Amagotchi.getState().getLevel();
     String mutation = "_mutation"+ Amagotchi.getState().getMutation();
     String amagotchiType = "_type" + Amagotchi.getState().getType();
 */

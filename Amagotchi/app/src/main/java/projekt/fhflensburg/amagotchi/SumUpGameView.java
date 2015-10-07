@@ -8,29 +8,30 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-
-import java.util.jar.Attributes;
 
 
 public class SumUpGameView extends SurfaceView implements Runnable
 {
     private static final String LOG_TAG = "SumUpGameView";
+
+    private Amagotchi amaGee;
+
     //Zugriff-Methode via Singleton
 
     //Hier müssen die Werte des Amagotchi rein! MAYBE Observer ?
-    /*String state = "level" +Amagotchi.getState().getLevel();
+    /*String level = "level" +Amagotchi.getState().getLevel();
     String mutation = "_mutation"+ Amagotchi.getState().getMutation();
     String amagotchiType = "_type" + Amagotchi.getState().getType();
 */
-    String state = "level0" ;
-    String mutation = "_mutation1";
-    String amagotchiType = "_type1";
-    Sprite amagotchi;
 
+    String level;
+    String mutation;
+    String amagotchiType;
+
+    Sprite amagotchi;
     Bitmap spriteSheet;
 
     SurfaceHolder holder;
@@ -38,7 +39,7 @@ public class SumUpGameView extends SurfaceView implements Runnable
     Thread drawingThread = null;
     boolean isRunning = true;
 
-    AnimationTyp amagotchiEvent = AnimationTyp.NORMAL;
+    AnimationTyp amagotchiEvent;
 
     Context ctx;
 
@@ -48,104 +49,111 @@ public class SumUpGameView extends SurfaceView implements Runnable
 
     boolean firstTime;
 
+    public int paintedSprites = 0;
+
     public SumUpGameView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
 
-        Resources res = context.getResources();
-        String spriteSheetName = state+mutation + amagotchiType;
-        spriteSheet = BitmapFactory.decodeResource(getResources(), res.getIdentifier(spriteSheetName, "drawable", context.getPackageName()));
-
-        holder = getHolder();
-
-        drawingThread = new Thread(this);
-        drawingThread.start();
-
         ctx = context;
 
-        firstTime = true;
-
-        holder.addCallback(new SurfaceHolder.Callback() {
-            @Override
-            public void surfaceCreated(SurfaceHolder holder)
-            {
-                //ImageButton btn = (ImageButton)findViewById(R.id.feedBtn);
-                //int btnHeight = btn.getHeight();
-
-                if(firstTime)
-                {
-
-                    Rect displayDimensions = holder.getSurfaceFrame();
-                    displayWidth = displayDimensions.width();
-                    displayHeight = displayDimensions.height();
-                    holder.setFixedSize(displayWidth, displayHeight - ((int) (ctx.getResources().getDimension(R.dimen.sum_up_game_view_reserved_height))));// hier  müssen wir nochmal gucken bekomme  die referen auf den Btn nicht hin denke das es ihn zu diesem Zeitpunkt noch nicht gibt
-                    firstTime = false;
-                }
-            }
-
-            @Override
-            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
-            }
-
-            @Override
-            public void surfaceDestroyed(SurfaceHolder holder) {
-
-            }
-        });
-
     }
+
+    public void init()
+    {
+        if(MainService.getAma() != null)
+        {
+            amagotchiEvent = AnimationTyp.NORMAL;
+
+            amaGee = MainService.getAma();
+            updateAmagotchiInformation();
+
+            Resources res = ctx.getResources();
+            String spriteSheetName = level + mutation + amagotchiType;
+            spriteSheet = BitmapFactory.decodeResource(getResources(), res.getIdentifier(spriteSheetName, "drawable", ctx.getPackageName()));
+
+            holder = getHolder();
+
+            drawingThread = new Thread(this);
+            drawingThread.start();
+
+            firstTime = true;
+
+            holder.addCallback(new SurfaceHolder.Callback() {
+                @Override
+                public void surfaceCreated(SurfaceHolder holder) {
+                    if (firstTime) {
+                        Rect displayDimensions = holder.getSurfaceFrame();
+                        displayWidth = displayDimensions.width();
+                        displayHeight = displayDimensions.height();
+                        holder.setFixedSize(displayWidth, displayHeight - ((int) (ctx.getResources().getDimension(R.dimen.sum_up_game_view_reserved_height))));// hier  müssen wir nochmal gucken bekomme  die referen auf den Btn nicht hin denke das es ihn zu diesem Zeitpunkt noch nicht gibt
+                        firstTime = false;
+                    }
+                }
+
+                @Override
+                public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+                }
+
+                @Override
+                public void surfaceDestroyed(SurfaceHolder holder) {
+
+                }
+            });
+        }
+    }
+
+    public void updateAmagotchiInformation()
+    {
+        level = "level" + amaGee.getLevel();
+        mutation = "_mutation" +  amaGee.getMutation();
+        amagotchiType = "_type" + amaGee.getType();
+    }
+
     public void doDrawings(Canvas canvas)
     {
         canvas.drawColor(Color.rgb(120, 153, 66));
-    }
 
+
+        ///_____________________________
+
+        int amountSprites = 0;
+
+        if(amaGee.getLevel() > 0)
+        {
+            switch(amagotchiEvent)
+            {
+                case NORMAL:
+                    amountSprites = 1;
+                    break;
+                case HAPPY:
+                    amountSprites = 2;
+                    break;
+                case UNHAPPY:
+                    amountSprites = 2;
+                    break;
+                case THINKING:
+                    amountSprites = 1;
+                    break;
+                case DEVELOP:
+                    amountSprites = 4;
+                    break;
+                default:
+                    Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");
+            }
+        }
+        amagotchi = new Sprite(spriteSheet,amagotchiEvent);
+        amagotchi.drawAmagotchi(canvas, paintedSprites);
+
+        if(paintedSprites == amountSprites)
+            paintedSprites = -1;
+
+        paintedSprites++;
+    }
 
     public void run()
     {
-        amagotchi = new Sprite(spriteSheet,amagotchiEvent);
-        int amountSprites = 0;
-        int amagotchiCounter = 0;
-
-        switch(amagotchiEvent)
-        {
-            case NORMAL:
-                amountSprites = 1;
-                break;
-            case HAPPY:
-                amountSprites = 2;
-                break;
-            case UNHAPPY:
-                amountSprites = 2;
-                break;
-            case SLEEPING:
-                amountSprites = 2;
-                break;
-            case REFUSE:
-                amountSprites = 1;
-                break;
-            case EATING:
-                amountSprites = 1;
-                break;
-            case THINKING:
-                amountSprites = 1;
-                break;
-            case CLEANING:
-                amountSprites = 4;
-                break;
-            case DEVELOP:
-                amountSprites = 4;
-                break;
-            case TURN_LEFT_RIGHT:
-                amountSprites = 1;
-                break;
-            case DYING:
-                amountSprites = 2;
-                break;
-            default:
-                Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");
-        }
-
         while(isRunning)
         {
             try
@@ -163,22 +171,14 @@ public class SumUpGameView extends SurfaceView implements Runnable
             }
 
             Canvas canvas = holder.lockCanvas();
-
             doDrawings(canvas);
-            amagotchi.drawAmagotchi(canvas, amagotchiCounter);
             holder.unlockCanvasAndPost(canvas);
-
-            if(amagotchiCounter == amountSprites)
-                amagotchiCounter = -1;
-
-            amagotchiCounter++;
-
         }
-
     }
 
     public void setAmagotchiEvent(AnimationTyp animation)
     {
+        paintedSprites = 0;
         this.amagotchiEvent= animation;
 
         stop();

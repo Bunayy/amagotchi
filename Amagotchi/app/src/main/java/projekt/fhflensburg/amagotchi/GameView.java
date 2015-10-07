@@ -27,7 +27,7 @@ public class GameView extends SurfaceView implements Runnable
     String amagotchiType;
 
 /*
-    String state = "level0" ;
+    String level = "level0" ;
     String mutation = "_mutation1";
     String amagotchiType = "_type1";
 */
@@ -46,7 +46,6 @@ public class GameView extends SurfaceView implements Runnable
     AnimationTyp amagotchiEvent;
 
     Context ctx;
-
 
     int displayWidth;
     int displayHeight;
@@ -207,7 +206,6 @@ public class GameView extends SurfaceView implements Runnable
 
     public void run()
     {
-
         while(isRunning)
         {
             try
@@ -228,11 +226,11 @@ public class GameView extends SurfaceView implements Runnable
             doDrawings(canvas);
             holder.unlockCanvasAndPost(canvas);
         }
-
     }
 
     public void setAmagotchiEvent(AnimationTyp animation)
     {
+        paintedSprites = 0;
         this.amagotchiEvent= animation;
 
         stop();

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 import android.util.TypedValue;
 
-// Unterscheidung Eiform und geschlüpfte Form umsetzen
 // ToString() Funktion für die Speicherung
 public class Amagotchi
 {
