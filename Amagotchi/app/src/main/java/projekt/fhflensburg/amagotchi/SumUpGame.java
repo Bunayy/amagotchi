@@ -107,11 +107,21 @@ public class SumUpGame
                 {
                     MainService.wonMiniGame();
                     MainActivity.mSoundService.playSounds("happy");
+                    MainActivity.sugv.setAmagotchiEvent(AnimationTyp.HAPPY);
+
+                    Handler timer = new Handler();
+
+                    timer.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            MainActivity.sugv.setAmagotchiEvent(AnimationTyp.NORMAL);
+                        }
+                    }, 1500);
                 }
 
-                ((SumUpGameView)activity.findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
-                ((GameView)activity.findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);
-                ((LeftOrRightGameView)activity.findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
+                MainActivity.sugv.setVisibility(View.INVISIBLE);
+                MainActivity.gv.setVisibility(View.VISIBLE);
+                MainActivity.lorgv.setVisibility(View.INVISIBLE);
 
                 flipper.setDisplayedChild(flipper.indexOfChild(activity.findViewById(R.id.gameView)));
             }
@@ -178,16 +188,37 @@ public class SumUpGame
 
         if(equationSolvedValid)
         {
-            tempTV.setBackgroundColor(Color.parseColor("#32CD32"));
 
             MainActivity.mSoundService.playSounds("happy");
+            MainActivity.sugv.setAmagotchiEvent(AnimationTyp.HAPPY);
 
+            Handler timer = new Handler();
+
+            timer.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    MainActivity.sugv.setAmagotchiEvent(AnimationTyp.THINKING);
+                }
+            }, 1500);
+
+
+            tempTV.setBackgroundColor(Color.parseColor("#32CD32"));
             wonGames++;
 
         }
         else
         {
             MainActivity.mSoundService.playSounds("unhappy");
+            MainActivity.sugv.setAmagotchiEvent(AnimationTyp.UNHAPPY);
+
+            Handler timer = new Handler();
+
+            timer.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    MainActivity.sugv.setAmagotchiEvent(AnimationTyp.THINKING);
+                }
+            }, 1500);
 
             tempTV.setBackgroundColor(Color.parseColor("#cc0000"));
         }
@@ -196,12 +227,11 @@ public class SumUpGame
         Handler reDo = new Handler();
 
         reDo.postDelayed(new Runnable() {
-            private long time = 0;
 
             @Override
             public void run() {
                 tempTV.setBackgroundColor(Color.parseColor("#cccccc"));
             }
-        }, 500); // 1 second delay (takes millis)
+        }, 500);
     }
 }

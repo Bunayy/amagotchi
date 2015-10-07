@@ -182,7 +182,7 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
                 amagotchiEvent = AnimationTyp.NORMAL;
                 */
                 MainActivity.mSoundService.playSounds("unhappy");
-               amagotchiEvent=AnimationTyp.UNHAPPY;
+                amagotchiEvent=AnimationTyp.UNHAPPY;
                 Handler timer = new Handler();
 
                 timer.postDelayed(new Runnable()
