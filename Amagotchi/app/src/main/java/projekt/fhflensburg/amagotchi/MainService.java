@@ -354,7 +354,7 @@ public class MainService extends Service
                         loopCount++;
                     }
 
-                    if(ama.getAge() % 720 == 0)//12 Stunden
+                    if(ama.getAge() % 20 == 0)//12 Stunden
                     {
                         ama.setLevel(ama.getLevel() + 1);
 
@@ -371,6 +371,23 @@ public class MainService extends Service
                         }
 
                         ama.setDevelopmentPoints(0);
+
+                        MainActivity.sugv.setVisibility(View.INVISIBLE);
+                        MainActivity.lorgv.setVisibility(View.INVISIBLE);
+                        MainActivity.gv.setVisibility(View.VISIBLE);
+
+                        MainActivity.flipper.setDisplayedChild(MainActivity.flipper.indexOfChild(MainActivity.instance.findViewById(R.id.gameView)));
+
+                        MainActivity.gv.setAmagotchiEvent(AnimationTyp.DEVELOP);
+                        Handler timer = new Handler();
+
+                        timer.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
+                                MainActivity.gv.updateAmagotchiInformation();
+                            }
+                        }, 2500);
                     }
 
 
