@@ -1,9 +1,6 @@
 package projekt.fhflensburg.amagotchi;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -28,7 +25,6 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
 
 
     Sprite amagotchi;
-    Bitmap spriteSheet;
 
     SurfaceHolder holder;
 
@@ -61,11 +57,6 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
             amagotchiEvent = AnimationTyp.NORMAL;
 
             amaGee = MainService.getAma();
-            updateAmagotchiInformation();
-
-            Resources res = ctx.getResources();
-            String spriteSheetName = level + mutation + amagotchiType;
-            spriteSheet = BitmapFactory.decodeResource(getResources(), res.getIdentifier(spriteSheetName, "drawable", ctx.getPackageName()));
 
             holder = getHolder();
 
@@ -127,7 +118,7 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
                 Log.v(LOG_TAG, "drawingThread- Fehler mit dem amagotchiEvent");
         }
 
-        amagotchi = new Sprite(spriteSheet,amagotchiEvent);
+        amagotchi = new Sprite(GameView.spriteSheet,amagotchiEvent);
         amagotchi.drawAmagotchi(canvas, paintedSprites);
 
         if(paintedSprites == amountSprites)
@@ -215,17 +206,6 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
 
         stop();
         resume();
-    }
-
-    public void updateAmagotchiInformation()
-    {
-        level = "level" + amaGee.getLevel();
-        mutation = "_mutation" +  amaGee.getMutation();
-        amagotchiType = "_type" + amaGee.getType();
-
-        Resources res = ctx.getResources();
-        String spriteSheetName = level + mutation + amagotchiType;
-        spriteSheet = BitmapFactory.decodeResource(getResources(), res.getIdentifier(spriteSheetName, "drawable", ctx.getPackageName()));
     }
 
     public void resume()

@@ -34,7 +34,7 @@ public class GameView extends SurfaceView implements Runnable
 
     Sprite amagotchi;
 
-    Bitmap spriteSheet;
+    public static Bitmap spriteSheet;
 
     SurfaceHolder holder;
 
