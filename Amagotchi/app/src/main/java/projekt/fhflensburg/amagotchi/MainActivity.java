@@ -595,12 +595,38 @@ public class MainActivity extends AppCompatActivity {
 
     public void onWarmEgg(View v)
     {
+        MainService.doEggWarm();
+
+        egv.setAmagotchiEvent(AnimationTyp.HAPPY);
+        mSoundService.playSounds("happy");
+
+        Handler timer = new Handler();
+
+        timer.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                egv.setAmagotchiEvent(AnimationTyp.NORMAL);
+            }
+        }, 3000);
+
 
     }
 
     public void onTalkingToEgg(View v)
     {
+        MainService.doEggEntertain();
 
+        egv.setAmagotchiEvent(AnimationTyp.HAPPY);
+        mSoundService.playSounds("happy");
+
+        Handler timer = new Handler();
+
+        timer.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                egv.setAmagotchiEvent(AnimationTyp.NORMAL);
+            }
+        }, 3000);
     }
 
 }

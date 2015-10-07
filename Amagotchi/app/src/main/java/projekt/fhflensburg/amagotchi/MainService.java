@@ -47,7 +47,7 @@ public class MainService extends Service
                 while(true)
                 {
                     try {
-                        Thread.sleep(500);
+                        Thread.sleep(10000);
                         handler.sendEmptyMessage(0);
 
                     } catch (InterruptedException e) {
