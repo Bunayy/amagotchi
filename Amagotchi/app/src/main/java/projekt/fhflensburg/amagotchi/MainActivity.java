@@ -358,6 +358,7 @@ public class MainActivity extends AppCompatActivity {
                 gv.init();
                 sugv.init();
                 lorgv.init();
+                egv.init();
 
                 sugv.setVisibility(View.INVISIBLE);
                 gv.setVisibility(View.INVISIBLE);

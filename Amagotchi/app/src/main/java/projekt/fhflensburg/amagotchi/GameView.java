@@ -125,7 +125,7 @@ public class GameView extends SurfaceView implements Runnable
 
             if(amaGee.isLightOff())
             {
-                canvas.drawColor(Color.BLACK);
+                canvas.drawColor(Color.rgb(50,50,50));
             }
             else {
                 canvas.drawColor(Color.rgb(120, 153, 66));
