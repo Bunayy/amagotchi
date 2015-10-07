@@ -72,9 +72,6 @@ public class GameView extends SurfaceView implements Runnable
 
             amaGee = MainService.getAma();
             updateAmagotchiInformation();
-            Resources res = ctx.getResources();
-            String spriteSheetName = level + mutation + amagotchiType;
-            spriteSheet = BitmapFactory.decodeResource(getResources(), res.getIdentifier(spriteSheetName, "drawable", ctx.getPackageName()));
 
             holder = getHolder();
 
@@ -116,6 +113,10 @@ public class GameView extends SurfaceView implements Runnable
         level = "level" + amaGee.getLevel();
         mutation = "_mutation" +  amaGee.getMutation();
         amagotchiType = "_type" + amaGee.getType();
+
+        Resources res = ctx.getResources();
+        String spriteSheetName = level + mutation + amagotchiType;
+        spriteSheet = BitmapFactory.decodeResource(getResources(), res.getIdentifier(spriteSheetName, "drawable", ctx.getPackageName()));
     }
 
     public void doDrawings(Canvas canvas)

@@ -7,7 +7,7 @@
     <integer name="startValueHappiness">100</integer>
     <integer name="startValueFitness">100</integer>
     <integer name="startValueAttention">60</integer>
-    <integer name="startValuetimeToHatch">1</integer>
+    <integer name="startValuetimeToHatch">2</integer>
     <integer name="ageStandardValue">0</integer>
 
     <item name="healthPerPeriodStandardValue" format="float" type="dimen">-0.042</item>

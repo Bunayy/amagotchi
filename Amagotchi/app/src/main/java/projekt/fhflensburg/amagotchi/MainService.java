@@ -155,7 +155,7 @@ public class MainService extends Service
                                 //MainActivity.flipper.setDisplayedChild(MainActivity.flipper.indexOfChild(MainActivity.instance.findViewById(R.id.gameView)));
                                 MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
                             }
-                        }, 4000); // 1 second delay (takes millis)
+                        }, 4000);
                     }
                 } else {
                     ////////////////////////////////////////
