@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    >
+
+    <Button
+        android:id="@+id/statsEggBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stats"
+        style="?android:attr/borderlessButtonStyle"
+        android:onClick="onStatsPressed"
+        />
+    <Button
+        android:id="@+id/warmEggBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/statsEggBtn"
+        android:text="Ei Wärmen"
+        style="?android:attr/borderlessButtonStyle"
+        android:onClick="onLightPressed"
+        />
+
+    <projekt.fhflensburg.amagotchi.GameView
+        android:id="@+id/canvasContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/statsEggBtn"
+        android:layout_centerVertical="true"
+        >
+    </projekt.fhflensburg.amagotchi.GameView>
+
+    <Button
+        android:id="@+id/talkToAmagotchiBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/canvasContainer"
+        android:text="Amagotchi gut zureden"
+        style="?android:attr/borderlessButtonStyle"
+        android:onClick="onMedicinePressed"
+        />
+
+</RelativeLayout>
