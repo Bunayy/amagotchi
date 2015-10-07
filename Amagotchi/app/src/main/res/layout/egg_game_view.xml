@@ -20,14 +20,14 @@
         android:onClick="onWarmEgg"
         />
 
-    <projekt.fhflensburg.amagotchi.GameView
+    <projekt.fhflensburg.amagotchi.EggGameView
         android:id="@+id/eggGameViewAmaGee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/statsEggBtn"
         android:layout_centerVertical="true"
         >
-    </projekt.fhflensburg.amagotchi.GameView>
+    </projekt.fhflensburg.amagotchi.EggGameView>
 
     <Button
         android:id="@+id/talkToAmagotchiBtn"

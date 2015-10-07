@@ -103,16 +103,6 @@ public class EggGameView extends SurfaceView implements Runnable
 
             int amountSprites = 0;
 
-            if (amaGee.getFeces()) {
-                Rect srcRect = new Rect(0, 0, poopBitmap.getWidth(), poopBitmap.getHeight());
-
-                int destStartX = canvas.getWidth() - poopBitmap.getWidth();
-                int destStartY = canvas.getHeight() - poopBitmap.getHeight();
-
-                Rect destRect = new Rect(destStartX, destStartY, destStartX + poopBitmap.getWidth(), destStartY + poopBitmap.getHeight());
-                canvas.drawBitmap(poopBitmap, srcRect, destRect, null);
-            }
-
             switch (amagotchiEvent) {
                 case NORMAL:
                     amountSprites = 3;

@@ -46,7 +46,7 @@ public class MainService extends Service
                 while(true)
                 {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(6000);
                         handler.sendEmptyMessage(0);
 
                     } catch (InterruptedException e) {
@@ -151,10 +151,10 @@ public class MainService extends Service
                                 ama.setLevel(1);
                                 MainActivity.gv.updateAmagotchiInformation();
 
-                                //MainActivity.flipper.setDisplayedChild(MainActivity.flipper.indexOfChild(MainActivity.instance.findViewById(R.id.gameView)));
+                                MainActivity.flipper.setDisplayedChild(MainActivity.flipper.indexOfChild(MainActivity.instance.findViewById(R.id.gameView)));
                                 MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
                             }
-                        }, 4000);
+                        }, 3000);
                     }
                 } else {
                     ////////////////////////////////////////
