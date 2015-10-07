@@ -64,9 +64,6 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                //ImageButton btn = (ImageButton)findViewById(R.id.feedBtn);
-                //int btnHeight = btn.getHeight();
-
                 if (firstTime) {
                     Rect displayDimensions = holder.getSurfaceFrame();
                     displayWidth = displayDimensions.width();

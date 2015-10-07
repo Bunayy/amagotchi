@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.Random;
@@ -142,7 +143,18 @@ public class MainService extends Service
                         ama.setTimeToHatch(ama.getTimeToHatch() - 1);
                     } else {
                         ama.setTimeToHatch(0);
-                        ama.setLevel(1);
+                        MainActivity.gv.setAmagotchiEvent(AnimationTyp.HATCHING);
+
+                        Handler timer = new Handler();
+
+                        timer.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                ama.setLevel(1);
+                                MainActivity.gv.updateAmagotchiInformation();
+                                //MainActivity.flipper.setDisplayedChild(MainActivity.flipper.indexOfChild(MainActivity.instance.findViewById(R.id.gameView)));
+                            }
+                        }, 4000); // 1 second delay (takes millis)
                     }
                 } else {
                     ////////////////////////////////////////

@@ -29,8 +29,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     //Refrences
-    private ViewFlipper flipper;
+    public static ViewFlipper flipper;
     private TextView textViewStatsMain;
+
+    public static GameView gv;
+    public static SumUpGameView sugv;
+    public static LeftOrRightGameView lorgv;
+
 
     //Main Service
     MainService mainService;
@@ -98,6 +103,9 @@ public class MainActivity extends AppCompatActivity {
         Log.v(LOG_TAG, "startServiceBtn onClick()");
         bindService(intent, mSoundServiceConnection, Context.BIND_AUTO_CREATE);
 
+        gv = (GameView)findViewById(R.id.canvasContainer);
+        sugv = (SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi);
+        lorgv = (LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee);
 
         //Service Test
         /*Log.v(LOG_TAG, "---DONE---");
@@ -287,11 +295,13 @@ public class MainActivity extends AppCompatActivity {
     public void onLeftOrRightStarted(View v)
     {
         Log.d(LOG_TAG, "onLeftOrRightStarted()");
-        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.leftOrRightGameView)));
         lorGame = new LeftOrRightGame(this);
-        ((SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
-        ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.INVISIBLE);
-        ((LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee)).setVisibility(View.VISIBLE);
+
+        sugv.setVisibility(View.INVISIBLE);
+        gv.setVisibility(View.INVISIBLE);
+        lorgv.setVisibility(View.VISIBLE);
+
+        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.leftOrRightGameView)));
     }
 
     public void onSumUpGameStarted(View v)
@@ -299,9 +309,10 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "onSumUpGameStarted()");
         SumUpGame sum = new SumUpGame(this);
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.sumUpGameView)));
-        ((SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.VISIBLE);
-        ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.INVISIBLE);
-        ((LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
+
+        sugv.setVisibility(View.VISIBLE);
+        gv.setVisibility(View.INVISIBLE);
+        lorgv.setVisibility(View.INVISIBLE);
 
     }
 
@@ -334,9 +345,10 @@ public class MainActivity extends AppCompatActivity {
 
                 ((GameView)findViewById(R.id.canvasContainer)).init();
 
-                ((SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
-                ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);
-                ((LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
+                sugv.setVisibility(View.INVISIBLE);
+                gv.setVisibility(View.VISIBLE);
+                lorgv.setVisibility(View.INVISIBLE);
+
                 flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
             }
             else
@@ -356,9 +368,9 @@ public class MainActivity extends AppCompatActivity {
     {
         if (Amagotchi.getState() != null)
         {
-            ((SumUpGameView)findViewById(R.id.sumUpGameViewAmagotchi)).setVisibility(View.INVISIBLE);
-            ((GameView)findViewById(R.id.canvasContainer)).setVisibility(View.VISIBLE);
-            ((LeftOrRightGameView)findViewById(R.id.lorGameViewAmagee)).setVisibility(View.INVISIBLE);
+            sugv.setVisibility(View.INVISIBLE);
+            gv.setVisibility(View.VISIBLE);
+            lorgv.setVisibility(View.INVISIBLE);
             flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
         }
     }
