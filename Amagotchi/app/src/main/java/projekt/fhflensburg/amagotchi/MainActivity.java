@@ -197,7 +197,20 @@ public class MainActivity extends AppCompatActivity {
         Amagotchi.setInstance(ama);
         MainService.setAma(ama);
         MainService.run();
+
+        gv.init();
+        sugv.init();
+        lorgv.init();
+        egv.init();
+
+        sugv.setVisibility(View.INVISIBLE);
+        gv.setVisibility(View.VISIBLE);
+        lorgv.setVisibility(View.INVISIBLE);
+        egv.setVisibility(View.INVISIBLE);
+
+
         updateInterface();
+
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
     }
 
