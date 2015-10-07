@@ -46,7 +46,7 @@ public class MainService extends Service
                 while(true)
                 {
                     try {
-                        Thread.sleep(60000);
+                        Thread.sleep(10000);
                         handler.sendEmptyMessage(0);
 
                     } catch (InterruptedException e) {
@@ -197,7 +197,7 @@ public class MainService extends Service
                     }
 
                     //Schläft
-                    if (ama.getIsAsleep()) {
+                    if (ama.getIsAsleep() && ama.getSleep() <= 99.8) {
                         sleepThisPeriod += 0.2;
                     }
 
@@ -521,7 +521,14 @@ public class MainService extends Service
     {
         if (ama.isLightOff())
         {
-
+            ama.setLightOff(false);
+            if (ama.getIsAsleep())
+                ama.setIsAsleep(false);
+        }
+        else
+        {
+            ama.setLightOff(true);
+            ama.setIsAsleep(true);
         }
     }
 
