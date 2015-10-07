@@ -26,19 +26,14 @@ public class GameView extends SurfaceView implements Runnable
     String mutation;
     String amagotchiType;
 
-/*
-    String level = "level0" ;
-    String mutation = "_mutation1";
-    String amagotchiType = "_type1";
-*/
 
     Sprite amagotchi;
-
     public static Bitmap spriteSheet;
+    Bitmap poopBitmap;
+    Bitmap sicknessBitmap;
 
     SurfaceHolder holder;
 
-    Bitmap poopBitmap;
 
     Thread drawingThread = null;
     boolean isRunning = true;
@@ -79,6 +74,7 @@ public class GameView extends SurfaceView implements Runnable
             drawingThread.start();
 
             poopBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.poop_2);
+            sicknessBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sick);
 
             firstTime = true;
 
@@ -142,6 +138,17 @@ public class GameView extends SurfaceView implements Runnable
 
                 Rect destRect = new Rect(destStartX, destStartY, destStartX + poopBitmap.getWidth(), destStartY + poopBitmap.getHeight());
                 canvas.drawBitmap(poopBitmap, srcRect, destRect, null);
+            }
+
+            if (amaGee.getIsSickInfection() || amaGee.getIsSickOveraeting())
+            {
+                Rect srcRect = new Rect(0, 0, sicknessBitmap.getWidth(), sicknessBitmap.getHeight());
+
+                int destStartX = canvas.getWidth() - sicknessBitmap.getWidth();
+                int destStartY = sicknessBitmap.getHeight();
+
+                Rect destRect = new Rect(destStartX, destStartY, destStartX + sicknessBitmap.getWidth(), destStartY + sicknessBitmap.getHeight());
+                canvas.drawBitmap(sicknessBitmap, srcRect, destRect, null);
             }
 
             switch (amagotchiEvent)

@@ -47,7 +47,7 @@ public class MainService extends Service
                 while(true)
                 {
                     try {
-                        Thread.sleep(6000);
+                        Thread.sleep(500);
                         handler.sendEmptyMessage(0);
 
                     } catch (InterruptedException e) {
@@ -354,7 +354,7 @@ public class MainService extends Service
                         loopCount++;
                     }
 
-                    if(ama.getAge() % 20 == 0)//12 Stunden
+                    if(ama.getAge() % 720 == 0)//12 Stunden
                     {
                         ama.setLevel(ama.getLevel() + 1);
 
