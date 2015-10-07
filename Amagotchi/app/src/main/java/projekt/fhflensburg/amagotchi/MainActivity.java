@@ -225,6 +225,17 @@ public class MainActivity extends AppCompatActivity {
             mainService.doFeedBurger();
         }
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+        gv.setAmagotchiEvent(AnimationTyp.EATING);
+
+        Handler timer = new Handler();
+
+        timer.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
+
+            }
+        }, 3000);
     }
     public void onFeedSweets(View v)
     {
@@ -234,6 +245,17 @@ public class MainActivity extends AppCompatActivity {
             mainService.doFeedSweets();
         }
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+        gv.setAmagotchiEvent(AnimationTyp.EATING);
+
+        Handler timer = new Handler();
+
+        timer.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
+
+            }
+        }, 3000);
     }
     public void onFeedHealthy(View v)
     {
@@ -243,6 +265,17 @@ public class MainActivity extends AppCompatActivity {
             mainService.doFeedHealthy();
         }
         flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+        gv.setAmagotchiEvent(AnimationTyp.EATING);
+
+        Handler timer = new Handler();
+
+        timer.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
+
+            }
+        }, 3000);
     }
 
     public void onLightPressed(View v)
