@@ -194,7 +194,7 @@ android:layout_width="match_parent" android:layout_height="match_parent">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=""
+        android:text="     "
         android:id="@+id/nameText"
         android:layout_marginLeft="43dp"
         android:layout_marginStart="43dp"
@@ -206,7 +206,7 @@ android:layout_width="match_parent" android:layout_height="match_parent">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=""
+        android:text="     "
         android:id="@+id/ageText"
         android:layout_alignTop="@+id/ageLabel"
         android:layout_alignLeft="@+id/nameText"
@@ -216,10 +216,31 @@ android:layout_width="match_parent" android:layout_height="match_parent">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=""
+        android:text="      "
         android:id="@+id/weightText"
         android:layout_alignTop="@+id/weightLabel"
         android:layout_alignLeft="@+id/ageText"
         android:layout_alignStart="@+id/ageText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Level:"
+        android:id="@+id/levelLabel"
+        android:layout_alignTop="@+id/levelText"
+        android:layout_alignRight="@+id/weightLabel"
+        android:layout_alignEnd="@+id/weightLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="      "
+        android:id="@+id/levelText"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/weightText"
+        android:layout_alignLeft="@+id/weightText"
+        android:layout_alignStart="@+id/weightText" />
 
 </RelativeLayout>

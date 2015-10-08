@@ -18,7 +18,7 @@
     <item name="fitnessPerPeriodStandardValue" format="float" type="dimen">-0.12</item>
     <item name="attentionPerPeriodStandardValue" format="float" type="dimen">-0.28</item>
     <item name="levelStandardValue" format="float" type="dimen">0.0</item>
-    <item name="weightStandardValue" format="float" type="dimen">0.1</item>
+    <item name="weightStandardValue" format="float" type="dimen">4.0</item>
 
     <integer name="healthDevelopmentBoundary">70</integer>
     <integer name="repletionDevelopmentBoundary">60</integer>

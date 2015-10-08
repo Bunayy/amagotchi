@@ -50,7 +50,7 @@ public class Sys {
     }
 
     private static Boolean saveGameString(String save, Context ctx) {
-        Log.v(LOG_TAG, "saveGameString(String save, Context ctx) " + save);
+        //Log.v(LOG_TAG, "saveGameString(String save, Context ctx) " + save);
 
         try {
 

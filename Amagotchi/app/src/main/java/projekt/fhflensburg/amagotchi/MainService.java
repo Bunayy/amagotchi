@@ -47,7 +47,7 @@ public class MainService extends Service
                 while(true)
                 {
                     try {
-                        Thread.sleep(10);
+                        Thread.sleep(1000);
                         handler.sendEmptyMessage(0);
 
                     } catch (InterruptedException e) {
@@ -200,6 +200,7 @@ public class MainService extends Service
 
                     //Schläft
                     if (ama.getIsAsleep()) {
+                        Log.v(LOG_TAG, "tick isAFuckingSleep");
                         sleepThisPeriod += 0.2;
                     }
 
@@ -324,7 +325,7 @@ public class MainService extends Service
                     //Sterben
                     if(ama.getHealth() == 0)
                     {
-                       ama.setisDead(true);
+                       ama.setIsDead(true);
                     }
 
                     ////////////////////////////////////////
@@ -360,6 +361,7 @@ public class MainService extends Service
                         if(ama.getLevel() < 2) {
 
                             ama.setLevel(ama.getLevel() + 1);
+                            ama.setWeight(ama.getWeight() + 3);
 
                             //Max 168 Dev Points
                             //Unterscheidung der Spielerleistung hier

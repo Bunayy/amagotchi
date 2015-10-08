@@ -409,11 +409,11 @@ public class Amagotchi
 
     public boolean getIsDead() { return isDead; }
 
-    public void setisDead(boolean isDead) { this.isDead = isDead; }
+    public void setIsDead(boolean isDead) { this.isDead = isDead; }
 
     public boolean getIsAsleep() { return isAsleep; }
 
-    public void setIsAsleep(boolean isAsleep) { this.isDead = isAsleep; }
+    public void setIsAsleep(boolean isAsleep) { this.isAsleep = isAsleep; }
 
     public String getName() { return name; }
 
@@ -575,7 +575,7 @@ public class Amagotchi
 
     public String getSaveString()
     {
-        Log.d(LOG_TAG, "getSaveString() " + name);
+        //Log.d(LOG_TAG, "getSaveString() " + name);
 
         String saveString = "";
 

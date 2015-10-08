@@ -192,29 +192,47 @@ public class MainActivity extends AppCompatActivity {
     {
         Log.d(LOG_TAG, "onContGame()");
 
-        if(Sys.saveGameExists(this)) {
+        //laden falls nötig
 
-            //Load
-            Amagotchi ama = Sys.loadGame(this);
-            Amagotchi.setInstance(ama);
-            MainService.setAma(ama);
-            MainService.run();
+        if(Amagotchi.getState() == null)
+        {
+            if(Sys.saveGameExists(this)) {
 
-            gv.init();
-            sugv.init();
-            lorgv.init();
-            egv.init();
+                //Load
+                Amagotchi ama = Sys.loadGame(this);
+                Amagotchi.setInstance(ama);
+                MainService.setAma(ama);
+                MainService.run();
 
+                gv.init();
+                sugv.init();
+                lorgv.init();
+                egv.init();
+
+
+                sugv.setVisibility(View.INVISIBLE);
+                gv.setVisibility(View.VISIBLE);
+                lorgv.setVisibility(View.INVISIBLE);
+                egv.setVisibility(View.INVISIBLE);
+
+                flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+
+                updateInterface();
+
+            }
+        }
+        else
+        {
             sugv.setVisibility(View.INVISIBLE);
             gv.setVisibility(View.VISIBLE);
             lorgv.setVisibility(View.INVISIBLE);
             egv.setVisibility(View.INVISIBLE);
 
+            flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
 
             updateInterface();
-
-            flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
         }
+
     }
 
     public void onSettings(View view)
@@ -493,19 +511,35 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed()
     {
+        Log.d(LOG_TAG, "onBackPressed()");
+
         if (Amagotchi.getState() != null)
         {
             Amagotchi outAma = MainService.getAma();
+
             sugv.setVisibility(View.INVISIBLE);
             gv.setVisibility(View.VISIBLE);
             lorgv.setVisibility(View.INVISIBLE);
             egv.setVisibility(View.INVISIBLE);
 
-            if (outAma.getLevel() != 0)
-                flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+            if(flipper.getCurrentView() == findViewById(R.id.gameView) || flipper.getCurrentView() == findViewById(R.id.eggGameView))
+            {//Ins Hauptmenu
+
+                sugv.setVisibility(View.INVISIBLE);
+                gv.setVisibility(View.INVISIBLE);
+                lorgv.setVisibility(View.INVISIBLE);
+                egv.setVisibility(View.INVISIBLE);
+
+                flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.mainMenuView)));
+            }
             else
-            {
-                flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.eggGameView)));
+            {//Zur Spielansicht
+
+                if (outAma.getLevel() != 0)
+                    flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+                else {
+                    flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.eggGameView)));
+                }
             }
         }
     }
@@ -633,12 +667,15 @@ public class MainActivity extends AppCompatActivity {
         nameText.setText(outAma.getName());
 
         TextView ageText = (TextView)findViewById(R.id.ageText);
-        ageText.setText(String.valueOf(outAma.getAge()));
+        ageText.setText(String.valueOf(outAma.getAge())+ " Minuten");
 
         DecimalFormat f = new DecimalFormat("#0.00");
 
         TextView weightText = (TextView)findViewById(R.id.weightText);
-        weightText.setText(String.valueOf(f.format(outAma.getWeight())));
+        weightText.setText(String.valueOf(f.format(outAma.getWeight())) + " kg");
+
+        TextView levelText = (TextView)findViewById(R.id.levelText);
+        levelText.setText(String.valueOf(outAma.getLevel()));
     }
 
 
