@@ -1,7 +1,9 @@
 package projekt.fhflensburg.amagotchi;
 
 import android.app.Activity;
+import android.graphics.Canvas;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -10,7 +12,7 @@ import android.widget.ViewFlipper;
 import java.util.Random;
 
 
-public class LeftOrRightGame
+public class LeftOrRightGame implements Runnable
 {
     private final static String LOG_TAG = "LeftOrRightGame";
 
@@ -31,6 +33,8 @@ public class LeftOrRightGame
 
     ImageButton leftBtn, rightBtn;
 
+
+    Thread gameThread;
 
     public LeftOrRightGame(final Activity activity)
     {
@@ -61,6 +65,7 @@ public class LeftOrRightGame
     {
         if(playedRounds == MAX_ROUNDS)
         {
+
             MainActivity.lorgv.setVisibility(View.INVISIBLE);
             MainActivity.gv.setVisibility(View.VISIBLE);
             flipper.setDisplayedChild(flipper.indexOfChild(activity.findViewById(R.id.gameView)));
@@ -80,11 +85,9 @@ public class LeftOrRightGame
             // Aus dem UI-Thread behandeln !
             Handler updateUI = new Handler();
 
-            updateUI.postDelayed(new Runnable()
-            {
+            updateUI.postDelayed(new Runnable() {
                 @Override
-                public void run()
-                {
+                public void run() {
                     MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.NORMAL);
                     MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
                 }
@@ -101,43 +104,81 @@ public class LeftOrRightGame
         MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.TURN_LEFT_RIGHT);
         playedRounds++;
 
+        resume();
+    }
+    public void rightDirection()
+    {
+        if(userChooseLeft && amagotchiFacingLeft || !userChooseLeft && !amagotchiFacingLeft)
+        {
+            MainActivity.mSoundService.playSounds("happy");
+            MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.HAPPY);
+
+            Handler timer = new Handler();
+
+            timer.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.NORMAL);
+                }
+            }, 1500);
+        }
+        else
+        {
+            MainActivity.mSoundService.playSounds("unhappy");
+            MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.UNHAPPY);
+
+            Handler timer = new Handler();
+
+            timer.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.NORMAL);
+                }
+            }, 1500);
+        }
+        stop();
         endGame();
     }
 
-    public void checkChangeDirection()
+    public void run()
     {
-        if(MainActivity.lorGame.changeDirectionCounter > 0 && MainActivity.lorgv.amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT)
+        Looper.prepare();
+        while(changeDirectionCounter >= 0)
         {
-            MainActivity.lorGame.amagotchiFacingLeft = !MainActivity.lorGame.amagotchiFacingLeft;
-            MainActivity.lorGame.changeDirectionCounter--;
-        }
-        else if(MainActivity.lorGame.changeDirectionCounter == 0 && MainActivity.lorgv.amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT) {
-            if ((MainActivity.lorGame.userChooseLeft && MainActivity.lorGame.amagotchiFacingLeft) || (!MainActivity.lorGame.userChooseLeft && !MainActivity.lorGame.amagotchiFacingLeft)) {
+            try {
+                Thread.sleep(500);
 
-                MainActivity.mSoundService.playSounds("happy");
-                MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.HAPPY);
-
-                Handler timer = new Handler();
-
-                timer.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.NORMAL);
-                    }
-                }, 1500);
-            } else {
-
-                MainActivity.mSoundService.playSounds("unhappy");
-                MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.UNHAPPY);
-                Handler timer = new Handler();
-
-                timer.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        MainActivity.lorgv.setAmagotchiEvent(AnimationTyp.NORMAL);
-                    }
-                }, 1500);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                Log.e(LOG_TAG, e.getMessage(),e);
             }
+
+            if(MainActivity.lorGame.changeDirectionCounter > 0 && MainActivity.lorgv.amagotchiEvent == AnimationTyp.TURN_LEFT_RIGHT)
+            {
+                MainActivity.lorGame.amagotchiFacingLeft = !MainActivity.lorGame.amagotchiFacingLeft;
+            }
+            else if(changeDirectionCounter == 0)
+            {
+                rightDirection();
+            }
+            changeDirectionCounter--;
+        }
+    }
+
+    public void resume()
+    {
+        gameThread = new Thread(this);
+        gameThread.start();
+    }
+
+    public void stop()
+    {
+        try
+        {
+            gameThread.join();
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 

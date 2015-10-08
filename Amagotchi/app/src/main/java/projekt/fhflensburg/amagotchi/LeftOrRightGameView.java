@@ -150,8 +150,6 @@ public class LeftOrRightGameView extends SurfaceView implements Runnable
             Canvas canvas = holder.lockCanvas();
             doDrawings(canvas);
             holder.unlockCanvasAndPost(canvas);
-
-            MainActivity.lorGame.checkChangeDirection();
         }
     }
 
