@@ -16,6 +16,7 @@ public class MainService extends Service
     private static final String LOG_TAG = "MainService";
     private IBinder mBinder = new MyBinder();
     Random r = new Random();
+    static Integer tickTime = 1000;
 
     static Handler handler;
 
@@ -46,7 +47,7 @@ public class MainService extends Service
                 while(true)
                 {
                     try {
-                        Thread.sleep(500);
+                        Thread.sleep(tickTime);
                         handler.sendEmptyMessage(0);
 
                     } catch (InterruptedException e) {
@@ -559,5 +560,9 @@ public class MainService extends Service
         }
     }
 
+    public static void setTick(Integer ms)
+    {
+        tickTime = ms;
+    }
 
 }

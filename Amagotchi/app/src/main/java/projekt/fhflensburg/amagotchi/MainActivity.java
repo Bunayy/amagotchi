@@ -717,4 +717,22 @@ public class MainActivity extends AppCompatActivity {
         }, 3000);
     }
 
+    public void onTick1Min(View v)
+    {
+        Log.v(LOG_TAG, "onTick1Min");
+        MainService.setTick(60000);
+    }
+
+    public void onTick1Sek(View v)
+    {
+        Log.v(LOG_TAG, "onTick1Sek");
+        MainService.setTick(1000);
+    }
+
+    public void onTick50ms(View v)
+    {
+        Log.v(LOG_TAG, "onTick50ms");
+        MainService.setTick(50);
+    }
+
 }
