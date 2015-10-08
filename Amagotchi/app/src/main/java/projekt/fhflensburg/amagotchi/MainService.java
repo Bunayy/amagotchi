@@ -47,7 +47,7 @@ public class MainService extends Service
                 while(true)
                 {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(10);
                         handler.sendEmptyMessage(0);
 
                     } catch (InterruptedException e) {
@@ -321,9 +321,10 @@ public class MainService extends Service
                         }
                     }
 
+                    //Sterben
                     if(ama.getHealth() == 0)
                     {
-                       // ama.setisDead(true);
+                       ama.setisDead(true);
                     }
 
                     ////////////////////////////////////////
@@ -356,75 +357,39 @@ public class MainService extends Service
 
                     if(ama.getAge() % 720 == 0)//12 Stunden
                     {
-                        ama.setLevel(ama.getLevel() + 1);
+                        if(ama.getLevel() < 2) {
 
-                        //Max 168 Dev Points
-                        //Unterscheidung der Spielerleistung hier
-                        //Falls neues Spritesheet vorhanden ist, hier durchnummerieren
-                        if(ama.getDevelopmentPoints() >= 100)
-                        {
-                            ama.setMutation("1");
-                        }
-                        else
-                        {
-                            ama.setMutation("1");
-                        }
+                            ama.setLevel(ama.getLevel() + 1);
 
-                        ama.setDevelopmentPoints(0);
-
-                        MainActivity.sugv.setVisibility(View.INVISIBLE);
-                        MainActivity.lorgv.setVisibility(View.INVISIBLE);
-                        MainActivity.gv.setVisibility(View.VISIBLE);
-
-                        MainActivity.flipper.setDisplayedChild(MainActivity.flipper.indexOfChild(MainActivity.instance.findViewById(R.id.gameView)));
-
-                        MainActivity.gv.setAmagotchiEvent(AnimationTyp.DEVELOP);
-                        Handler timer = new Handler();
-
-                        timer.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
-                                MainActivity.gv.updateAmagotchiInformation();
+                            //Max 168 Dev Points
+                            //Unterscheidung der Spielerleistung hier
+                            //Falls neues Spritesheet vorhanden ist, hier durchnummerieren
+                            if (ama.getDevelopmentPoints() >= 100) {
+                                ama.setMutation("1");
+                            } else {
+                                ama.setMutation("1");
                             }
-                        }, 2500);
+
+                            ama.setDevelopmentPoints(0);
+
+                            MainActivity.sugv.setVisibility(View.INVISIBLE);
+                            MainActivity.lorgv.setVisibility(View.INVISIBLE);
+                            MainActivity.gv.setVisibility(View.VISIBLE);
+
+                            MainActivity.flipper.setDisplayedChild(MainActivity.flipper.indexOfChild(MainActivity.instance.findViewById(R.id.gameView)));
+
+                            MainActivity.gv.setAmagotchiEvent(AnimationTyp.DEVELOP);
+                            Handler timer = new Handler();
+
+                            timer.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
+                                    MainActivity.gv.updateAmagotchiInformation();
+                                }
+                            }, 2500);
+                        }
                     }
-
-
-                    /*switch(ama.getLevel())
-                    {
-                        case 1:
-
-                            break;
-                        case 2:
-
-                            break;
-                        case 3:
-
-                            break;
-                        case 4:
-
-                            break;
-                        case 5:
-
-                            break;
-                        case 6:
-
-                            break;
-                        case 7:
-
-                            break;
-                        case 8:
-
-                            break;
-                        case 9:
-
-                            break;
-                        case 10:
-
-                            break;
-                        default:
-                    }*/
 
                 }
                 //Altern
@@ -436,105 +401,120 @@ public class MainService extends Service
         }
     }
 
-
+    //////////////////////
     //INPUT
+    //////////////////////
+
     public static void doFeedHealthy()
     {
-        ama.setHealth(ama.getHealth() + 10);
-        ama.setRepletion(ama.getRepletion() + 7);
-        ama.setHappiness(ama.getHappiness() - 7);
-        ama.setFitness(ama.getFitness() + 5);
-        ama.setAttention(ama.getAttention() + 1);
+        if(!ama.getIsDead()) {
+            ama.setHealth(ama.getHealth() + 10);
+            ama.setRepletion(ama.getRepletion() + 7);
+            ama.setHappiness(ama.getHappiness() - 7);
+            ama.setFitness(ama.getFitness() + 5);
+            ama.setAttention(ama.getAttention() + 1);
 
-        if(ama.getRepletion() >= 100)
-            ama.setSleep(ama.getSleep() - 5);
+            if (ama.getRepletion() >= 100)
+                ama.setSleep(ama.getSleep() - 5);
 
-        Sys.saveGame(ama, MainActivity.instance);
-        MainActivity.instance.updateInterface();
+            Sys.saveGame(ama, MainActivity.instance);
+            MainActivity.instance.updateInterface();
+        }
     }
 
     public static void doFeedBurger()
     {
-        ama.setRepletion(ama.getRepletion() + 20);
-        ama.setHappiness(ama.getHappiness() + 6);
-        ama.setFitness(ama.getFitness() - 3);
-        ama.setAttention(ama.getAttention() + 3);
+        if(!ama.getIsDead()) {
+            ama.setRepletion(ama.getRepletion() + 20);
+            ama.setHappiness(ama.getHappiness() + 6);
+            ama.setFitness(ama.getFitness() - 3);
+            ama.setAttention(ama.getAttention() + 3);
 
-        if(ama.getRepletion() >= 100)
-            ama.setSleep(ama.getSleep() - 20);
+            if (ama.getRepletion() >= 100)
+                ama.setSleep(ama.getSleep() - 20);
 
-        Sys.saveGame(ama, MainActivity.instance);
-        MainActivity.instance.updateInterface();
+            Sys.saveGame(ama, MainActivity.instance);
+            MainActivity.instance.updateInterface();
+        }
     }
 
     public static void doFeedSweets()
     {
-        ama.setRepletion(ama.getRepletion() + 12);
-        ama.setMotivation(ama.getMotivation() + 15);
-        ama.setHappiness(ama.getHappiness() + 8);
-        ama.setFitness(ama.getFitness() - 9);
-        ama.setAttention(ama.getAttention() + 3);
+        if(!ama.getIsDead()) {
+            ama.setRepletion(ama.getRepletion() + 12);
+            ama.setMotivation(ama.getMotivation() + 15);
+            ama.setHappiness(ama.getHappiness() + 8);
+            ama.setFitness(ama.getFitness() - 9);
+            ama.setAttention(ama.getAttention() + 3);
 
-        if(ama.getRepletion() >= 100)
-            ama.setSleep(ama.getSleep() - 10);
+            if (ama.getRepletion() >= 100)
+                ama.setSleep(ama.getSleep() - 10);
 
-        Sys.saveGame(ama, MainActivity.instance);
-        MainActivity.instance.updateInterface();
+            Sys.saveGame(ama, MainActivity.instance);
+            MainActivity.instance.updateInterface();
+        }
     }
 
     public static void wonMiniGame()
     {
-        ama.setSleep(ama.getSleep() - 5);
-        ama.setMotivation(ama.getMotivation() + 3);
-        ama.setHappiness(ama.getHappiness() + 8);
-        ama.setAttention(ama.getAttention() + 7);
+        if(!ama.getIsDead()) {
+            ama.setSleep(ama.getSleep() - 5);
+            ama.setMotivation(ama.getMotivation() + 3);
+            ama.setHappiness(ama.getHappiness() + 8);
+            ama.setAttention(ama.getAttention() + 7);
 
-        Sys.saveGame(ama, MainActivity.instance);
-        MainActivity.instance.updateInterface();
+            Sys.saveGame(ama, MainActivity.instance);
+            MainActivity.instance.updateInterface();
+        }
     }
 
     public static void lostMiniGame()
     {
-        ama.setSleep(ama.getSleep() - 5);
-        ama.setMotivation(ama.getMotivation() - 2);
-        ama.setAttention(ama.getAttention() + 5);
+        if(!ama.getIsDead()) {
+            ama.setSleep(ama.getSleep() - 5);
+            ama.setMotivation(ama.getMotivation() - 2);
+            ama.setAttention(ama.getAttention() + 5);
 
-        Sys.saveGame(ama, MainActivity.instance);
-        MainActivity.instance.updateInterface();
+            Sys.saveGame(ama, MainActivity.instance);
+            MainActivity.instance.updateInterface();
+        }
     }
 
     public static void cleanAma()
     {
-        ama.setHappiness(ama.getHappiness() + 5);
-        ama.setAttention(ama.getAttention() + 3);
+        if(!ama.getIsDead()) {
+            ama.setHappiness(ama.getHappiness() + 5);
+            ama.setAttention(ama.getAttention() + 3);
 
-        ama.setFecesCountdown(0);
-        ama.setFeces(false);
+            ama.setFecesCountdown(0);
+            ama.setFeces(false);
 
-        Sys.saveGame(ama, MainActivity.instance);
-        MainActivity.instance.updateInterface();
+            Sys.saveGame(ama, MainActivity.instance);
+            MainActivity.instance.updateInterface();
+        }
     }
 
     public static void giveMedicine()
     {
-        ama.setHealth(ama.getHealth() + 40);
-        ama.setHappiness(ama.getHappiness() - 35);
-        ama.setAttention(ama.getAttention() + 3);
+        if(!ama.getIsDead()) {
+            ama.setHealth(ama.getHealth() + 40);
+            ama.setHappiness(ama.getHappiness() - 35);
+            ama.setAttention(ama.getAttention() + 3);
 
-        //Infektion heilen
-        if(ama.getIsSickInfection() && !ama.getFeces())
-            ama.setIsSickInfection(false);
+            //Infektion heilen
+            if (ama.getIsSickInfection() && !ama.getFeces())
+                ama.setIsSickInfection(false);
 
-        //Überfressen heilen
-        if(ama.getIsSickOveraeting())
-        {
-            ama.setFeces(true);
-            ama.setFecesCountdown(180);
-            ama.setRepletion(100);
+            //Überfressen heilen
+            if (ama.getIsSickOveraeting()) {
+                ama.setFeces(true);
+                ama.setFecesCountdown(180);
+                ama.setRepletion(100);
+            }
+
+            Sys.saveGame(ama, MainActivity.instance);
+            MainActivity.instance.updateInterface();
         }
-
-        Sys.saveGame(ama, MainActivity.instance);
-        MainActivity.instance.updateInterface();
     }
 
     public static void lightTurnedOnOff()
@@ -555,26 +535,28 @@ public class MainService extends Service
 
     public static void doEggEntertain()
     {
-        if(ama.getLevel() == 0)
-        {
-            ama.setTimeToHatch(ama.getTimeToHatch() - 2);
-            if (ama.getAttention() <= 98)
-                ama.setAttention(ama.getAttention() + 2);
+        if(!ama.getIsDead()) {
+            if (ama.getLevel() == 0) {
+                ama.setTimeToHatch(ama.getTimeToHatch() - 2);
+                if (ama.getAttention() <= 98)
+                    ama.setAttention(ama.getAttention() + 2);
+            }
+            Sys.saveGame(ama, MainActivity.instance);
+            MainActivity.instance.updateInterface();
         }
-        Sys.saveGame(ama, MainActivity.instance);
-        MainActivity.instance.updateInterface();
     }
 
     public static void doEggWarm()
     {
-        if(ama.getLevel() == 0)
-        {
-            ama.setTimeToHatch(ama.getTimeToHatch() - 2);
-            if (ama.getAttention() <= 98)
-                ama.setAttention(ama.getAttention() + 2);
+        if(!ama.getIsDead()) {
+            if (ama.getLevel() == 0) {
+                ama.setTimeToHatch(ama.getTimeToHatch() - 2);
+                if (ama.getAttention() <= 98)
+                    ama.setAttention(ama.getAttention() + 2);
+            }
+            Sys.saveGame(ama, MainActivity.instance);
+            MainActivity.instance.updateInterface();
         }
-        Sys.saveGame(ama, MainActivity.instance);
-        MainActivity.instance.updateInterface();
     }
 
 

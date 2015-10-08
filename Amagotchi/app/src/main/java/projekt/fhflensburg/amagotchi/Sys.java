@@ -29,6 +29,26 @@ public class Sys {
         return ama;
     }
 
+    public static Boolean saveGameExists(Context ctx)
+    {
+        String[] hashSplit;
+        Boolean hashCorrect = false;
+
+        try
+        {
+            hashSplit = loadGameString(ctx).split("\\|");
+            hashCorrect = String.valueOf(hashSplit[0].hashCode()).equals(hashSplit[1]);
+
+        }
+        catch(Exception e)
+        {
+            Log.v(LOG_TAG, "Checking Game failed while checking hash. Corrupt Gamefile ?");
+
+        }
+
+        return hashCorrect;
+    }
+
     private static Boolean saveGameString(String save, Context ctx) {
         Log.v(LOG_TAG, "saveGameString(String save, Context ctx) " + save);
 

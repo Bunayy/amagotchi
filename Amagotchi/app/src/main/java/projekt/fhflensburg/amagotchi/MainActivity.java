@@ -192,26 +192,29 @@ public class MainActivity extends AppCompatActivity {
     {
         Log.d(LOG_TAG, "onContGame()");
 
-        //Load
-        Amagotchi ama = Sys.loadGame(this);
-        Amagotchi.setInstance(ama);
-        MainService.setAma(ama);
-        MainService.run();
+        if(Sys.saveGameExists(this)) {
 
-        gv.init();
-        sugv.init();
-        lorgv.init();
-        egv.init();
+            //Load
+            Amagotchi ama = Sys.loadGame(this);
+            Amagotchi.setInstance(ama);
+            MainService.setAma(ama);
+            MainService.run();
 
-        sugv.setVisibility(View.INVISIBLE);
-        gv.setVisibility(View.VISIBLE);
-        lorgv.setVisibility(View.INVISIBLE);
-        egv.setVisibility(View.INVISIBLE);
+            gv.init();
+            sugv.init();
+            lorgv.init();
+            egv.init();
+
+            sugv.setVisibility(View.INVISIBLE);
+            gv.setVisibility(View.VISIBLE);
+            lorgv.setVisibility(View.INVISIBLE);
+            egv.setVisibility(View.INVISIBLE);
 
 
-        updateInterface();
+            updateInterface();
 
-        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+            flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
+        }
     }
 
     public void onSettings(View view)
@@ -227,7 +230,11 @@ public class MainActivity extends AppCompatActivity {
     public void onFeedingPressed(View v)
     {
         Log.d(LOG_TAG, "onFeedingPressed");
-        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.foodChooserView)));
+        if (mainServiceBound) {
+            if(!MainService.getAma().getIsDead()) {
+                flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.foodChooserView)));
+            }
+        }
     }
 
     public void onFeedBurger(View v)
@@ -236,19 +243,25 @@ public class MainActivity extends AppCompatActivity {
         if (mainServiceBound)
         {
             mainService.doFeedBurger();
-        }
-        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
-        gv.setAmagotchiEvent(AnimationTyp.EATING);
 
-        Handler timer = new Handler();
+            flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
 
-        timer.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
+            if(!MainService.getAma().getIsDead()) {
 
+                gv.setAmagotchiEvent(AnimationTyp.EATING);
+
+                Handler timer = new Handler();
+
+                timer.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
+
+                    }
+                }, 3000);
             }
-        }, 3000);
+        }
+
     }
     public void onFeedSweets(View v)
     {
@@ -256,19 +269,24 @@ public class MainActivity extends AppCompatActivity {
         if (mainServiceBound)
         {
             mainService.doFeedSweets();
-        }
-        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
-        gv.setAmagotchiEvent(AnimationTyp.EATING);
 
-        Handler timer = new Handler();
+            flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
 
-        timer.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
+            if(!MainService.getAma().getIsDead()) {
 
+                gv.setAmagotchiEvent(AnimationTyp.EATING);
+
+                Handler timer = new Handler();
+
+                timer.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
+
+                    }
+                }, 3000);
             }
-        }, 3000);
+        }
     }
     public void onFeedHealthy(View v)
     {
@@ -276,49 +294,69 @@ public class MainActivity extends AppCompatActivity {
         if (mainServiceBound)
         {
             mainService.doFeedHealthy();
-        }
-        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
-        gv.setAmagotchiEvent(AnimationTyp.EATING);
 
-        Handler timer = new Handler();
+            flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
 
-        timer.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
+            if(!MainService.getAma().getIsDead()) {
+
+                gv.setAmagotchiEvent(AnimationTyp.EATING);
+
+                Handler timer = new Handler();
+
+                timer.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        MainActivity.gv.setAmagotchiEvent(AnimationTyp.NORMAL);
+
+                    }
+                }, 3000);
 
             }
-        }, 3000);
+        }
+
     }
 
     public void onLightPressed(View v)
     {
         Log.d(LOG_TAG, "Licht An/Aus");
-        MainService.lightTurnedOnOff();
+        if (mainServiceBound) {
 
-        sugv.setVisibility(View.INVISIBLE);
-        gv.setVisibility(View.VISIBLE);
-        lorgv.setVisibility(View.INVISIBLE);
-        egv.setVisibility(View.INVISIBLE);
+            MainService.lightTurnedOnOff();
 
+            if(!MainService.getAma().getIsDead()) {
+
+                sugv.setVisibility(View.INVISIBLE);
+                gv.setVisibility(View.VISIBLE);
+                lorgv.setVisibility(View.INVISIBLE);
+                egv.setVisibility(View.INVISIBLE);
+
+            }
+        }
 
     }
 
     public void onCleaningPressed(View v)
     {
         Log.v("test", "Reinigen");
-        gv.setAmagotchiEvent(AnimationTyp.CLEANING);
+        if (mainServiceBound) {
 
-        Handler timer = new Handler();
+            MainService.cleanAma();
 
-        timer.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-               gv.setAmagotchiEvent(AnimationTyp.NORMAL);
+            if(!MainService.getAma().getIsDead()) {
+
+                gv.setAmagotchiEvent(AnimationTyp.CLEANING);
+
+                Handler timer = new Handler();
+
+                timer.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        gv.setAmagotchiEvent(AnimationTyp.NORMAL);
+                    }
+                }, 2500);
+
             }
-        }, 2500);
-
-        MainService.cleanAma();
+        }
     }
 
     public void onStatsPressed(View v)
@@ -331,7 +369,9 @@ public class MainActivity extends AppCompatActivity {
     public void onStatsBack(View v)
     {
         Amagotchi outAma = MainService.getAma();
+
         Log.d(LOG_TAG, "onStatsBack");
+
         if (outAma.getLevel() != 0)
             flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.gameView)));
         else
@@ -353,7 +393,12 @@ public class MainActivity extends AppCompatActivity {
     public void onMinigamesPressed(View v)
     {
         Log.d(LOG_TAG, "Juhu Spiele!");
-        flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.minigamesChooserView)));
+        if (mainServiceBound) {
+            if(!MainService.getAma().getIsDead()) {
+
+                flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.minigamesChooserView)));
+            }
+        }
     }
 
     public void onWalkingPressed(View v) {

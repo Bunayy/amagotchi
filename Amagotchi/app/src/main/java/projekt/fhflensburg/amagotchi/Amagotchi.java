@@ -54,8 +54,6 @@ public class Amagotchi
     private FoodFactory foodFactory;
     private Food food;
 
-    //SChalfen, ShitLiegtRum
-
     public Amagotchi(String pName, String pType, Context ctx)
     {
         context = ctx;
