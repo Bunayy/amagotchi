@@ -66,7 +66,6 @@ public class Sys {
             Log.v(LOG_TAG, "saveGameString Fail: " + e.getMessage());
             return false;
         }
-
     }
 
     private static String loadGameString(Context ctx) {

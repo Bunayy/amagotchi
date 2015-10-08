@@ -571,8 +571,7 @@ public class Amagotchi
     {
         this.weight = weight;
     }
-
-
+    
     public String getSaveString()
     {
         //Log.d(LOG_TAG, "getSaveString() " + name);

@@ -58,7 +58,6 @@ public class GameView extends SurfaceView implements Runnable
 
     }
 
-
     public void init()
     {
         if(MainService.getAma() != null)

@@ -95,4 +95,5 @@
         style="?android:attr/borderlessButtonStyle"
         android:onClick="onWalkingPressed"
         />
+
 </RelativeLayout>

@@ -11,7 +11,6 @@ import android.view.View;
 
 import java.util.Random;
 
-
 public class MainService extends Service
 {
     private static final String LOG_TAG = "MainService";

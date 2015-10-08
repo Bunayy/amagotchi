@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "MainActivity";
     public static MainActivity instance;
 
-
     //Refrences
     public static ViewFlipper flipper;
     private TextView textViewStatsMain;
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     public static SumUpGameView sugv;
     public static LeftOrRightGameView lorgv;
     public static EggGameView egv;
-
 
     //Main Service
     MainService mainService;
@@ -49,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
     //Zuletzt gewähltes Amagotchi
     private boolean amagotchiClicked = false;
-
 
     public static LeftOrRightGame lorGame;
     //Bei Start der App
