@@ -513,7 +513,11 @@ public class MainActivity extends AppCompatActivity {
     {
         Log.d(LOG_TAG, "onBackPressed()");
 
-        if (Amagotchi.getState() != null)
+        if(flipper.getCurrentView() == findViewById(R.id.settingsView))
+        {
+            flipper.setDisplayedChild(flipper.indexOfChild(findViewById(R.id.mainMenuView)));
+        }
+        else if (Amagotchi.getState() != null)
         {
             Amagotchi outAma = MainService.getAma();
 
@@ -542,6 +546,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+
     }
 
     private ServiceConnection mainServiceConnection = new ServiceConnection() {
