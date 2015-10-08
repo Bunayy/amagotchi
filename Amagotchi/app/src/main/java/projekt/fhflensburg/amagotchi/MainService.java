@@ -46,7 +46,7 @@ public class MainService extends Service
                 while(true)
                 {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(500);
                         handler.sendEmptyMessage(0);
 
                     } catch (InterruptedException e) {
@@ -112,7 +112,7 @@ public class MainService extends Service
 
     private void tick()
     {
-        //Log.v(LOG_TAG, "tick " + run);
+        //Log.v(LOG_TAG, "tick");
 
         //Initialisieren mit Grundwerten
         double healthThisPeriod = 0.043;
@@ -199,7 +199,6 @@ public class MainService extends Service
 
                     //Schläft
                     if (ama.getIsAsleep()) {
-                        Log.v(LOG_TAG, "tick isAFuckingSleep");
                         sleepThisPeriod += 0.2;
                     }
 
